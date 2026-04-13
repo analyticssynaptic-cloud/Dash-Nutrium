@@ -55,7 +55,8 @@ body{font-family:'Sora',sans-serif;background:var(--g50);color:var(--ink)}
 .logo-pill{display:flex;align-items:stretch;background:#fff;border-radius:14px;box-shadow:0 8px 40px rgba(0,0,0,.25),0 2px 8px rgba(0,0,0,.15);overflow:hidden;border:1px solid rgba(255,255,255,.5);width:fit-content}
 .logo-cell{padding:18px 26px;display:flex;align-items:center;justify-content:center;background:#fff}
 .logo-cell+.logo-cell{border-left:1px solid #e5f0e6}
-.logo-cell img{display:block;height:46px;width:auto;object-fit:contain}
+.logo-cell img{display:block;height:46px;width:auto;object-fit:contain;max-width:160px}
+.logo-cell .logo-fallback{font-family:'Sora',sans-serif;font-weight:700;font-size:16px;color:var(--g700);letter-spacing:1px}
 .logo-tagline{margin-top:11px;font-size:10.5px;font-weight:500;color:rgba(255,255,255,.38);letter-spacing:1.8px;text-transform:uppercase}
 .hero-text{text-align:center}
 .hero-eyebrow{display:inline-block;font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,.5);border:1px solid rgba(255,255,255,.18);padding:5px 16px;border-radius:30px;background:rgba(255,255,255,.06);margin-bottom:14px}
@@ -207,10 +208,12 @@ tbody td[title]{cursor:help;border-bottom:1px dotted var(--g300)}
     <div>
       <div class="logo-pill">
         <div class="logo-cell">
-          <img id="logoEficacia" alt="Eficacia S.A.S">
+          <img id="logoEficacia" alt="Eficacia S.A.S" style="display:inline-block" onerror="this.style.display='none'; this.nextSibling.style.display='flex'">
+          <div class="logo-fallback" style="display:none; align-items:center; justify-content:center; height:46px;">EFICACIA</div>
         </div>
         <div class="logo-cell">
-          <img id="logoNutrimenti" alt="Nutrimenti">
+          <img id="logoNutrimenti" alt="Nutrimenti" style="display:inline-block" onerror="this.style.display='none'; this.nextSibling.style.display='flex'">
+          <div class="logo-fallback" style="display:none; align-items:center; justify-content:center; height:46px;">NUTRIMENTI</div>
         </div>
       </div>
       <p class="logo-tagline">Operador de talento · Cliente estratégico</p>
@@ -450,7 +453,7 @@ tbody td[title]{cursor:help;border-bottom:1px dotted var(--g300)}
           <th>CEDIS</th><th>Ciudad</th><th>Causal</th><th>Tipo</th><th>Fecha Retiro</th>
         </tr></thead>
         <tbody id="tbodyRetiros"><tr><td colspan="9" class="no-data">Cargando…</td></tr></tbody>
-      </table>
+       </table>
     </div>
   </div>
 </div>
@@ -494,12 +497,12 @@ tbody td[title]{cursor:help;border-bottom:1px dotted var(--g300)}
 </footer>
 
 <script>
-// ══ LOGOS BASE64 (se inyectan al cargar) ══════════════════
+// ══ LOGOS (con fallback) ═══════════════════════════════════
 const LOGO_EFICACIA = 'https://eficacia.com.co/wp-content/uploads/2023/06/logo-eficacia.png';
 const LOGO_NUTRIMENTI = 'https://yt3.googleusercontent.com/ytc/AIdro_nlHVTWRB8BCs4Ls9w6DTbrKYhkmcOd7nkLfI6qzCzzeBs=s900-c-k-c0x00ffffff-no-rj';
 
-// ══ CONFIG ═══════════════════════════════════════════════
-const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxQqKl24nd3w71ggFJzuN6hpakMg7BIxbr3wgg3ai59r_5l8C9A88Ex60_WiuBinH_nbQ/exec';
+// ══ CONFIGURACIÓN ══════════════════════════════════════════
+const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw6LlDLe3UIXKTi5Q2VX6vhrPV3S4ZztaUMX8W6_5PLLmvq2Kno-w0vqC4ZWoG9cB_unQ/exec';
 
 let DATA = null;
 let currentLinea = 'ALL';
@@ -508,7 +511,7 @@ Chart.defaults.font.family = "'Sora',sans-serif";
 Chart.defaults.color = '#8aaa8e';
 const CHARTS = {};
 
-// ══ CARGA DE DATOS ══════════════════════════════════════
+// ══ CARGA DE DATOS ════════════════════════════════════════
 async function loadData() {
   showLoading(true);
   setError(null);
@@ -566,14 +569,16 @@ function jsonp(url) {
   });
 }
 
-// ══ CUPOS HELPERS ═══════════════════════════════════════
-function getCuposForLinea(d, linea) {
-  if (!d || !d.cupos) return 0;
-  if (linea === 'ALL') return d.cupos.total || 0;
-  return (d.cupos.porLinea && d.cupos.porLinea[linea]) || 0;
+// ══ CUPOS (sin filtrar por estatus de detalle) ══════════════
+function getCuposBase(d, linea, regionalFiltro) {
+  if (!d || !d.vacantes) return 0;
+  let vacantes = d.vacantes.filter(v => String(v.estatus || '').toUpperCase() !== 'CIERRE DE CUPO');
+  if (linea !== 'ALL') vacantes = vacantes.filter(v => v.linea === linea);
+  if (regionalFiltro) vacantes = vacantes.filter(v => (v.regional || '').toUpperCase() === regionalFiltro);
+  return vacantes.length;
 }
 
-// ══ RENDER PRINCIPAL ════════════════════════════════════
+// ══ RENDER PRINCIPAL ═══════════════════════════════════════
 function renderAll(d) {
   renderHero(d);
   renderKPIs(d, currentLinea);
@@ -585,13 +590,13 @@ function renderAll(d) {
 
 function updateFilterCount() {
   if (!DATA) return;
+  const ret = filterByLinea(DATA.retiros, currentLinea);
+  const aus = filterByLinea(DATA.ausencias, currentLinea);
+  const vac = filterByLinea(DATA.vacantes, currentLinea);
   document.getElementById('filterCount').textContent =
-    filterByLinea(DATA.retiros, currentLinea).length + ' retiros · ' +
-    filterByLinea(DATA.ausencias, currentLinea).length + ' ausentismos · ' +
-    filterByLinea(DATA.vacantes, currentLinea).length + ' vacantes';
+    ret.length + ' retiros · ' + aus.length + ' ausentismos · ' + vac.length + ' vacantes';
 }
 
-// ══ Hero con periodo dinámico ═══════════════════════════
 function renderHero(d) {
   const k = d.kpis;
   setText('barCupos',       k.totalCupos || 0);
@@ -602,7 +607,6 @@ function renderHero(d) {
   setText('barVacantes',    k.totalVacantes);
   setText('barPctRot', (k.pctRotacion !== null && k.pctRotacion !== undefined) ? k.pctRotacion + '%' : '—%');
 
-  // Periodo dinámico desde backend
   const mes  = parseInt(d.periodoMes)  || (new Date().getMonth() + 1);
   const anio = parseInt(d.periodoAnio) || (new Date().getFullYear());
   const mesesFull = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
@@ -614,7 +618,7 @@ function renderHero(d) {
     `Autoservicios (AU) · Grandes Cuentas (GC) · ${mesesFull[mes-1]} ${anio}`;
 }
 
-// ══ KPIs ════════════════════════════════════════════════
+// ══ KPIS (versión global, sin filtros de detalle) ═══════════
 function renderKPIs(d, linea) {
   const retFilt = filterByLinea(d.retiros, linea);
   const ausFilt = filterByLinea(d.ausencias, linea);
@@ -626,19 +630,16 @@ function renderKPIs(d, linea) {
   const diasAus = ausFilt.reduce((s, a) => s + (a.dias||0), 0);
   const contrat = vacFilt.filter(v => v.estatus && v.estatus.toUpperCase() === 'CONTRATADO').length;
 
-  // Cupos de la línea actual (excluyendo CIERRE DE CUPO)
-  const cuposLinea = getCuposForLinea(d, linea);
+  // Cupos reales (excluyendo CIERRE DE CUPO) para la línea actual
+  const cuposLinea = getCuposBase(d, linea, null);
   const pctRot = cuposLinea > 0 ? (total / cuposLinea * 100).toFixed(2) : null;
-
-  // Vacantes gestionadas = total filas VACANTES (incluyendo cerradas)
-  const vacantesGestionadas = vacFilt.length;
 
   animNum('k0', cuposLinea);
   animNum('k1', total);
   animNum('k2', plan);
   animNum('k3', noPlan);
   animNum('k4', ausFilt.length);
-  animNum('k5', vacantesGestionadas);
+  animNum('k5', vacFilt.length);
 
   setText('k0foot', pctRot !== null ? pctRot + '% rotación' : 'Sin cupos activos');
   setText('k1foot', 'Período actual');
@@ -647,16 +648,16 @@ function renderKPIs(d, linea) {
   setText('k4foot', diasAus + ' días afectados');
   setText('k5foot', contrat + ' contratados');
 
-  // Hero bar
-  setText('barCupos',   cuposLinea || 0);
+  // Hero bar (sin filtros)
+  setText('barCupos',   cuposLinea);
   setText('barTotal',   total);
   setText('barPlaneados', plan);
   setText('barNoPlaneados', noPlan);
   setText('barAusencias', ausFilt.length);
-  setText('barVacantes',  vacantesGestionadas);
+  setText('barVacantes',  vacFilt.length);
   setText('barPctRot',  pctRot !== null ? pctRot + '%' : '—%');
 
-  // ANS stats
+  // ANS stats globales
   const maxDias   = Math.max(...vacFilt.map(v => v.diasVacante||0), 0);
   const maxSinCob = Math.max(...vacFilt.map(v => v.diasSinCob||0), 0);
   const dentro    = vacFilt.filter(v => (v.diasVacante||0) <= (v.ans||5) && v.estatus && v.estatus.toUpperCase() === 'CONTRATADO').length;
@@ -665,11 +666,11 @@ function renderKPIs(d, linea) {
   setText('ansDentro',    dentro||'0');
 }
 
-// ══ CHARTS (usa arrays filtrados) ═══════════════════════
+// ══ CHARTS (usa arrays filtrados) ═══════════════════════════
 function renderCharts(d, retFiltArg, ausFiltArg, vacFiltArg) {
-  const retiros   = retFiltArg || d.retiros;
-  const ausencias = ausFiltArg || d.ausencias;
-  const vacantes  = vacFiltArg || d.vacantes;
+  const retiros   = retFiltArg || filterByLinea(d.retiros, currentLinea);
+  const ausencias = ausFiltArg || filterByLinea(d.ausencias, currentLinea);
+  const vacantes  = vacFiltArg || filterByLinea(d.vacantes, currentLinea);
   const colors = ['#1e5826','#3d9e4a','#5cb868','#96d49e','#c8eacc','#0d9488','#34d399','#d97706','#dc2626'];
 
   // Causales
@@ -705,7 +706,7 @@ function renderCharts(d, retFiltArg, ausFiltArg, vacFiltArg) {
   destroyChart('ausentChart');
   CHARTS.ausentChart = new Chart(document.getElementById('ausentChart'), {
     type: 'doughnut',
-    data: { labels: tiposAus.map(t => t.label), datasets: [{ data: tiposAus.map(t => t.value), backgroundColor:ausColors, borderWidth:2, borderColor:'#fff' }] },
+    data: { labels: tiposAus.map(t=>t.label), datasets: [{ data: tiposAus.map(t=>t.value), backgroundColor:ausColors, borderWidth:2, borderColor:'#fff' }] },
     options: { cutout:'70%', responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}} }
   });
   const ausTotal = tiposAus.reduce((s,t)=>s+t.value,0);
@@ -794,7 +795,7 @@ function renderCharts(d, retFiltArg, ausFiltArg, vacFiltArg) {
   });
 }
 
-// ══ TABLAS con tooltips ═════════════════════════════════
+// ══ TABLAS con tooltips ════════════════════════════════════
 function escapeAttr(s) {
   return String(s||'').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 }
@@ -805,8 +806,8 @@ function renderTables(d, linea, retFiltArg, ausFiltArg, vacFiltArg) {
   const vacFilt = vacFiltArg || filterByLinea(d.vacantes, linea);
 
   // Retiros
-  document.getElementById('tbodyRetiros').innerHTML = retFilt.length
-    ? retFilt.map(r => {
+  if (retFilt.length) {
+    let htmlRows = retFilt.map(r => {
         const tip = `Documento: ${r.documento||'—'} | Motivo: ${r.motivo||'—'} | ${r.ciudad||''} / ${r.regional||''}`;
         return `<tr title="${escapeAttr(tip)}">
           <td title="${escapeAttr('Doc: '+(r.documento||'—'))}">${titleCase(r.nombre)}</td>
@@ -819,16 +820,18 @@ function renderTables(d, linea, retFiltArg, ausFiltArg, vacFiltArg) {
           <td>${tipoBadge(r.tipo)}</td>
           <td>${r.fecha||'—'}</td>
         </tr>`;
-      }).join('')
-    : '<tr><td colspan="9" class="no-data">Sin registros para esta selección</td></tr>';
-
-  const planR  = retFilt.filter(r=>r.tipo==='PLANEADA').length;
-  const noPlanR = retFilt.filter(r=>r.tipo==='NO PLANEADA').length;
-  document.getElementById('tbodyRetiros').innerHTML += `<tr class="tr-total">
-    <td colspan="7"><strong>TOTAL</strong></td>
-    <td><span class="chip chip-g">${planR} Planeadas</span>&nbsp;<span class="chip chip-r">${noPlanR} No Plan.</span></td>
-    <td><strong>${retFilt.length} retiros</strong></td>
-  </tr>`;
+      }).join('');
+    const planR  = retFilt.filter(r=>r.tipo==='PLANEADA').length;
+    const noPlanR = retFilt.filter(r=>r.tipo==='NO PLANEADA').length;
+    htmlRows += `<tr class="tr-total">
+      <td colspan="7"><strong>TOTAL</strong></td>
+      <td><span class="chip chip-g">${planR} Planeadas</span>&nbsp;<span class="chip chip-r">${noPlanR} No Plan.</span></td>
+      <td><strong>${retFilt.length} retiros</strong></td>
+    </tr>`;
+    document.getElementById('tbodyRetiros').innerHTML = htmlRows;
+  } else {
+    document.getElementById('tbodyRetiros').innerHTML = '<tr><td colspan="9" class="no-data">Sin registros para esta selección</td></tr>';
+  }
 
   // Ausentismos
   document.getElementById('tbodyAusencias').innerHTML = ausFilt.length
@@ -873,7 +876,7 @@ function renderTables(d, linea, retFiltArg, ausFiltArg, vacFiltArg) {
     : '<tr><td colspan="11" class="no-data">Sin registros</td></tr>';
 }
 
-// ══ FILTROS ═════════════════════════════════════════════
+// ══ FILTROS (lógica corregida) ══════════════════════════════
 function populateFilters(retiros) {
   const regionals = [...new Set(retiros.map(r => r.regional).filter(Boolean))].sort();
   const causales  = [...new Set(retiros.map(r => r.causal).filter(Boolean))].sort();
@@ -894,68 +897,57 @@ function applyFilters() {
   const estatus = document.getElementById('fEstatus').value.toUpperCase();
   const search  = document.getElementById('fSearch').value.toUpperCase();
 
-  // Filtrar retiros por todos los filtros aplicables
+  // Filtros de detalle (causal, tipo, estatus, búsqueda) afectan solo tablas y gráficos, NO los KPIs principales.
   let retFilt = filterByLinea(DATA.retiros, currentLinea);
-  if (reg)    retFilt = retFilt.filter(r => (r.regional||'').toUpperCase() === reg);
+  let ausFilt = filterByLinea(DATA.ausencias, currentLinea);
+  let vacFilt = filterByLinea(DATA.vacantes, currentLinea);
+
+  // Aplicar filtro de regional a todos (sí afecta KPIs)
+  if (reg) {
+    retFilt = retFilt.filter(r => (r.regional||'').toUpperCase() === reg);
+    ausFilt = ausFilt.filter(a => (a.regional||'').toUpperCase() === reg);
+    vacFilt = vacFilt.filter(v => (v.regional||'').toUpperCase() === reg);
+  }
+  // Filtros de detalle (no afectan KPIs de cupos/rotación)
+  const hasDetailFilter = causal || tipo || estatus || search;
   if (causal) retFilt = retFilt.filter(r => (r.causal||'').toUpperCase() === causal);
   if (tipo)   retFilt = retFilt.filter(r => (r.tipo||'').toUpperCase() === tipo);
-  if (search) retFilt = retFilt.filter(r =>
-    [r.nombre, r.cargo, r.cedis, r.ciudad, r.causal, r.documento].some(f => f && String(f).toUpperCase().includes(search))
-  );
-
-  // Ausentismos por regional + búsqueda
-  let ausFilt = filterByLinea(DATA.ausencias, currentLinea);
-  if (reg)    ausFilt = ausFilt.filter(a => (a.regional||'').toUpperCase() === reg);
-  if (search) ausFilt = ausFilt.filter(a =>
-    [a.nombre, a.cargo, a.cedi, a.ciudad, a.documento].some(f => f && String(f).toUpperCase().includes(search))
-  );
-
-  // Vacantes por regional + estatus + búsqueda
-  let vacFilt = filterByLinea(DATA.vacantes, currentLinea);
-  if (reg)     vacFilt = vacFilt.filter(v => (v.regional||'').toUpperCase() === reg);
   if (estatus) vacFilt = vacFilt.filter(v => (v.estatus||'').toUpperCase() === estatus);
-  if (search)  vacFilt = vacFilt.filter(v =>
-    [v.quienSeFue, v.cargo, v.cedis, v.documento, v.reemplazante].some(f => f && String(f).toUpperCase().includes(search))
-  );
+  if (search) {
+    retFilt = retFilt.filter(r => [r.nombre, r.cargo, r.cedis, r.ciudad, r.causal, r.documento].some(f => f && String(f).toUpperCase().includes(search)));
+    ausFilt = ausFilt.filter(a => [a.nombre, a.cargo, a.cedi, a.ciudad, a.documento].some(f => f && String(f).toUpperCase().includes(search)));
+    vacFilt = vacFilt.filter(v => [v.quienSeFue, v.cargo, v.cedis, v.documento, v.reemplazante].some(f => f && String(f).toUpperCase().includes(search)));
+  }
 
-  // Recalcular cupos con los filtros (excluyendo CIERRE DE CUPO)
-  const cuposFiltrados = vacFilt.filter(v => (v.estatus||'').toUpperCase() !== 'CIERRE DE CUPO').length;
+  // Cupos base (para KPI) solo con filtro de regional y línea, sin detalle
+  const cuposFiltrados = getCuposBase(DATA, currentLinea, reg);
+  const totalRetirosFiltrados = retFilt.length;
+  const pctRotFiltrado = (cuposFiltrados > 0 && !hasDetailFilter) ? (totalRetirosFiltrados / cuposFiltrados * 100).toFixed(2) : null;
 
-  // Render tablas
-  renderTables(DATA, currentLinea, retFilt, ausFilt, vacFilt);
-
-  // KPIs con datos filtrados
-  const total   = retFilt.length;
-  const plan    = retFilt.filter(r => r.tipo === 'PLANEADA').length;
-  const noPlan  = retFilt.filter(r => r.tipo === 'NO PLANEADA').length;
-  const diasAus = ausFilt.reduce((s, a) => s + (a.dias||0), 0);
-  const contrat = vacFilt.filter(v => (v.estatus||'').toUpperCase() === 'CONTRATADO').length;
-  const pctRot  = cuposFiltrados > 0 ? (total / cuposFiltrados * 100).toFixed(2) : null;
-  const hasFilter = reg || causal || tipo || estatus || search;
-
+  // Actualizar KPIs con los valores filtrados (solo los que corresponden)
   animNum('k0', cuposFiltrados);
-  animNum('k1', total);
-  animNum('k2', plan);
-  animNum('k3', noPlan);
+  animNum('k1', totalRetirosFiltrados);
+  animNum('k2', retFilt.filter(r => r.tipo === 'PLANEADA').length);
+  animNum('k3', retFilt.filter(r => r.tipo === 'NO PLANEADA').length);
   animNum('k4', ausFilt.length);
   animNum('k5', vacFilt.length);
 
-  setText('k0foot', pctRot !== null ? pctRot + '% rotación' : 'Sin cupos activos');
-  setText('k1foot', hasFilter ? 'Filtrado' : 'Período actual');
-  setText('k2foot', total ? pct(plan,total) + '% del total' : '—');
-  setText('k3foot', total ? pct(noPlan,total) + '% del total' : '—');
-  setText('k4foot', diasAus + ' días afectados');
-  setText('k5foot', contrat + ' contratados');
+  setText('k0foot', pctRotFiltrado !== null ? pctRotFiltrado + '% rotación' : (hasDetailFilter ? 'Filtros activos' : 'Sin cupos activos'));
+  setText('k1foot', hasDetailFilter ? 'Filtrado' : 'Período actual');
+  setText('k2foot', totalRetirosFiltrados ? pct(retFilt.filter(r => r.tipo === 'PLANEADA').length, totalRetirosFiltrados) + '% del total' : '—');
+  setText('k3foot', totalRetirosFiltrados ? pct(retFilt.filter(r => r.tipo === 'NO PLANEADA').length, totalRetirosFiltrados) + '% del total' : '—');
+  setText('k4foot', ausFilt.reduce((s,a)=>s+(a.dias||0),0) + ' días afectados');
+  setText('k5foot', vacFilt.filter(v => (v.estatus||'').toUpperCase() === 'CONTRATADO').length + ' contratados');
 
-  setText('barCupos',       cuposFiltrados);
-  setText('barTotal',       total);
-  setText('barPlaneados',   plan);
-  setText('barNoPlaneados', noPlan);
-  setText('barAusencias',   ausFilt.length);
-  setText('barVacantes',    vacFilt.length);
-  setText('barPctRot',      pctRot !== null ? pctRot + '%' : '—%');
+  setText('barCupos', cuposFiltrados);
+  setText('barTotal', totalRetirosFiltrados);
+  setText('barPlaneados', retFilt.filter(r => r.tipo === 'PLANEADA').length);
+  setText('barNoPlaneados', retFilt.filter(r => r.tipo === 'NO PLANEADA').length);
+  setText('barAusencias', ausFilt.length);
+  setText('barVacantes', vacFilt.length);
+  setText('barPctRot', pctRotFiltrado !== null ? pctRotFiltrado + '%' : (hasDetailFilter ? '—%' : '—%'));
 
-  // ANS stats filtrados
+  // ANS stats filtrados (solo con regional)
   const maxDias   = Math.max(...vacFilt.map(v => v.diasVacante||0), 0);
   const maxSinCob = Math.max(...vacFilt.map(v => v.diasSinCob||0), 0);
   const dentro    = vacFilt.filter(v => (v.diasVacante||0) <= (v.ans||5) && (v.estatus||'').toUpperCase() === 'CONTRATADO').length;
@@ -963,7 +955,8 @@ function applyFilters() {
   setText('ansMaxSinCob', maxSinCob||'0');
   setText('ansDentro',    dentro||'0');
 
-  // Recalcular charts con datos filtrados
+  // Renderizar tablas y gráficos con los filtros completos
+  renderTables(DATA, currentLinea, retFilt, ausFilt, vacFilt);
   renderCharts(DATA, retFilt, ausFilt, vacFilt);
 
   document.getElementById('filterCount').textContent = retFilt.length + ' retiros · ' + ausFilt.length + ' ausentismos · ' + vacFilt.length + ' vacantes';
@@ -996,7 +989,7 @@ function filterByLinea(arr, linea) {
   return arr.filter(r => r.linea === linea);
 }
 
-// ══ HELPERS UI ══════════════════════════════════════════
+// ══ HELPERS UI ══════════════════════════════════════════════
 function showLoading(v) {
   const el = document.getElementById('loadingOverlay');
   if (v) el.classList.remove('hidden');
@@ -1026,7 +1019,9 @@ function setText(id, val) {
 function animNum(id, target) {
   const el = document.getElementById(id);
   if (!el) return;
-  const start = 0, dur = 600;
+  const start = parseInt(el.textContent) || 0;
+  if (start === target) return;
+  const dur = 600;
   const t0 = performance.now();
   function step(now) {
     const p = Math.min((now-t0)/dur, 1);
@@ -1070,11 +1065,16 @@ function estatusBadge(est) {
   return `<span class="chip chip-s">${est||'—'}</span>`;
 }
 
-// ══ INICIO ══════════════════════════════════════════════
+// ══ INICIO ══════════════════════════════════════════════════
 window.addEventListener('DOMContentLoaded', () => {
-  // Inyectar logos
-  document.getElementById('logoEficacia').src   = LOGO_EFICACIA;
-  document.getElementById('logoNutrimenti').src = LOGO_NUTRIMENTI;
+  // Inyectar logos con fallback
+  const imgE = document.getElementById('logoEficacia');
+  const imgN = document.getElementById('logoNutrimenti');
+  imgE.src = LOGO_EFICACIA;
+  imgN.src = LOGO_NUTRIMENTI;
+  // Fallback visual si las imágenes fallan
+  imgE.onerror = function() { this.style.display = 'none'; this.nextSibling.style.display = 'flex'; };
+  imgN.onerror = function() { this.style.display = 'none'; this.nextSibling.style.display = 'flex'; };
   loadData();
   setInterval(loadData, 5 * 60 * 1000);
 });
