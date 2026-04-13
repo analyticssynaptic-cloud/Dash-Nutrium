@@ -8,9 +8,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,700;0,900;1,700&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <style>
-/* ══════════════════════════════════════════════════════════
-   BASE & VARIABLES
-══════════════════════════════════════════════════════════ */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
   --g50:#f6fdf6;--g100:#e8f7ea;--g200:#c8eacc;--g300:#96d49e;
@@ -25,8 +22,6 @@
 }
 html{-webkit-font-smoothing:antialiased;scroll-behavior:smooth}
 body{font-family:'Sora',sans-serif;background:var(--g50);color:var(--ink)}
-
-/* ══ LOADING OVERLAY ══════════════════════════════════════ */
 #loadingOverlay{position:fixed;inset:0;z-index:9999;background:linear-gradient(145deg,#0b2a10,#1e5826,#2d7a38);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:24px;transition:opacity .6s ease, visibility .6s ease}
 #loadingOverlay.hidden{opacity:0;visibility:hidden;pointer-events:none}
 .ld-logo{width:80px;height:80px;border-radius:20px;background:rgba(255,255,255,.12);display:flex;align-items:center;justify-content:center}
@@ -36,20 +31,14 @@ body{font-family:'Sora',sans-serif;background:var(--g50);color:var(--ink)}
 .ld-bar{width:200px;height:3px;background:rgba(255,255,255,.15);border-radius:3px;overflow:hidden}
 .ld-prog{height:100%;border-radius:3px;background:linear-gradient(90deg,#5cb868,#a8e6ad);animation:ldprog 1.8s ease-in-out infinite}
 @keyframes ldprog{0%{width:0%;margin-left:0}50%{width:70%;margin-left:0}100%{width:0%;margin-left:100%}}
-
-/* ══ ERROR BANNER ════════════════════════════════════════ */
 #errorBanner{display:none;background:#fef2f2;border:1px solid #fca5a5;border-radius:12px;padding:16px 20px;margin:20px 40px;color:#991b1b;font-size:13px;font-weight:500;align-items:center;gap:12px}
 #errorBanner.show{display:flex}
 #errorBanner svg{flex-shrink:0;width:20px;height:20px}
-
-/* ══ SYNC BUTTON ══════════════════════════════════════════ */
 .sync-btn{display:inline-flex;align-items:center;gap:7px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.22);color:rgba(255,255,255,.85);font-size:11px;font-weight:600;letter-spacing:.6px;text-transform:uppercase;padding:8px 16px;border-radius:30px;cursor:pointer;transition:background .2s,transform .2s;font-family:'Sora',sans-serif}
 .sync-btn:hover{background:rgba(255,255,255,.2);transform:translateY(-1px)}
 .sync-btn svg{width:14px;height:14px}
 .sync-btn.syncing svg{animation:spin .8s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
-
-/* ══ FILTROS ════════════════════════════════════════════ */
 .filter-bar{background:#fff;border:1px solid var(--g200);border-radius:var(--r);box-shadow:var(--sh2);padding:16px 20px;margin-bottom:24px;display:flex;flex-wrap:wrap;gap:12px;align-items:center}
 .filter-group{display:flex;flex-direction:column;gap:4px;min-width:140px}
 .filter-label{font-size:9.5px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--ink4)}
@@ -58,10 +47,7 @@ body{font-family:'Sora',sans-serif;background:var(--g50);color:var(--ink)}
 .filter-reset{margin-left:auto;align-self:flex-end;font-family:'Sora',sans-serif;font-size:11px;font-weight:600;letter-spacing:.4px;padding:8px 16px;border-radius:8px;cursor:pointer;border:1px solid var(--g200);background:#fff;color:var(--ink3);transition:background .15s,color .15s}
 .filter-reset:hover{background:var(--g100);color:var(--g700)}
 .filter-count{font-size:10px;font-weight:700;color:var(--g600);background:var(--g100);padding:4px 10px;border-radius:20px;align-self:flex-end;white-space:nowrap}
-
-/* ══ HERO ════════════════════════════════════════════════ */
 .hero{position:relative;min-height:280px;overflow:hidden;display:flex;flex-direction:column;background:radial-gradient(ellipse 70% 80% at 0% 0%,#0d4a1a 0%,transparent 65%),radial-gradient(ellipse 55% 60% at 100% 0%,#1a6e2e 0%,transparent 60%),radial-gradient(ellipse 60% 70% at 50% 100%,#0b3512 0%,transparent 60%),linear-gradient(150deg,#0b2a10 0%,#1e5826 40%,#2d7a38 75%,#3d9e4a 100%)}
-.hero-leaf{position:absolute;right:-60px;top:-40px;width:460px;opacity:.07;pointer-events:none;filter:brightness(10)}
 .hero-orb{position:absolute;border-radius:50%;pointer-events:none}
 .hero-orb-1{width:320px;height:320px;top:-120px;right:200px;background:radial-gradient(circle,rgba(93,196,104,.15) 0%,transparent 70%)}
 .hero-orb-2{width:200px;height:200px;bottom:-80px;left:32%;background:radial-gradient(circle,rgba(61,158,74,.12) 0%,transparent 70%)}
@@ -92,27 +78,19 @@ body{font-family:'Sora',sans-serif;background:var(--g50);color:var(--ink)}
 .hbi-l{font-size:10px;font-weight:500;color:rgba(255,255,255,.45);letter-spacing:.4px;margin-top:2px}
 .hbi-cupos .hbi-ico{background:rgba(168,230,173,.15)}
 .hbi-cupos .hbi-ico svg{color:#a8e6ad}
-
-/* ══ WRAP & SECTIONS ══════════════════════════════════════ */
 .wrap{max-width:1440px;margin:0 auto;padding:36px 40px 64px}
 .sec{font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--g500);display:flex;align-items:center;gap:12px;margin:0 0 18px}
 .sec::before{content:'';width:20px;height:2px;background:var(--g400);border-radius:2px;flex-shrink:0}
 .sec::after{content:'';flex:1;height:1px;background:var(--g200)}
-
-/* ══ GRIDS ═════════════════════════════════════════════ */
 .g6{display:grid;grid-template-columns:repeat(6,1fr);gap:14px;margin-bottom:28px}
 .g3{display:grid;grid-template-columns:2.2fr 1fr 1fr;gap:18px;margin-bottom:22px}
 .g3b{display:grid;grid-template-columns:1fr 1fr 1.6fr;gap:18px;margin-bottom:22px}
 .g3c{display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:18px;margin-bottom:22px}
 .gfull{margin-bottom:22px}
-
-/* ══ CARD ════════════════════════════════════════════════ */
 .card{background:#fff;border-radius:var(--r);border:1px solid var(--g200);box-shadow:var(--sh2);padding:22px 20px 18px;overflow:hidden}
 .card-hd{font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:1.2px;color:var(--ink3);display:flex;align-items:center;gap:8px;margin-bottom:18px}
 .card-pip{width:4px;height:16px;border-radius:2px;background:linear-gradient(180deg,var(--g400),var(--g300));flex-shrink:0}
 .chart-h{position:relative}
-
-/* ══ KPI ════════════════════════════════════════════════ */
 .kpi{background:#fff;border-radius:var(--r);border:1px solid var(--g200);box-shadow:var(--sh2);padding:20px 16px 14px;position:relative;overflow:hidden;transition:transform .22s,box-shadow .22s;cursor:default}
 .kpi:hover{transform:translateY(-4px);box-shadow:var(--sh3)}
 .kpi-top{position:absolute;top:0;left:0;right:0;height:3px;border-radius:var(--r) var(--r) 0 0}
@@ -133,8 +111,6 @@ body{font-family:'Sora',sans-serif;background:var(--g50);color:var(--ink)}
 .t-amber .kpi-ico{background:#fffbeb;color:#d97706}
 .t-indigo .kpi-top{background:linear-gradient(90deg,#4f46e5,#a5b4fc)}
 .t-indigo .kpi-ico{background:#eef2ff;color:#4f46e5}
-
-/* ══ DARK CARD ═══════════════════════════════════════════ */
 .dark-card{border-radius:var(--r);overflow:hidden;box-shadow:var(--sh4);background:radial-gradient(ellipse 80% 60% at 0% 0%,#1e5826 0%,transparent 70%),radial-gradient(ellipse 60% 50% at 100% 100%,#0d4a1a 0%,transparent 60%),linear-gradient(145deg,#0b2a10 0%,#1e5826 50%,#2d7a38 100%);color:#fff;padding:26px 22px 22px;position:relative}
 .dark-card::after{content:'';position:absolute;right:-30px;bottom:-30px;width:200px;height:200px;border-radius:50%;background:rgba(93,196,104,.08);pointer-events:none}
 .dark-card .card-hd{color:rgba(255,255,255,.5)}
@@ -149,8 +125,6 @@ body{font-family:'Sora',sans-serif;background:var(--g50);color:var(--ink)}
 .ans-stat{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.09);border-radius:10px;padding:12px 10px;text-align:center}
 .as-v{font-family:'Playfair Display',serif;font-size:24px;color:#fff;line-height:1;transition:all .3s}
 .as-l{font-size:9.5px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:rgba(255,255,255,.4);margin-top:3px}
-
-/* ══ PROGRESS ══════════════════════════════════════════ */
 .prog{margin-bottom:12px}
 .prog:last-child{margin-bottom:0}
 .prog-hd{display:flex;justify-content:space-between;margin-bottom:5px}
@@ -158,8 +132,6 @@ body{font-family:'Sora',sans-serif;background:var(--g50);color:var(--ink)}
 .prog-hd span:last-child{font-size:12px;font-weight:700;color:var(--g600)}
 .prog-track{height:7px;background:var(--g100);border-radius:4px;overflow:hidden}
 .prog-fill{height:100%;border-radius:4px;transition:width .6s ease}
-
-/* ══ REGIONAL BARS ════════════════════════════════════ */
 .reg-item{margin-bottom:16px}
 .reg-item:last-child{margin-bottom:0}
 .reg-top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:5px}
@@ -168,23 +140,17 @@ body{font-family:'Sora',sans-serif;background:var(--g50);color:var(--ink)}
 .reg-track{height:11px;background:var(--g100);border-radius:6px;overflow:hidden;display:flex}
 .reg-p{height:100%;border-radius:6px 0 0 6px;background:linear-gradient(90deg,var(--g600),var(--g400));transition:width .6s ease}
 .reg-np{height:100%;background:linear-gradient(90deg,#dc2626,#f87171);transition:width .6s ease}
-
-/* ══ DONUT LEGEND ══════════════════════════════════════ */
 .dleg{list-style:none;margin-top:14px;display:flex;flex-direction:column;gap:9px}
 .dleg li{display:flex;align-items:center;gap:9px;font-size:12px;font-weight:500;color:var(--ink2)}
 .dl-sq{width:10px;height:10px;border-radius:3px;flex-shrink:0}
 .dl-n{margin-left:auto;font-weight:700;font-size:13px;color:var(--ink)}
 .dl-p{font-size:10px;color:var(--ink4);margin-left:3px}
-
-/* ══ CHIPS ═════════════════════════════════════════════ */
 .chip{display:inline-flex;align-items:center;padding:3px 9px;border-radius:20px;font-size:10px;font-weight:700;letter-spacing:.4px;white-space:nowrap}
 .chip-g{background:var(--g100);color:var(--g700)}
 .chip-r{background:#fef2f2;color:#991b1b}
 .chip-a{background:#fffbeb;color:#92400e}
 .chip-s{background:#f3f4f6;color:#374151}
 .chip-t{background:#f0fdfa;color:#0f766e}
-
-/* ══ TABLE ══════════════════════════════════════════════ */
 .tbl-wrap{overflow-x:auto}
 table{width:100%;border-collapse:collapse;font-size:12.5px}
 thead th{background:var(--g50);padding:11px 13px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--ink3);text-align:left;border-bottom:2px solid var(--g200);white-space:nowrap}
@@ -192,54 +158,27 @@ tbody td{padding:10px 13px;border-bottom:1px solid var(--g100);color:var(--ink2)
 tbody tr:last-child td{border-bottom:none}
 tbody tr:hover td{background:var(--g50)}
 tbody tr.tr-total td{background:var(--g100);font-weight:700;color:var(--ink);border-top:2px solid var(--g200)}
+tbody td[title]{cursor:help;border-bottom:1px dotted var(--g300)}
 .no-data{text-align:center;color:var(--ink4);font-style:italic;padding:32px!important}
-
-/* ══ TAB TOGGLE ════════════════════════════════════════ */
 .tab-bar{display:flex;gap:6px;margin-bottom:16px;flex-wrap:wrap}
 .tab-btn{font-family:'Sora',sans-serif;font-size:11px;font-weight:600;letter-spacing:.5px;padding:7px 16px;border-radius:8px;cursor:pointer;border:1px solid var(--g200);background:#fff;color:var(--ink3);transition:all .15s}
 .tab-btn.active{background:var(--g700);color:#fff;border-color:var(--g700)}
-
-/* ══ ANIMATIONS ═════════════════════════════════════════ */
 @keyframes up{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
 .kpi{animation:up .4s ease both}
 .kpi:nth-child(1){animation-delay:.04s}.kpi:nth-child(2){animation-delay:.08s}
 .kpi:nth-child(3){animation-delay:.12s}.kpi:nth-child(4){animation-delay:.16s}
 .kpi:nth-child(5){animation-delay:.20s}.kpi:nth-child(6){animation-delay:.24s}
 .card,.dark-card{animation:up .45s ease both;animation-delay:.08s}
-
-/* ══ LAST SYNC ══════════════════════════════════════════ */
 .sync-info{font-size:10px;color:rgba(255,255,255,.35);display:flex;align-items:center;gap:6px;margin-top:6px}
 .sync-dot{width:6px;height:6px;border-radius:50%;background:#5cb868;flex-shrink:0}
 .sync-dot.err{background:#dc2626}
-
-/* ══ RESPONSIVE ═════════════════════════════════════════ */
-@media(max-width:1240px){
-  .g6{grid-template-columns:repeat(3,1fr)}
-}
-@media(max-width:1140px){
-  .hero-inner{grid-template-columns:1fr;padding:32px 28px 24px}
-  .hero-badge{display:none}
-  .hero-bar{padding:0 28px}
-  .g3,.g3b,.g3c{grid-template-columns:1fr 1fr}
-  .wrap{padding:22px 20px 48px}
-  .filter-bar{padding:14px 16px}
-}
-@media(max-width:700px){
-  .hero-inner{padding:24px 18px 18px}
-  .hero-bar{padding:0 18px}
-  .hbi{min-width:50%;border-right:none;border-bottom:1px solid rgba(255,255,255,.07)}
-  .g6{grid-template-columns:1fr 1fr}
-  .g3,.g3b,.g3c{grid-template-columns:1fr}
-  .wrap{padding:14px 12px 36px}
-  .filter-bar{flex-direction:column;align-items:stretch}
-  .filter-group{min-width:0}
-  .filter-reset{margin-left:0}
-}
+@media(max-width:1240px){.g6{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:1140px){.hero-inner{grid-template-columns:1fr;padding:32px 28px 24px}.hero-badge{display:none}.hero-bar{padding:0 28px}.g3,.g3b,.g3c{grid-template-columns:1fr 1fr}.wrap{padding:22px 20px 48px}.filter-bar{padding:14px 16px}}
+@media(max-width:700px){.hero-inner{padding:24px 18px 18px}.hero-bar{padding:0 18px}.hbi{min-width:50%;border-right:none;border-bottom:1px solid rgba(255,255,255,.07)}.g6{grid-template-columns:1fr 1fr}.g3,.g3b,.g3c{grid-template-columns:1fr}.wrap{padding:14px 12px 36px}.filter-bar{flex-direction:column;align-items:stretch}.filter-group{min-width:0}.filter-reset{margin-left:0}}
 </style>
 </head>
 <body>
 
-<!-- LOADING OVERLAY -->
 <div id="loadingOverlay">
   <div class="ld-logo">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
@@ -252,7 +191,6 @@ tbody tr.tr-total td{background:var(--g100);font-weight:700;color:var(--ink);bor
   <div class="ld-bar"><div class="ld-prog"></div></div>
 </div>
 
-<!-- ERROR BANNER -->
 <div id="errorBanner">
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
   <div>
@@ -261,20 +199,18 @@ tbody tr.tr-total td{background:var(--g100);font-weight:700;color:var(--ink);bor
   </div>
 </div>
 
-<!-- ══════════════════ HERO ══════════════════════════════ -->
 <header class="hero">
   <div class="hero-orb hero-orb-1"></div>
   <div class="hero-orb hero-orb-2"></div>
 
   <div class="hero-inner">
-    <!-- LOGOS -->
     <div>
       <div class="logo-pill">
         <div class="logo-cell">
-          <div style="font-family:'Playfair Display',serif;font-size:18px;font-weight:900;color:#1e5826;letter-spacing:.5px">EFICACIA</div>
+          <img id="logoEficacia" alt="Eficacia S.A.S">
         </div>
         <div class="logo-cell">
-          <div style="font-family:'Playfair Display',serif;font-size:18px;font-weight:900;color:#2d7a38;letter-spacing:.5px">NUTRIMENTI</div>
+          <img id="logoNutrimenti" alt="Nutrimenti">
         </div>
       </div>
       <p class="logo-tagline">Operador de talento · Cliente estratégico</p>
@@ -284,14 +220,12 @@ tbody tr.tr-total td{background:var(--g100);font-weight:700;color:var(--ink);bor
       </div>
     </div>
 
-    <!-- CENTER -->
     <div class="hero-text">
       <div class="hero-eyebrow">Informe de Gestión Humana</div>
       <h1 class="hero-title">Rotación de <em>Personal</em></h1>
       <p class="hero-sub" id="heroSub">Autoservicios (AU) · Grandes Cuentas (GC) · Cargando…</p>
     </div>
 
-    <!-- DATE BADGE -->
     <div class="hero-badge">
       <div class="badge-period">Período</div>
       <div class="badge-date" id="badgeMonth">—</div>
@@ -301,7 +235,6 @@ tbody tr.tr-total td{background:var(--g100);font-weight:700;color:var(--ink);bor
     </div>
   </div>
 
-  <!-- STATS BAR -->
   <div class="hero-bar">
     <div class="hbi hbi-cupos">
       <div class="hbi-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
@@ -342,7 +275,6 @@ tbody tr.tr-total td{background:var(--g100);font-weight:700;color:var(--ink);bor
 
 <main class="wrap">
 
-<!-- ══ KPIs ════════════════════════════════════════════ -->
 <div class="sec">Indicadores Clave · Período Actual</div>
 
 <div class="tab-bar">
@@ -352,7 +284,6 @@ tbody tr.tr-total td{background:var(--g100);font-weight:700;color:var(--ink);bor
 </div>
 
 <div class="g6" id="kpiGrid">
-  <!-- NUEVO KPI: CUPOS -->
   <div class="kpi t-indigo">
     <div class="kpi-top"></div>
     <div class="kpi-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
@@ -397,7 +328,6 @@ tbody tr.tr-total td{background:var(--g100);font-weight:700;color:var(--ink);bor
   </div>
 </div>
 
-<!-- ══ FILTROS TABLA ════════════════════════════════════ -->
 <div class="sec">Filtros Interactivos</div>
 <div class="filter-bar" id="filterBar">
   <div class="filter-group">
@@ -421,6 +351,15 @@ tbody tr.tr-total td{background:var(--g100);font-weight:700;color:var(--ink);bor
     </select>
   </div>
   <div class="filter-group">
+    <label class="filter-label">Estatus Vacante</label>
+    <select class="filter-select" id="fEstatus" onchange="applyFilters()">
+      <option value="">Todos</option>
+      <option value="CONTRATADO">Contratado</option>
+      <option value="CIERRE DE CUPO">Cierre de Cupo</option>
+      <option value="NO SE CUBRE">No se Cubre</option>
+    </select>
+  </div>
+  <div class="filter-group">
     <label class="filter-label">Búsqueda</label>
     <input class="filter-input" id="fSearch" placeholder="Nombre, cargo, CEDIS…" oninput="applyFilters()" style="width:200px">
   </div>
@@ -428,7 +367,6 @@ tbody tr.tr-total td{background:var(--g100);font-weight:700;color:var(--ink);bor
   <div class="filter-count" id="filterCount">— registros</div>
 </div>
 
-<!-- ══ TENDENCIA Y COMPOSICIÓN ══════════════════════════ -->
 <div class="sec">Tendencia y Composición</div>
 <div class="g3">
   <div class="card">
@@ -447,7 +385,6 @@ tbody tr.tr-total td{background:var(--g100);font-weight:700;color:var(--ink);bor
   </div>
 </div>
 
-<!-- ══ REGIONAL · GC · COBERTURA ══════════════════════ -->
 <div class="sec">Por Regional · Cobertura de Ausentismos</div>
 <div class="g3b">
   <div class="card">
@@ -466,7 +403,6 @@ tbody tr.tr-total td{background:var(--g100);font-weight:700;color:var(--ink);bor
   </div>
 </div>
 
-<!-- ══ ANS & VACANTES ══════════════════════════════════ -->
 <div class="sec">ANS &amp; Gestión de Vacantes</div>
 <div class="g3c">
   <div class="dark-card">
@@ -504,7 +440,6 @@ tbody tr.tr-total td{background:var(--g100);font-weight:700;color:var(--ink);bor
   </div>
 </div>
 
-<!-- ══ TABLA RETIROS ════════════════════════════════════ -->
 <div class="sec">Tabla de Retiros · Detalle Completo</div>
 <div class="gfull">
   <div class="card" style="padding:0">
@@ -520,7 +455,6 @@ tbody tr.tr-total td{background:var(--g100);font-weight:700;color:var(--ink);bor
   </div>
 </div>
 
-<!-- ══ TABLA AUSENTISMOS ════════════════════════════════ -->
 <div class="sec">Tabla de Ausentismos</div>
 <div class="gfull">
   <div class="card" style="padding:0">
@@ -536,7 +470,6 @@ tbody tr.tr-total td{background:var(--g100);font-weight:700;color:var(--ink);bor
   </div>
 </div>
 
-<!-- ══ TABLA VACANTES ══════════════════════════════════ -->
 <div class="sec">Tabla de Vacantes · Estatus de Cobertura</div>
 <div class="gfull">
   <div class="card" style="padding:0">
@@ -560,26 +493,22 @@ tbody tr.tr-total td{background:var(--g100);font-weight:700;color:var(--ink);bor
   Datos en tiempo real desde Google Sheets
 </footer>
 
-<!-- ══════════════════ JAVASCRIPT ══════════════════════ -->
 <script>
-// ┌─────────────────────────────────────────────────────────┐
-// │  ⚠️  CONFIGURACIÓN — EDITA ESTA URL DESPUÉS DE DESPLEGAR │
-// │  Reemplaza la URL con la de tu Web App de Apps Script   │
-// └─────────────────────────────────────────────────────────┘
-const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwhqZGBE7nkqn_FNKkDjE7lz6EeQ1bLT4gD4sFi3-jvMcOJgtAmYlHOGH4ouqkq7u65zA/exec';
+// ══ LOGOS BASE64 (se inyectan al cargar) ══════════════════
+const LOGO_EFICACIA = 'https://eficacia.com.co/wp-content/uploads/2023/06/logo-eficacia.png';
+const LOGO_NUTRIMENTI = 'https://yt3.googleusercontent.com/ytc/AIdro_nlHVTWRB8BCs4Ls9w6DTbrKYhkmcOd7nkLfI6qzCzzeBs=s900-c-k-c0x00ffffff-no-rj';
 
-// ── Estado global ─────────────────────────────────────────
+// ══ CONFIG ═══════════════════════════════════════════════
+const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxQqKl24nd3w71ggFJzuN6hpakMg7BIxbr3wgg3ai59r_5l8C9A88Ex60_WiuBinH_nbQ/exec';
+
 let DATA = null;
 let currentLinea = 'ALL';
 
-// ── Chart.js defaults ─────────────────────────────────────
 Chart.defaults.font.family = "'Sora',sans-serif";
 Chart.defaults.color = '#8aaa8e';
 const CHARTS = {};
 
-// ════════════════════════════════════════════════════════════
-// CARGA DE DATOS
-// ════════════════════════════════════════════════════════════
+// ══ CARGA DE DATOS ══════════════════════════════════════
 async function loadData() {
   showLoading(true);
   setError(null);
@@ -637,31 +566,32 @@ function jsonp(url) {
   });
 }
 
-// ════════════════════════════════════════════════════════════
-// CUPOS HELPERS
-// ════════════════════════════════════════════════════════════
+// ══ CUPOS HELPERS ═══════════════════════════════════════
 function getCuposForLinea(d, linea) {
   if (!d || !d.cupos) return 0;
   if (linea === 'ALL') return d.cupos.total || 0;
   return (d.cupos.porLinea && d.cupos.porLinea[linea]) || 0;
 }
 
-// ════════════════════════════════════════════════════════════
-// RENDER PRINCIPAL
-// ════════════════════════════════════════════════════════════
+// ══ RENDER PRINCIPAL ════════════════════════════════════
 function renderAll(d) {
   renderHero(d);
   renderKPIs(d, currentLinea);
   renderCharts(d);
   renderTables(d, currentLinea);
   populateFilters(d.retiros);
-  document.getElementById('filterCount').textContent =
-    filterByLinea(d.retiros, currentLinea).length + ' retiros · ' +
-    filterByLinea(d.ausencias, currentLinea).length + ' ausentismos · ' +
-    filterByLinea(d.vacantes, currentLinea).length + ' vacantes';
+  updateFilterCount();
 }
 
-// ── Hero ─────────────────────────────────────────────────
+function updateFilterCount() {
+  if (!DATA) return;
+  document.getElementById('filterCount').textContent =
+    filterByLinea(DATA.retiros, currentLinea).length + ' retiros · ' +
+    filterByLinea(DATA.ausencias, currentLinea).length + ' ausentismos · ' +
+    filterByLinea(DATA.vacantes, currentLinea).length + ' vacantes';
+}
+
+// ══ Hero con periodo dinámico ═══════════════════════════
 function renderHero(d) {
   const k = d.kpis;
   setText('barCupos',       k.totalCupos || 0);
@@ -672,15 +602,19 @@ function renderHero(d) {
   setText('barVacantes',    k.totalVacantes);
   setText('barPctRot', (k.pctRotacion !== null && k.pctRotacion !== undefined) ? k.pctRotacion + '%' : '—%');
 
-  const [mes, anio] = (d.periodo || '3/2026').toString().split('/');
-  const meses = ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'];
-  setText('badgeMonth', meses[(parseInt(mes)||3)-1] + ' ' + (parseInt(mes)||3).toString().padStart(2,'0'));
-  setText('badgeYear', anio || '2026');
+  // Periodo dinámico desde backend
+  const mes  = parseInt(d.periodoMes)  || (new Date().getMonth() + 1);
+  const anio = parseInt(d.periodoAnio) || (new Date().getFullYear());
+  const mesesFull = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+  const mesesShort = ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'];
+
+  setText('badgeMonth', mesesShort[mes-1] + ' ' + String(mes).padStart(2,'0'));
+  setText('badgeYear',  anio);
   document.getElementById('heroSub').textContent =
-    `Autoservicios (AU) · Grandes Cuentas (GC) · ${meses[(parseInt(mes)||3)-1]} ${anio||2026}`;
+    `Autoservicios (AU) · Grandes Cuentas (GC) · ${mesesFull[mes-1]} ${anio}`;
 }
 
-// ── KPIs ─────────────────────────────────────────────────
+// ══ KPIs ════════════════════════════════════════════════
 function renderKPIs(d, linea) {
   const retFilt = filterByLinea(d.retiros, linea);
   const ausFilt = filterByLinea(d.ausencias, linea);
@@ -692,27 +626,35 @@ function renderKPIs(d, linea) {
   const diasAus = ausFilt.reduce((s, a) => s + (a.dias||0), 0);
   const contrat = vacFilt.filter(v => v.estatus && v.estatus.toUpperCase() === 'CONTRATADO').length;
 
-  // Cupos de la línea actual
+  // Cupos de la línea actual (excluyendo CIERRE DE CUPO)
   const cuposLinea = getCuposForLinea(d, linea);
   const pctRot = cuposLinea > 0 ? (total / cuposLinea * 100).toFixed(2) : null;
+
+  // Vacantes gestionadas = total filas VACANTES (incluyendo cerradas)
+  const vacantesGestionadas = vacFilt.length;
 
   animNum('k0', cuposLinea);
   animNum('k1', total);
   animNum('k2', plan);
   animNum('k3', noPlan);
   animNum('k4', ausFilt.length);
-  animNum('k5', vacFilt.length);
+  animNum('k5', vacantesGestionadas);
 
-  setText('k0foot', pctRot !== null ? pctRot + '% rotación' : 'Sin datos de cupos');
+  setText('k0foot', pctRot !== null ? pctRot + '% rotación' : 'Sin cupos activos');
   setText('k1foot', 'Período actual');
   setText('k2foot', total ? pct(plan,total) + '% del total' : '—');
   setText('k3foot', total ? pct(noPlan,total) + '% del total' : '—');
   setText('k4foot', diasAus + ' días afectados');
   setText('k5foot', contrat + ' contratados');
 
-  // Actualizar también el hero bar según línea
-  setText('barCupos',       cuposLinea || (d.kpis.totalCupos || 0));
-  setText('barPctRot',      pctRot !== null ? pctRot + '%' : '—%');
+  // Hero bar
+  setText('barCupos',   cuposLinea || 0);
+  setText('barTotal',   total);
+  setText('barPlaneados', plan);
+  setText('barNoPlaneados', noPlan);
+  setText('barAusencias', ausFilt.length);
+  setText('barVacantes',  vacantesGestionadas);
+  setText('barPctRot',  pctRot !== null ? pctRot + '%' : '—%');
 
   // ANS stats
   const maxDias   = Math.max(...vacFilt.map(v => v.diasVacante||0), 0);
@@ -723,27 +665,27 @@ function renderKPIs(d, linea) {
   setText('ansDentro',    dentro||'0');
 }
 
-// ── CHARTS ───────────────────────────────────────────────
-function renderCharts(d) {
+// ══ CHARTS (usa arrays filtrados) ═══════════════════════
+function renderCharts(d, retFiltArg, ausFiltArg, vacFiltArg) {
+  const retiros   = retFiltArg || d.retiros;
+  const ausencias = ausFiltArg || d.ausencias;
+  const vacantes  = vacFiltArg || d.vacantes;
   const colors = ['#1e5826','#3d9e4a','#5cb868','#96d49e','#c8eacc','#0d9488','#34d399','#d97706','#dc2626'];
 
-  const causales = d.charts.causales;
+  // Causales
+  const causalMap = {};
+  retiros.forEach(r => { const c = r.causal||'Otro'; causalMap[c]=(causalMap[c]||0)+1; });
+  const causales = Object.entries(causalMap).map(([l,v])=>({label:l,value:v})).sort((a,b)=>b.value-a.value);
   destroyChart('causalBarChart');
   CHARTS.causalBarChart = new Chart(document.getElementById('causalBarChart'), {
-    type: 'bar',
-    data: {
-      labels: causales.map(c => c.label),
-      datasets: [{ data: causales.map(c => c.value), backgroundColor: colors, borderRadius: 6, borderSkipped: false }]
-    },
-    options: {
-      responsive:true, maintainAspectRatio:false, indexAxis:'y',
-      plugins:{ legend:{display:false} },
-      scales:{ x:{beginAtZero:true, ticks:{font:{size:11}}, grid:{color:'rgba(0,0,0,.05)'}}, y:{ticks:{font:{size:11}}, grid:{display:false}} }
-    }
+    type:'bar',
+    data:{ labels:causales.map(c=>c.label), datasets:[{data:causales.map(c=>c.value),backgroundColor:colors,borderRadius:6,borderSkipped:false}] },
+    options:{ responsive:true,maintainAspectRatio:false,indexAxis:'y',plugins:{legend:{display:false}},scales:{x:{beginAtZero:true,ticks:{font:{size:11}},grid:{color:'rgba(0,0,0,.05)'}},y:{ticks:{font:{size:11}},grid:{display:false}}} }
   });
 
-  const plan = d.retiros.filter(r => r.tipo === 'PLANEADA').length;
-  const noPlan = d.retiros.filter(r => r.tipo === 'NO PLANEADA').length;
+  // Tipo rotación
+  const plan = retiros.filter(r => r.tipo === 'PLANEADA').length;
+  const noPlan = retiros.filter(r => r.tipo === 'NO PLANEADA').length;
   destroyChart('tipoChart');
   CHARTS.tipoChart = new Chart(document.getElementById('tipoChart'), {
     type: 'doughnut',
@@ -755,121 +697,129 @@ function renderCharts(d) {
     <li><span class="dl-sq" style="background:#2d7a38"></span>Planeada<span class="dl-n">${plan}</span><span class="dl-p">${pct(plan,tTotal)}%</span></li>
     <li><span class="dl-sq" style="background:#dc2626"></span>No Planeada<span class="dl-n">${noPlan}</span><span class="dl-p">${pct(noPlan,tTotal)}%</span></li>`;
 
-  const tiposAus = d.charts.tiposAusencia;
+  // Tipo ausentismo
+  const tipoAusMap = {};
+  ausencias.forEach(a => { const t = a.tipo||'Otro'; tipoAusMap[t]=(tipoAusMap[t]||0)+1; });
+  const tiposAus = Object.entries(tipoAusMap).map(([l,v])=>({label:l,value:v})).sort((a,b)=>b.value-a.value);
+  const ausColors = ['#0d9488','#34d399','#a7f3d0','#d97706'];
   destroyChart('ausentChart');
   CHARTS.ausentChart = new Chart(document.getElementById('ausentChart'), {
     type: 'doughnut',
-    data: { labels: tiposAus.map(t => t.label), datasets: [{ data: tiposAus.map(t => t.value), backgroundColor:['#0d9488','#34d399','#a7f3d0','#d97706'], borderWidth:2, borderColor:'#fff' }] },
+    data: { labels: tiposAus.map(t => t.label), datasets: [{ data: tiposAus.map(t => t.value), backgroundColor:ausColors, borderWidth:2, borderColor:'#fff' }] },
     options: { cutout:'70%', responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}} }
   });
-  const ausColors = ['#0d9488','#34d399','#a7f3d0','#d97706'];
-  const ausTotal  = tiposAus.reduce((s,t)=>s+t.value,0);
+  const ausTotal = tiposAus.reduce((s,t)=>s+t.value,0);
   document.getElementById('ausentLeg').innerHTML = tiposAus.map((t,i)=>
     `<li><span class="dl-sq" style="background:${ausColors[i%ausColors.length]}"></span>${t.label}<span class="dl-n">${t.value}</span><span class="dl-p">${pct(t.value,ausTotal)}%</span></li>`
   ).join('');
 
-  const regs = d.charts.retirosPorRegional;
+  // Retiros por regional
+  const regMap = {};
+  retiros.forEach(r => { const rg=r.regional||'N/A'; if(!regMap[rg]) regMap[rg]={planeada:0,noPlaneada:0,total:0}; regMap[rg].total++; if(r.tipo==='PLANEADA')regMap[rg].planeada++; else regMap[rg].noPlaneada++; });
+  const regs = Object.entries(regMap).map(([name,v])=>({name,...v})).sort((a,b)=>b.total-a.total);
   const mx = Math.max(...regs.map(r=>r.total), 1);
-  document.getElementById('regBars').innerHTML = regs.map(r=>`
+  document.getElementById('regBars').innerHTML = regs.length ? regs.map(r=>`
     <div class="reg-item">
-      <div class="reg-top">
-        <span class="reg-name">${r.name}</span>
-        <span class="reg-nums">${r.planeada} plan · ${r.noPlaneada} no plan · ${r.total} total</span>
-      </div>
-      <div class="reg-track">
-        <div class="reg-p" style="width:${r.planeada/mx*100}%"></div>
-        <div class="reg-np" style="width:${r.noPlaneada/mx*100}%"></div>
-      </div>
-    </div>`).join('');
+      <div class="reg-top"><span class="reg-name">${r.name}</span><span class="reg-nums">${r.planeada} plan · ${r.noPlaneada} no plan · ${r.total} total</span></div>
+      <div class="reg-track"><div class="reg-p" style="width:${r.planeada/mx*100}%"></div><div class="reg-np" style="width:${r.noPlaneada/mx*100}%"></div></div>
+    </div>`).join('') : '<p style="color:var(--ink4);font-size:12px;text-align:center;padding:20px">Sin datos</p>';
 
-  const auCount = d.retiros.filter(r=>r.linea==='AU').length;
-  const gcCount = d.retiros.filter(r=>r.linea==='GC').length;
-  const snCount = d.retiros.filter(r=>r.linea==='SN').length;
-  const otCount = d.retiros.filter(r=>r.linea==='OTRO').length;
+  // Distribución por línea
+  const auC = retiros.filter(r=>r.linea==='AU').length;
+  const gcC = retiros.filter(r=>r.linea==='GC').length;
+  const snC = retiros.filter(r=>r.linea==='SN').length;
+  const otC = retiros.filter(r=>r.linea==='OTRO').length;
   const lineaData = [
-    {label:'Autoservicios AU', val:auCount, color:'#2d7a38'},
-    {label:'Grandes Cuentas GC', val:gcCount, color:'#3d9e4a'},
-    {label:'Supernumerario SN', val:snCount, color:'#96d49e'},
-    ...(otCount>0?[{label:'Otro', val:otCount, color:'#8aaa8e'}]:[])
+    {label:'Autoservicios AU', val:auC, color:'#2d7a38'},
+    {label:'Grandes Cuentas GC', val:gcC, color:'#3d9e4a'},
+    {label:'Supernumerario SN', val:snC, color:'#96d49e'},
+    ...(otC>0?[{label:'Otro', val:otC, color:'#8aaa8e'}]:[])
   ].filter(x=>x.val>0);
   destroyChart('lineaChart');
   CHARTS.lineaChart = new Chart(document.getElementById('lineaChart'), {
-    type: 'doughnut',
-    data: { labels: lineaData.map(l=>l.label), datasets:[{ data:lineaData.map(l=>l.val), backgroundColor:lineaData.map(l=>l.color), borderWidth:2, borderColor:'#fff' }] },
+    type:'doughnut',
+    data:{ labels:lineaData.map(l=>l.label), datasets:[{data:lineaData.map(l=>l.val), backgroundColor:lineaData.map(l=>l.color), borderWidth:2, borderColor:'#fff'}] },
     options:{ cutout:'65%', responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}} }
   });
-  const ltotal = lineaData.reduce((s,l)=>s+l.val,0);
+  const lt = lineaData.reduce((s,l)=>s+l.val,0);
   document.getElementById('lineaLeg').innerHTML = lineaData.map(l=>
-    `<li><span class="dl-sq" style="background:${l.color}"></span>${l.label}<span class="dl-n">${l.val}</span><span class="dl-p">${pct(l.val,ltotal)}%</span></li>`
+    `<li><span class="dl-sq" style="background:${l.color}"></span>${l.label}<span class="dl-n">${l.val}</span><span class="dl-p">${pct(l.val,lt)}%</span></li>`
   ).join('');
 
-  const cob = d.charts.coberturaAusencia;
+  // Cobertura ausentismo
+  const cobMap = {};
+  ausencias.forEach(a => { const k=(a.comoSeCubrio&&a.comoSeCubrio!=='')?a.comoSeCubrio:'Sin cobertura'; cobMap[k]=(cobMap[k]||0)+1; });
+  const cob = Object.entries(cobMap).map(([label,value])=>({label,value}));
   destroyChart('cobChart');
   CHARTS.cobChart = new Chart(document.getElementById('cobChart'), {
-    type: 'pie',
-    data: { labels: cob.map(c=>c.label), datasets:[{ data:cob.map(c=>c.value), backgroundColor:['#dc2626','#3d9e4a','#0d9488','#d97706'], borderWidth:2, borderColor:'#fff' }] },
+    type:'pie',
+    data:{ labels:cob.map(c=>c.label), datasets:[{data:cob.map(c=>c.value), backgroundColor:['#dc2626','#3d9e4a','#0d9488','#d97706'], borderWidth:2, borderColor:'#fff'}] },
     options:{ responsive:true, maintainAspectRatio:false, plugins:{legend:{position:'bottom',labels:{boxWidth:9,padding:10,font:{size:10}}}} }
   });
-  const cobTotal = cob.reduce((s,c)=>s+c.value,0);
-  document.getElementById('cobProgs').innerHTML = cob.map((c,i)=>{
-    const pc = pct(c.value, cobTotal);
-    const bgs = ['linear-gradient(90deg,#dc2626,#f87171)','linear-gradient(90deg,var(--g500),var(--g300))','linear-gradient(90deg,#0d9488,#34d399)','linear-gradient(90deg,#d97706,#fcd34d)'];
-    return `<div class="prog">
-      <div class="prog-hd"><span>${c.label}</span><span>${c.value} / ${cobTotal}</span></div>
-      <div class="prog-track"><div class="prog-fill" style="width:${pc}%;background:${bgs[i%bgs.length]}"></div></div>
-    </div>`;
-  }).join('');
+  const cobTotal = cob.reduce((s,c)=>s+c.value, 0);
+  const bgs = ['linear-gradient(90deg,#dc2626,#f87171)','linear-gradient(90deg,var(--g500),var(--g300))','linear-gradient(90deg,#0d9488,#34d399)','linear-gradient(90deg,#d97706,#fcd34d)'];
+  document.getElementById('cobProgs').innerHTML = cob.map((c,i)=>
+    `<div class="prog"><div class="prog-hd"><span>${c.label}</span><span>${c.value} / ${cobTotal}</span></div><div class="prog-track"><div class="prog-fill" style="width:${pct(c.value,cobTotal)}%;background:${bgs[i%bgs.length]}"></div></div></div>`
+  ).join('');
 
-  const ev = d.charts.estadoVacantes;
+  // Estado vacantes
+  const evMap = {};
+  vacantes.forEach(v => { const e=v.estatus||'N/A'; evMap[e]=(evMap[e]||0)+1; });
+  const ev = Object.entries(evMap).map(([label,value])=>({label,value}));
   destroyChart('vacChart');
   CHARTS.vacChart = new Chart(document.getElementById('vacChart'), {
     type:'doughnut',
-    data:{ labels:ev.map(e=>e.label), datasets:[{ data:ev.map(e=>e.value), backgroundColor:['#3d9e4a','#96d49e','#d97706','#dc2626'], borderWidth:2, borderColor:'#fff' }] },
+    data:{ labels:ev.map(e=>e.label), datasets:[{data:ev.map(e=>e.value), backgroundColor:['#3d9e4a','#96d49e','#d97706','#dc2626'], borderWidth:2, borderColor:'#fff'}] },
     options:{ cutout:'65%', responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}} }
   });
-  const evTotal = ev.reduce((s,e)=>s+e.value,0);
+  const evTotal = ev.reduce((s,e)=>s+e.value, 0);
   const evColors = ['#3d9e4a','#96d49e','#d97706','#dc2626'];
   document.getElementById('vacLeg').innerHTML = ev.map((e,i)=>
     `<li><span class="dl-sq" style="background:${evColors[i%evColors.length]}"></span>${e.label}<span class="dl-n">${e.value}</span><span class="dl-p">${pct(e.value,evTotal)}%</span></li>`
   ).join('');
 
-  const dv = d.charts.diasVacanteDetalle.slice(0,5);
+  // Dias vacante
+  const dv = vacantes.filter(v => v.diasVacante > 0 || v.diasSinCob > 0).slice(0,5);
   destroyChart('diasChart');
   CHARTS.diasChart = new Chart(document.getElementById('diasChart'), {
     type:'bar',
     data:{
-      labels: dv.length ? dv.map(v => shortName(v.nombre)) : ['Sin datos'],
+      labels: dv.length ? dv.map(v => shortName(v.quienSeFue || v.nombre)) : ['Sin datos'],
       datasets:[
-        { label:'Días Vacante', data:dv.map(v=>v.dias), backgroundColor:'rgba(220,38,38,.85)', borderRadius:6, borderSkipped:false },
-        { label:'Días Sin Cob.', data:dv.map(v=>v.sinCob), backgroundColor:'rgba(220,38,38,.3)', borderRadius:6, borderSkipped:false }
+        { label:'Días Vacante', data:dv.map(v=>v.diasVacante), backgroundColor:'rgba(220,38,38,.85)', borderRadius:6, borderSkipped:false },
+        { label:'Días Sin Cob.', data:dv.map(v=>v.diasSinCob), backgroundColor:'rgba(220,38,38,.3)', borderRadius:6, borderSkipped:false }
       ]
     },
-    options:{
-      responsive:true, maintainAspectRatio:false,
-      plugins:{ legend:{position:'bottom',labels:{boxWidth:9,padding:12,font:{size:11}}} },
-      scales:{ y:{ beginAtZero:true, ticks:{callback:v=>v+' d',font:{size:11}}, grid:{color:'rgba(0,0,0,.05)'} }, x:{ ticks:{font:{size:11}}, grid:{display:false} } }
-    }
+    options:{ responsive:true, maintainAspectRatio:false, plugins:{legend:{position:'bottom',labels:{boxWidth:9,padding:12,font:{size:11}}}},scales:{y:{beginAtZero:true,ticks:{callback:v=>v+' d',font:{size:11}},grid:{color:'rgba(0,0,0,.05)'}},x:{ticks:{font:{size:11}},grid:{display:false}}} }
   });
 }
 
-// ── TABLAS ───────────────────────────────────────────────
-function renderTables(d, linea) {
-  const retFilt = filterByLinea(d.retiros, linea);
-  const ausFilt = filterByLinea(d.ausencias, linea);
-  const vacFilt = filterByLinea(d.vacantes, linea);
+// ══ TABLAS con tooltips ═════════════════════════════════
+function escapeAttr(s) {
+  return String(s||'').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
 
+function renderTables(d, linea, retFiltArg, ausFiltArg, vacFiltArg) {
+  const retFilt = retFiltArg || filterByLinea(d.retiros, linea);
+  const ausFilt = ausFiltArg || filterByLinea(d.ausencias, linea);
+  const vacFilt = vacFiltArg || filterByLinea(d.vacantes, linea);
+
+  // Retiros
   document.getElementById('tbodyRetiros').innerHTML = retFilt.length
-    ? retFilt.map(r => `<tr>
-        <td>${titleCase(r.nombre)}</td>
-        <td>${titleCase(r.cargo)}</td>
-        <td>${lineaBadge(r.linea)}</td>
-        <td>${r.regional}</td>
-        <td>${r.cedis}</td>
-        <td>${r.ciudad}</td>
-        <td>${r.causal}</td>
-        <td>${tipoBadge(r.tipo)}</td>
-        <td>${r.fecha}</td>
-      </tr>`).join('')
+    ? retFilt.map(r => {
+        const tip = `Documento: ${r.documento||'—'} | Motivo: ${r.motivo||'—'} | ${r.ciudad||''} / ${r.regional||''}`;
+        return `<tr title="${escapeAttr(tip)}">
+          <td title="${escapeAttr('Doc: '+(r.documento||'—'))}">${titleCase(r.nombre)}</td>
+          <td title="${escapeAttr(r.cargo)}">${titleCase(r.cargo)}</td>
+          <td>${lineaBadge(r.linea)}</td>
+          <td title="${escapeAttr(r.regional)}">${r.regional||'—'}</td>
+          <td title="${escapeAttr(r.cedis)}">${r.cedis||'—'}</td>
+          <td>${r.ciudad||'—'}</td>
+          <td title="${escapeAttr('Motivo: '+(r.motivo||'—'))}">${r.causal||'—'}</td>
+          <td>${tipoBadge(r.tipo)}</td>
+          <td>${r.fecha||'—'}</td>
+        </tr>`;
+      }).join('')
     : '<tr><td colspan="9" class="no-data">Sin registros para esta selección</td></tr>';
 
   const planR  = retFilt.filter(r=>r.tipo==='PLANEADA').length;
@@ -880,46 +830,50 @@ function renderTables(d, linea) {
     <td><strong>${retFilt.length} retiros</strong></td>
   </tr>`;
 
+  // Ausentismos
   document.getElementById('tbodyAusencias').innerHTML = ausFilt.length
-    ? ausFilt.map(a=>`<tr>
-        <td>${titleCase(a.nombre)}</td>
-        <td>${titleCase(a.cargo)}</td>
-        <td>${lineaBadge(a.linea)}</td>
-        <td>${a.regional}</td>
-        <td>${a.cedi}</td>
-        <td>${a.tipo}</td>
-        <td><strong>${a.dias}</strong></td>
-        <td>${a.inicio}</td>
-        <td>${a.fin}</td>
-        <td>${cubiertoBadge(a.cubierto)}</td>
-        <td>${a.comoSeCubrio||'—'}</td>
-      </tr>`).join('')
+    ? ausFilt.map(a => {
+        const tip = `Doc: ${a.documento||'—'} | Líder: ${a.lider||'—'} | ${a.ciudad||''}`;
+        return `<tr title="${escapeAttr(tip)}">
+          <td title="${escapeAttr('Doc: '+(a.documento||'—'))}">${titleCase(a.nombre)}</td>
+          <td title="${escapeAttr(a.cargo)}">${titleCase(a.cargo)}</td>
+          <td>${lineaBadge(a.linea)}</td>
+          <td>${a.regional||'—'}</td>
+          <td title="${escapeAttr(a.cedi)}">${a.cedi||'—'}</td>
+          <td>${a.tipo||'—'}</td>
+          <td><strong>${a.dias}</strong></td>
+          <td>${a.inicio||'—'}</td>
+          <td>${a.fin||'—'}</td>
+          <td>${cubiertoBadge(a.cubierto)}</td>
+          <td title="${escapeAttr(a.comoSeCubrio)}">${a.comoSeCubrio||'—'}</td>
+        </tr>`;
+      }).join('')
     : '<tr><td colspan="11" class="no-data">Sin registros</td></tr>';
 
+  // Vacantes
   document.getElementById('tbodyVacantes').innerHTML = vacFilt.length
-    ? vacFilt.map(v=>{
+    ? vacFilt.map(v => {
         const dc = v.diasVacante > (v.ans||5) ? `<strong style="color:#dc2626">${v.diasVacante}</strong>` : v.diasVacante;
         const sc = v.diasSinCob > 0 ? `<strong style="color:${v.diasSinCob>5?'#dc2626':'#d97706'}">${v.diasSinCob}</strong>` : v.diasSinCob;
-        return `<tr>
-          <td>${titleCase(v.quienSeFue)}</td>
-          <td>${titleCase(v.cargo)}</td>
+        const tip = `Retiro: ${v.fechaRetiro||'—'} | Contrat.: ${v.fechaContrat||'—'} | Líder: ${v.lider||'—'} | Estado día: ${v.estadoDia||'—'}`;
+        return `<tr title="${escapeAttr(tip)}">
+          <td title="${escapeAttr('Doc: '+(v.documento||'—'))}">${titleCase(v.quienSeFue)}</td>
+          <td title="${escapeAttr(v.cargo)}">${titleCase(v.cargo)}</td>
           <td>${lineaBadge(v.linea)}</td>
-          <td>${v.regional}</td>
-          <td>${v.cedis}</td>
-          <td>${v.causal}</td>
+          <td>${v.regional||'—'}</td>
+          <td title="${escapeAttr(v.cedis)}">${v.cedis||'—'}</td>
+          <td>${v.causal||'—'}</td>
           <td>${estatusBadge(v.estatus)}</td>
           <td>${dc}</td>
           <td>${v.ans||'—'}</td>
           <td>${sc}</td>
-          <td>${titleCase(v.reemplazante)||'—'}</td>
+          <td title="${escapeAttr('Céd: '+(v.cedulaRep||'—'))}">${titleCase(v.reemplazante)||'—'}</td>
         </tr>`;
       }).join('')
     : '<tr><td colspan="11" class="no-data">Sin registros</td></tr>';
 }
 
-// ════════════════════════════════════════════════════════════
-// FILTROS
-// ════════════════════════════════════════════════════════════
+// ══ FILTROS ═════════════════════════════════════════════
 function populateFilters(retiros) {
   const regionals = [...new Set(retiros.map(r => r.regional).filter(Boolean))].sort();
   const causales  = [...new Set(retiros.map(r => r.causal).filter(Boolean))].sort();
@@ -934,115 +888,66 @@ function populateFilters(retiros) {
 
 function applyFilters() {
   if (!DATA) return;
-  const reg    = document.getElementById('fRegional').value.toUpperCase();
-  const causal = document.getElementById('fCausal').value.toUpperCase();
-  const tipo   = document.getElementById('fTipo').value.toUpperCase();
-  const search = document.getElementById('fSearch').value.toUpperCase();
+  const reg     = document.getElementById('fRegional').value.toUpperCase();
+  const causal  = document.getElementById('fCausal').value.toUpperCase();
+  const tipo    = document.getElementById('fTipo').value.toUpperCase();
+  const estatus = document.getElementById('fEstatus').value.toUpperCase();
+  const search  = document.getElementById('fSearch').value.toUpperCase();
 
-  const hasFilter = reg || causal || tipo || search;
-
+  // Filtrar retiros por todos los filtros aplicables
   let retFilt = filterByLinea(DATA.retiros, currentLinea);
-  if (reg)    retFilt = retFilt.filter(r => r.regional && r.regional.toUpperCase() === reg);
-  if (causal) retFilt = retFilt.filter(r => r.causal && r.causal.toUpperCase() === causal);
-  if (tipo)   retFilt = retFilt.filter(r => r.tipo && r.tipo.toUpperCase() === tipo);
+  if (reg)    retFilt = retFilt.filter(r => (r.regional||'').toUpperCase() === reg);
+  if (causal) retFilt = retFilt.filter(r => (r.causal||'').toUpperCase() === causal);
+  if (tipo)   retFilt = retFilt.filter(r => (r.tipo||'').toUpperCase() === tipo);
   if (search) retFilt = retFilt.filter(r =>
-    [r.nombre, r.cargo, r.cedis, r.ciudad, r.causal].some(f => f && f.toUpperCase().includes(search))
+    [r.nombre, r.cargo, r.cedis, r.ciudad, r.causal, r.documento].some(f => f && String(f).toUpperCase().includes(search))
   );
 
+  // Ausentismos por regional + búsqueda
   let ausFilt = filterByLinea(DATA.ausencias, currentLinea);
-  if (reg)    ausFilt = ausFilt.filter(a => a.regional && a.regional.toUpperCase() === reg);
+  if (reg)    ausFilt = ausFilt.filter(a => (a.regional||'').toUpperCase() === reg);
   if (search) ausFilt = ausFilt.filter(a =>
-    [a.nombre, a.cargo, a.cedi, a.ciudad].some(f => f && f.toUpperCase().includes(search))
+    [a.nombre, a.cargo, a.cedi, a.ciudad, a.documento].some(f => f && String(f).toUpperCase().includes(search))
   );
 
+  // Vacantes por regional + estatus + búsqueda
   let vacFilt = filterByLinea(DATA.vacantes, currentLinea);
-  if (reg)    vacFilt = vacFilt.filter(v => v.regional && v.regional.toUpperCase() === reg);
-  if (search) vacFilt = vacFilt.filter(v =>
-    [v.quienSeFue, v.cargo, v.cedis].some(f => f && f.toUpperCase().includes(search))
+  if (reg)     vacFilt = vacFilt.filter(v => (v.regional||'').toUpperCase() === reg);
+  if (estatus) vacFilt = vacFilt.filter(v => (v.estatus||'').toUpperCase() === estatus);
+  if (search)  vacFilt = vacFilt.filter(v =>
+    [v.quienSeFue, v.cargo, v.cedis, v.documento, v.reemplazante].some(f => f && String(f).toUpperCase().includes(search))
   );
 
-  const planR   = retFilt.filter(r=>r.tipo==='PLANEADA').length;
-  const noPlanR = retFilt.filter(r=>r.tipo==='NO PLANEADA').length;
-  document.getElementById('tbodyRetiros').innerHTML = (retFilt.length
-    ? retFilt.map(r=>`<tr>
-        <td>${titleCase(r.nombre)}</td>
-        <td>${titleCase(r.cargo)}</td>
-        <td>${lineaBadge(r.linea)}</td>
-        <td>${r.regional}</td>
-        <td>${r.cedis}</td>
-        <td>${r.ciudad}</td>
-        <td>${r.causal}</td>
-        <td>${tipoBadge(r.tipo)}</td>
-        <td>${r.fecha}</td>
-      </tr>`).join('')
-    : '<tr><td colspan="9" class="no-data">Sin registros para esta selección</td></tr>'
-  ) + `<tr class="tr-total">
-    <td colspan="7"><strong>${hasFilter ? 'TOTAL FILTRADO' : 'TOTAL'}</strong></td>
-    <td><span class="chip chip-g">${planR} Planeadas</span>&nbsp;<span class="chip chip-r">${noPlanR} No Plan.</span></td>
-    <td><strong>${retFilt.length} retiros</strong></td>
-  </tr>`;
+  // Recalcular cupos con los filtros (excluyendo CIERRE DE CUPO)
+  const cuposFiltrados = vacFilt.filter(v => (v.estatus||'').toUpperCase() !== 'CIERRE DE CUPO').length;
 
-  document.getElementById('tbodyAusencias').innerHTML = ausFilt.length
-    ? ausFilt.map(a=>`<tr>
-        <td>${titleCase(a.nombre)}</td>
-        <td>${titleCase(a.cargo)}</td>
-        <td>${lineaBadge(a.linea)}</td>
-        <td>${a.regional}</td>
-        <td>${a.cedi}</td>
-        <td>${a.tipo}</td>
-        <td><strong>${a.dias}</strong></td>
-        <td>${a.inicio}</td>
-        <td>${a.fin}</td>
-        <td>${cubiertoBadge(a.cubierto)}</td>
-        <td>${a.comoSeCubrio||'—'}</td>
-      </tr>`).join('')
-    : '<tr><td colspan="11" class="no-data">Sin registros para esta selección</td></tr>';
+  // Render tablas
+  renderTables(DATA, currentLinea, retFilt, ausFilt, vacFilt);
 
-  document.getElementById('tbodyVacantes').innerHTML = vacFilt.length
-    ? vacFilt.map(v=>{
-        const dc = v.diasVacante > (v.ans||5) ? `<strong style="color:#dc2626">${v.diasVacante}</strong>` : v.diasVacante;
-        const sc = v.diasSinCob > 0 ? `<strong style="color:${v.diasSinCob>5?'#dc2626':'#d97706'}">${v.diasSinCob}</strong>` : v.diasSinCob;
-        return `<tr>
-          <td>${titleCase(v.quienSeFue)}</td>
-          <td>${titleCase(v.cargo)}</td>
-          <td>${lineaBadge(v.linea)}</td>
-          <td>${v.regional}</td>
-          <td>${v.cedis}</td>
-          <td>${v.causal}</td>
-          <td>${estatusBadge(v.estatus)}</td>
-          <td>${dc}</td>
-          <td>${v.ans||'—'}</td>
-          <td>${sc}</td>
-          <td>${titleCase(v.reemplazante)||'—'}</td>
-        </tr>`;
-      }).join('')
-    : '<tr><td colspan="11" class="no-data">Sin registros para esta selección</td></tr>';
-
-  // Actualizar KPIs con filtros
+  // KPIs con datos filtrados
   const total   = retFilt.length;
   const plan    = retFilt.filter(r => r.tipo === 'PLANEADA').length;
   const noPlan  = retFilt.filter(r => r.tipo === 'NO PLANEADA').length;
   const diasAus = ausFilt.reduce((s, a) => s + (a.dias||0), 0);
-  const contrat = vacFilt.filter(v => v.estatus && v.estatus.toUpperCase() === 'CONTRATADO').length;
+  const contrat = vacFilt.filter(v => (v.estatus||'').toUpperCase() === 'CONTRATADO').length;
+  const pctRot  = cuposFiltrados > 0 ? (total / cuposFiltrados * 100).toFixed(2) : null;
+  const hasFilter = reg || causal || tipo || estatus || search;
 
-  const cuposLinea = getCuposForLinea(DATA, currentLinea);
-  const pctRot = cuposLinea > 0 ? (total / cuposLinea * 100).toFixed(2) : null;
-
-  animNum('k0', cuposLinea);
+  animNum('k0', cuposFiltrados);
   animNum('k1', total);
   animNum('k2', plan);
   animNum('k3', noPlan);
   animNum('k4', ausFilt.length);
   animNum('k5', vacFilt.length);
 
-  setText('k0foot', pctRot !== null ? pctRot + '% rotación' : 'Sin datos de cupos');
+  setText('k0foot', pctRot !== null ? pctRot + '% rotación' : 'Sin cupos activos');
   setText('k1foot', hasFilter ? 'Filtrado' : 'Período actual');
   setText('k2foot', total ? pct(plan,total) + '% del total' : '—');
   setText('k3foot', total ? pct(noPlan,total) + '% del total' : '—');
   setText('k4foot', diasAus + ' días afectados');
   setText('k5foot', contrat + ' contratados');
 
-  setText('barCupos',       cuposLinea);
+  setText('barCupos',       cuposFiltrados);
   setText('barTotal',       total);
   setText('barPlaneados',   plan);
   setText('barNoPlaneados', noPlan);
@@ -1050,137 +955,31 @@ function applyFilters() {
   setText('barVacantes',    vacFilt.length);
   setText('barPctRot',      pctRot !== null ? pctRot + '%' : '—%');
 
+  // ANS stats filtrados
   const maxDias   = Math.max(...vacFilt.map(v => v.diasVacante||0), 0);
   const maxSinCob = Math.max(...vacFilt.map(v => v.diasSinCob||0), 0);
-  const dentro    = vacFilt.filter(v => (v.diasVacante||0) <= (v.ans||5) && v.estatus && v.estatus.toUpperCase() === 'CONTRATADO').length;
+  const dentro    = vacFilt.filter(v => (v.diasVacante||0) <= (v.ans||5) && (v.estatus||'').toUpperCase() === 'CONTRATADO').length;
   setText('ansMaxDias',   maxDias||'0');
   setText('ansMaxSinCob', maxSinCob||'0');
   setText('ansDentro',    dentro||'0');
 
-  updateChartsFiltered(retFilt, ausFilt, vacFilt);
+  // Recalcular charts con datos filtrados
+  renderCharts(DATA, retFilt, ausFilt, vacFilt);
 
   document.getElementById('filterCount').textContent = retFilt.length + ' retiros · ' + ausFilt.length + ' ausentismos · ' + vacFilt.length + ' vacantes';
-}
-
-function updateChartsFiltered(retFilt, ausFilt, vacFilt) {
-  const colors = ['#1e5826','#3d9e4a','#5cb868','#96d49e','#c8eacc','#0d9488','#34d399','#d97706','#dc2626'];
-
-  const causalMap = {};
-  retFilt.forEach(r => { const c = r.causal||'Otro'; causalMap[c]=(causalMap[c]||0)+1; });
-  const causales = Object.entries(causalMap).map(([l,v])=>({label:l,value:v})).sort((a,b)=>b.value-a.value);
-  destroyChart('causalBarChart');
-  CHARTS.causalBarChart = new Chart(document.getElementById('causalBarChart'), {
-    type:'bar',
-    data:{ labels:causales.map(c=>c.label), datasets:[{data:causales.map(c=>c.value),backgroundColor:colors,borderRadius:6,borderSkipped:false}] },
-    options:{ responsive:true,maintainAspectRatio:false,indexAxis:'y',plugins:{legend:{display:false}},scales:{x:{beginAtZero:true,ticks:{font:{size:11}},grid:{color:'rgba(0,0,0,.05)'}},y:{ticks:{font:{size:11}},grid:{display:false}}} }
-  });
-
-  const plan2   = retFilt.filter(r=>r.tipo==='PLANEADA').length;
-  const noPlan2 = retFilt.filter(r=>r.tipo==='NO PLANEADA').length;
-  destroyChart('tipoChart');
-  CHARTS.tipoChart = new Chart(document.getElementById('tipoChart'), {
-    type:'doughnut',
-    data:{ labels:['Planeada','No Planeada'], datasets:[{data:[plan2,noPlan2],backgroundColor:['#2d7a38','#dc2626'],borderWidth:2,borderColor:'#fff'}] },
-    options:{ cutout:'70%',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}} }
-  });
-  const tT2 = plan2+noPlan2;
-  document.getElementById('tipoLeg').innerHTML = `
-    <li><span class="dl-sq" style="background:#2d7a38"></span>Planeada<span class="dl-n">${plan2}</span><span class="dl-p">${pct(plan2,tT2)}%</span></li>
-    <li><span class="dl-sq" style="background:#dc2626"></span>No Planeada<span class="dl-n">${noPlan2}</span><span class="dl-p">${pct(noPlan2,tT2)}%</span></li>`;
-
-  const tipoAusMap={};
-  ausFilt.forEach(a=>{const t=a.tipo||'Otro';tipoAusMap[t]=(tipoAusMap[t]||0)+1;});
-  const tiposAus=Object.entries(tipoAusMap).map(([l,v])=>({label:l,value:v})).sort((a,b)=>b.value-a.value);
-  const ausColors=['#0d9488','#34d399','#a7f3d0','#d97706'];
-  destroyChart('ausentChart');
-  CHARTS.ausentChart = new Chart(document.getElementById('ausentChart'), {
-    type:'doughnut',
-    data:{ labels:tiposAus.map(t=>t.label), datasets:[{data:tiposAus.map(t=>t.value),backgroundColor:ausColors,borderWidth:2,borderColor:'#fff'}] },
-    options:{ cutout:'70%',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}} }
-  });
-  const ausTotal=tiposAus.reduce((s,t)=>s+t.value,0);
-  document.getElementById('ausentLeg').innerHTML = tiposAus.map((t,i)=>
-    `<li><span class="dl-sq" style="background:${ausColors[i%ausColors.length]}"></span>${t.label}<span class="dl-n">${t.value}</span><span class="dl-p">${pct(t.value,ausTotal)}%</span></li>`
-  ).join('');
-
-  const regMap={};
-  retFilt.forEach(r=>{const rg=r.regional||'N/A';if(!regMap[rg])regMap[rg]={planeada:0,noPlaneada:0,total:0};regMap[rg].total++;if(r.tipo==='PLANEADA')regMap[rg].planeada++;else regMap[rg].noPlaneada++;});
-  const regs=Object.entries(regMap).map(([name,v])=>({name,...v})).sort((a,b)=>b.total-a.total);
-  const mx2=Math.max(...regs.map(r=>r.total),1);
-  document.getElementById('regBars').innerHTML = regs.map(r=>`
-    <div class="reg-item">
-      <div class="reg-top"><span class="reg-name">${r.name}</span><span class="reg-nums">${r.planeada} plan · ${r.noPlaneada} no plan · ${r.total} total</span></div>
-      <div class="reg-track">
-        <div class="reg-p" style="width:${r.planeada/mx2*100}%"></div>
-        <div class="reg-np" style="width:${r.noPlaneada/mx2*100}%"></div>
-      </div>
-    </div>`).join('') || '<p style="color:var(--ink4);font-size:12px;text-align:center;padding:20px">Sin datos</p>';
-
-  const auC=retFilt.filter(r=>r.linea==='AU').length, gcC=retFilt.filter(r=>r.linea==='GC').length, snC=retFilt.filter(r=>r.linea==='SN').length;
-  const lineaData=[{label:'AU',val:auC,color:'#2d7a38'},{label:'GC',val:gcC,color:'#3d9e4a'},{label:'SN',val:snC,color:'#96d49e'}].filter(x=>x.val>0);
-  destroyChart('lineaChart');
-  CHARTS.lineaChart = new Chart(document.getElementById('lineaChart'), {
-    type:'doughnut',
-    data:{ labels:lineaData.map(l=>l.label), datasets:[{data:lineaData.map(l=>l.val),backgroundColor:lineaData.map(l=>l.color),borderWidth:2,borderColor:'#fff'}] },
-    options:{ cutout:'65%',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}} }
-  });
-  const lt=lineaData.reduce((s,l)=>s+l.val,0);
-  document.getElementById('lineaLeg').innerHTML=lineaData.map(l=>`<li><span class="dl-sq" style="background:${l.color}"></span>${l.label}<span class="dl-n">${l.val}</span><span class="dl-p">${pct(l.val,lt)}%</span></li>`).join('');
-
-  const cobMap={};
-  ausFilt.forEach(a=>{const k=(a.comoSeCubrio&&a.comoSeCubrio!=='')?a.comoSeCubrio:'Sin cobertura';cobMap[k]=(cobMap[k]||0)+1;});
-  const cob=Object.entries(cobMap).map(([label,value])=>({label,value}));
-  destroyChart('cobChart');
-  CHARTS.cobChart = new Chart(document.getElementById('cobChart'), {
-    type:'pie',
-    data:{ labels:cob.map(c=>c.label), datasets:[{data:cob.map(c=>c.value),backgroundColor:['#dc2626','#3d9e4a','#0d9488','#d97706'],borderWidth:2,borderColor:'#fff'}] },
-    options:{ responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{boxWidth:9,padding:10,font:{size:10}}}} }
-  });
-  const cobT=cob.reduce((s,c)=>s+c.value,0);
-  const bgs=['linear-gradient(90deg,#dc2626,#f87171)','linear-gradient(90deg,var(--g500),var(--g300))','linear-gradient(90deg,#0d9488,#34d399)','linear-gradient(90deg,#d97706,#fcd34d)'];
-  document.getElementById('cobProgs').innerHTML=cob.map((c,i)=>`<div class="prog"><div class="prog-hd"><span>${c.label}</span><span>${c.value} / ${cobT}</span></div><div class="prog-track"><div class="prog-fill" style="width:${pct(c.value,cobT)}%;background:${bgs[i%bgs.length]}"></div></div></div>`).join('');
-
-  const evMap={};
-  vacFilt.forEach(v=>{const e=v.estatus||'N/A';evMap[e]=(evMap[e]||0)+1;});
-  const ev=Object.entries(evMap).map(([label,value])=>({label,value}));
-  destroyChart('vacChart');
-  CHARTS.vacChart = new Chart(document.getElementById('vacChart'), {
-    type:'doughnut',
-    data:{ labels:ev.map(e=>e.label), datasets:[{data:ev.map(e=>e.value),backgroundColor:['#3d9e4a','#96d49e','#d97706','#dc2626'],borderWidth:2,borderColor:'#fff'}] },
-    options:{ cutout:'65%',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}} }
-  });
-  const evT=ev.reduce((s,e)=>s+e.value,0);
-  const evC=['#3d9e4a','#96d49e','#d97706','#dc2626'];
-  document.getElementById('vacLeg').innerHTML=ev.map((e,i)=>`<li><span class="dl-sq" style="background:${evC[i%evC.length]}"></span>${e.label}<span class="dl-n">${e.value}</span><span class="dl-p">${pct(e.value,evT)}%</span></li>`).join('');
-
-  const dv=vacFilt.filter(v=>v.diasVacante>0||v.diasSinCob>0).slice(0,5);
-  destroyChart('diasChart');
-  CHARTS.diasChart = new Chart(document.getElementById('diasChart'), {
-    type:'bar',
-    data:{
-      labels:dv.length?dv.map(v=>shortName(v.quienSeFue)):['Sin datos'],
-      datasets:[
-        {label:'Días Vacante',data:dv.map(v=>v.diasVacante),backgroundColor:'rgba(220,38,38,.85)',borderRadius:6,borderSkipped:false},
-        {label:'Días Sin Cob.',data:dv.map(v=>v.diasSinCob),backgroundColor:'rgba(220,38,38,.3)',borderRadius:6,borderSkipped:false}
-      ]
-    },
-    options:{ responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{boxWidth:9,padding:12,font:{size:11}}}},scales:{y:{beginAtZero:true,ticks:{callback:v=>v+' d',font:{size:11}},grid:{color:'rgba(0,0,0,.05)'}},x:{ticks:{font:{size:11}},grid:{display:false}}} }
-  });
 }
 
 function resetFilters() {
   document.getElementById('fRegional').value = '';
   document.getElementById('fCausal').value   = '';
-  document.getElementById('fTipo').value      = '';
-  document.getElementById('fSearch').value    = '';
+  document.getElementById('fTipo').value     = '';
+  document.getElementById('fEstatus').value  = '';
+  document.getElementById('fSearch').value   = '';
   if (DATA) {
     renderKPIs(DATA, currentLinea);
     renderCharts(DATA);
     renderTables(DATA, currentLinea);
-    document.getElementById('filterCount').textContent =
-      filterByLinea(DATA.retiros, currentLinea).length + ' retiros · ' +
-      filterByLinea(DATA.ausencias, currentLinea).length + ' ausentismos · ' +
-      filterByLinea(DATA.vacantes, currentLinea).length + ' vacantes';
+    updateFilterCount();
   }
 }
 
@@ -1188,19 +987,7 @@ function setLinea(linea, btn) {
   currentLinea = linea;
   document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
-  if (DATA) {
-    const hasFilter = document.getElementById('fRegional').value ||
-                      document.getElementById('fCausal').value   ||
-                      document.getElementById('fTipo').value      ||
-                      document.getElementById('fSearch').value;
-    if (hasFilter) {
-      applyFilters();
-    } else {
-      renderKPIs(DATA, linea);
-      renderCharts(DATA);
-      renderTables(DATA, linea);
-    }
-  }
+  if (DATA) applyFilters();
 }
 
 function filterByLinea(arr, linea) {
@@ -1209,22 +996,18 @@ function filterByLinea(arr, linea) {
   return arr.filter(r => r.linea === linea);
 }
 
-// ════════════════════════════════════════════════════════════
-// HELPERS UI
-// ════════════════════════════════════════════════════════════
+// ══ HELPERS UI ══════════════════════════════════════════
 function showLoading(v) {
   const el = document.getElementById('loadingOverlay');
   if (v) el.classList.remove('hidden');
   else   el.classList.add('hidden');
 }
-
 function setError(msg) {
-  const el  = document.getElementById('errorBanner');
-  const msg2= document.getElementById('errorMsg');
+  const el   = document.getElementById('errorBanner');
+  const msg2 = document.getElementById('errorMsg');
   if (msg) { el.classList.add('show'); msg2.textContent = msg; }
   else     { el.classList.remove('show'); }
 }
-
 function setSync(ok, ts) {
   const dot  = document.getElementById('syncDot');
   const text = document.getElementById('syncText');
@@ -1236,12 +1019,10 @@ function setSync(ok, ts) {
     text.textContent = 'Error de conexión';
   }
 }
-
 function setText(id, val) {
   const el = document.getElementById(id);
   if (el) el.textContent = (val === null || val === undefined) ? '—' : val;
 }
-
 function animNum(id, target) {
   const el = document.getElementById(id);
   if (!el) return;
@@ -1254,61 +1035,46 @@ function animNum(id, target) {
   }
   requestAnimationFrame(step);
 }
-
-function pct(n, total) {
-  if (!total) return 0;
-  return Math.round(n / total * 100);
-}
-
-function titleCase(str) {
-  if (!str) return '';
-  return str.toLowerCase().replace(/\b\w/g, c => c.toUpperCase());
-}
-
+function pct(n, total) { if (!total) return 0; return Math.round(n / total * 100); }
+function titleCase(str) { if (!str) return ''; return String(str).toLowerCase().replace(/\b\w/g, c => c.toUpperCase()); }
 function shortName(nombre) {
   if (!nombre) return '—';
   const parts = nombre.trim().split(/\s+/);
   return parts.length >= 2 ? parts[0] + ' ' + parts[1].charAt(0) + '.' : parts[0];
 }
-
-function destroyChart(id) {
-  if (CHARTS[id]) { CHARTS[id].destroy(); delete CHARTS[id]; }
-}
-
+function destroyChart(id) { if (CHARTS[id]) { CHARTS[id].destroy(); delete CHARTS[id]; } }
 function tipoBadge(tipo) {
   if (!tipo) return '—';
   const t = tipo.toUpperCase();
-  if (t === 'PLANEADA')     return '<span class="chip chip-g">Planeada</span>';
-  if (t === 'NO PLANEADA')  return '<span class="chip chip-r">No Planeada</span>';
+  if (t === 'PLANEADA')    return '<span class="chip chip-g">Planeada</span>';
+  if (t === 'NO PLANEADA') return '<span class="chip chip-r">No Planeada</span>';
   return `<span class="chip chip-s">${tipo}</span>`;
 }
-
 function lineaBadge(linea) {
   if (linea === 'AU') return '<span class="chip chip-g">AU</span>';
   if (linea === 'GC') return '<span class="chip chip-t">GC</span>';
   if (linea === 'SN') return '<span class="chip chip-a">SN</span>';
   return '<span class="chip chip-s">—</span>';
 }
-
 function cubiertoBadge(val) {
   const v = (val||'').toUpperCase();
   if (v === 'SI') return '<span class="chip chip-g">Sí</span>';
   if (v === 'NO') return '<span class="chip chip-r">No</span>';
   return '—';
 }
-
 function estatusBadge(est) {
   const e = (est||'').toUpperCase();
-  if (e === 'CONTRATADO')    return '<span class="chip chip-g">Contratado</span>';
+  if (e === 'CONTRATADO')     return '<span class="chip chip-g">Contratado</span>';
   if (e === 'CIERRE DE CUPO') return '<span class="chip chip-s">Cierre Cupo</span>';
-  if (e === 'NO SE CUBRE')   return '<span class="chip chip-a">No se Cubre</span>';
+  if (e === 'NO SE CUBRE')    return '<span class="chip chip-a">No se Cubre</span>';
   return `<span class="chip chip-s">${est||'—'}</span>`;
 }
 
-// ════════════════════════════════════════════════════════════
-// INICIO
-// ════════════════════════════════════════════════════════════
+// ══ INICIO ══════════════════════════════════════════════
 window.addEventListener('DOMContentLoaded', () => {
+  // Inyectar logos
+  document.getElementById('logoEficacia').src   = LOGO_EFICACIA;
+  document.getElementById('logoNutrimenti').src = LOGO_NUTRIMENTI;
   loadData();
   setInterval(loadData, 5 * 60 * 1000);
 });
