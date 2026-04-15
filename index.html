@@ -22,8 +22,6 @@
 }
 html{-webkit-font-smoothing:antialiased;scroll-behavior:smooth}
 body{font-family:'Sora',sans-serif;background:var(--g50);color:var(--ink)}
-
-/* ── Loading ─────────────────────────── */
 #loadingOverlay{position:fixed;inset:0;z-index:9999;background:linear-gradient(145deg,#0b2a10,#1e5826,#2d7a38);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:24px;transition:opacity .6s,visibility .6s}
 #loadingOverlay.hidden{opacity:0;visibility:hidden;pointer-events:none}
 .ld-logo{width:80px;height:80px;border-radius:20px;background:rgba(255,255,255,.12);display:flex;align-items:center;justify-content:center}
@@ -33,23 +31,24 @@ body{font-family:'Sora',sans-serif;background:var(--g50);color:var(--ink)}
 .ld-bar{width:200px;height:3px;background:rgba(255,255,255,.15);border-radius:3px;overflow:hidden}
 .ld-prog{height:100%;border-radius:3px;background:linear-gradient(90deg,#5cb868,#a8e6ad);animation:ldprog 1.8s ease-in-out infinite}
 @keyframes ldprog{0%{width:0%;margin-left:0}50%{width:70%;margin-left:0}100%{width:0%;margin-left:100%}}
-
-/* ── Error ────────────────────────────── */
 #errorBanner{display:none;background:#fef2f2;border:1px solid #fca5a5;border-radius:12px;padding:16px 20px;margin:20px 40px;color:#991b1b;font-size:13px;font-weight:500;align-items:center;gap:12px}
 #errorBanner.show{display:flex}
 #errorBanner svg{flex-shrink:0;width:20px;height:20px}
-
-/* ── Hero ─────────────────────────────── */
 .hero{position:relative;min-height:280px;overflow:hidden;display:flex;flex-direction:column;background:radial-gradient(ellipse 70% 80% at 0% 0%,#0d4a1a 0%,transparent 65%),radial-gradient(ellipse 55% 60% at 100% 0%,#1a6e2e 0%,transparent 60%),radial-gradient(ellipse 60% 70% at 50% 100%,#0b3512 0%,transparent 60%),linear-gradient(150deg,#0b2a10 0%,#1e5826 40%,#2d7a38 75%,#3d9e4a 100%)}
 .hero-orb{position:absolute;border-radius:50%;pointer-events:none}
 .hero-orb-1{width:320px;height:320px;top:-120px;right:200px;background:radial-gradient(circle,rgba(93,196,104,.15) 0%,transparent 70%)}
 .hero-orb-2{width:200px;height:200px;bottom:-80px;left:32%;background:radial-gradient(circle,rgba(61,158,74,.12) 0%,transparent 70%)}
 .hero-inner{position:relative;z-index:5;display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:32px;padding:44px 56px 40px}
+/* ── LOGOS: pill con fallback SVG elegante ── */
 .logo-pill{display:flex;align-items:stretch;background:#fff;border-radius:14px;box-shadow:0 8px 40px rgba(0,0,0,.25),0 2px 8px rgba(0,0,0,.15);overflow:hidden;border:1px solid rgba(255,255,255,.5);width:fit-content}
-.logo-cell{padding:18px 26px;display:flex;align-items:center;justify-content:center;background:#fff}
+.logo-cell{padding:14px 22px;display:flex;align-items:center;justify-content:center;background:#fff;min-height:70px;min-width:120px}
 .logo-cell+.logo-cell{border-left:1px solid #e5f0e6}
-.logo-cell img{display:block;height:46px;width:auto;object-fit:contain;max-width:160px}
-.logo-cell .logo-fallback{font-family:'Sora',sans-serif;font-weight:700;font-size:16px;color:var(--g700);letter-spacing:1px;display:none;align-items:center;justify-content:center;height:46px}
+.logo-cell img{display:block;height:44px;width:auto;object-fit:contain;max-width:150px}
+.logo-cell .logo-fb{display:none;flex-direction:column;align-items:center;justify-content:center;gap:2px}
+.logo-fb-name{font-family:'Sora',sans-serif;font-weight:800;font-size:15px;letter-spacing:1.5px;line-height:1}
+.logo-fb-sub{font-family:'Sora',sans-serif;font-weight:500;font-size:7.5px;letter-spacing:2px;text-transform:uppercase;opacity:.5}
+.logo-cell.fb-active img{display:none!important}
+.logo-cell.fb-active .logo-fb{display:flex!important}
 .logo-tagline{margin-top:11px;font-size:10.5px;font-weight:500;color:rgba(255,255,255,.38);letter-spacing:1.8px;text-transform:uppercase}
 .hero-text{text-align:center}
 .hero-eyebrow{display:inline-block;font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,.5);border:1px solid rgba(255,255,255,.18);padding:5px 16px;border-radius:30px;background:rgba(255,255,255,.06);margin-bottom:14px}
@@ -70,10 +69,8 @@ body{font-family:'Sora',sans-serif;background:var(--g50);color:var(--ink)}
 .sync-info{font-size:10px;color:rgba(255,255,255,.35);display:flex;align-items:center;gap:6px;margin-top:6px}
 .sync-dot{width:6px;height:6px;border-radius:50%;background:#5cb868;flex-shrink:0}
 .sync-dot.err{background:#dc2626}
-
-/* ── Hero Bar ─────────────────────────── */
 .hero-bar{position:relative;z-index:5;display:flex;align-items:stretch;background:rgba(0,0,0,.22);border-top:1px solid rgba(255,255,255,.07);padding:0 56px;flex-wrap:wrap}
-.hbi{flex:1;min-width:130px;display:flex;align-items:center;gap:13px;padding:14px 16px 14px 0;border-right:1px solid rgba(255,255,255,.07)}
+.hbi{flex:1;min-width:120px;display:flex;align-items:center;gap:13px;padding:14px 16px 14px 0;border-right:1px solid rgba(255,255,255,.07)}
 .hbi:last-child{border-right:none;padding-right:0}
 .hbi:first-child{padding-left:0}
 .hbi-ico{width:34px;height:34px;border-radius:8px;background:rgba(255,255,255,.09);display:flex;align-items:center;justify-content:center;flex-shrink:0}
@@ -82,8 +79,6 @@ body{font-family:'Sora',sans-serif;background:var(--g50);color:var(--ink)}
 .hbi-l{font-size:10px;font-weight:500;color:rgba(255,255,255,.45);letter-spacing:.4px;margin-top:2px}
 .hbi-cupos .hbi-ico{background:rgba(168,230,173,.15)}
 .hbi-cupos .hbi-ico svg{color:#a8e6ad}
-
-/* ── Layout ───────────────────────────── */
 .wrap{max-width:1440px;margin:0 auto;padding:36px 40px 64px}
 .sec{font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--g500);display:flex;align-items:center;gap:12px;margin:0 0 18px}
 .sec::before{content:'';width:20px;height:2px;background:var(--g400);border-radius:2px;flex-shrink:0}
@@ -93,8 +88,6 @@ body{font-family:'Sora',sans-serif;background:var(--g50);color:var(--ink)}
 .g3b{display:grid;grid-template-columns:1fr 1fr 1.6fr;gap:18px;margin-bottom:22px}
 .g3c{display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:18px;margin-bottom:22px}
 .gfull{margin-bottom:22px}
-
-/* ── Card & KPI ───────────────────────── */
 .card{background:#fff;border-radius:var(--r);border:1px solid var(--g200);box-shadow:var(--sh2);padding:22px 20px 18px;overflow:hidden}
 .card-hd{font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:1.2px;color:var(--ink3);display:flex;align-items:center;gap:8px;margin-bottom:18px}
 .card-pip{width:4px;height:16px;border-radius:2px;background:linear-gradient(180deg,var(--g400),var(--g300));flex-shrink:0}
@@ -105,26 +98,17 @@ body{font-family:'Sora',sans-serif;background:var(--g50);color:var(--ink)}
 .kpi-ico{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;margin-bottom:12px}
 .kpi-ico svg{width:17px;height:17px;display:block}
 .kpi-n{font-family:'Playfair Display',serif;font-size:36px;font-weight:700;line-height:1;color:var(--ink);margin-bottom:3px;transition:all .3s}
-.kpi-n .u{font-family:'Sora',sans-serif;font-size:14px;font-weight:500;color:var(--ink3)}
 .kpi-lbl{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.7px;color:var(--ink3)}
 .kpi-foot{display:flex;align-items:center;gap:5px;font-size:10.5px;font-weight:500;color:var(--ink4);margin-top:10px;padding-top:10px;border-top:1px solid var(--g100)}
 .kpi-foot svg{width:11px;height:11px;flex-shrink:0}
-.t-green .kpi-top{background:linear-gradient(90deg,var(--g500),var(--g300))}
-.t-green .kpi-ico{background:var(--g100);color:var(--g600)}
-.t-red .kpi-top{background:linear-gradient(90deg,#dc2626,#fca5a5)}
-.t-red .kpi-ico{background:#fef2f2;color:#dc2626}
-.t-teal .kpi-top{background:linear-gradient(90deg,#0d9488,#5eead4)}
-.t-teal .kpi-ico{background:#f0fdfa;color:#0d9488}
-.t-amber .kpi-top{background:linear-gradient(90deg,#d97706,#fcd34d)}
-.t-amber .kpi-ico{background:#fffbeb;color:#d97706}
-.t-indigo .kpi-top{background:linear-gradient(90deg,#4f46e5,#a5b4fc)}
-.t-indigo .kpi-ico{background:#eef2ff;color:#4f46e5}
-
-/* ── Dark Card ────────────────────────── */
+.t-green .kpi-top{background:linear-gradient(90deg,var(--g500),var(--g300))}.t-green .kpi-ico{background:var(--g100);color:var(--g600)}
+.t-red .kpi-top{background:linear-gradient(90deg,#dc2626,#fca5a5)}.t-red .kpi-ico{background:#fef2f2;color:#dc2626}
+.t-teal .kpi-top{background:linear-gradient(90deg,#0d9488,#5eead4)}.t-teal .kpi-ico{background:#f0fdfa;color:#0d9488}
+.t-amber .kpi-top{background:linear-gradient(90deg,#d97706,#fcd34d)}.t-amber .kpi-ico{background:#fffbeb;color:#d97706}
+.t-indigo .kpi-top{background:linear-gradient(90deg,#4f46e5,#a5b4fc)}.t-indigo .kpi-ico{background:#eef2ff;color:#4f46e5}
 .dark-card{border-radius:var(--r);overflow:hidden;box-shadow:var(--sh4);background:radial-gradient(ellipse 80% 60% at 0% 0%,#1e5826 0%,transparent 70%),radial-gradient(ellipse 60% 50% at 100% 100%,#0d4a1a 0%,transparent 60%),linear-gradient(145deg,#0b2a10 0%,#1e5826 50%,#2d7a38 100%);color:#fff;padding:26px 22px 22px;position:relative}
 .dark-card::after{content:'';position:absolute;right:-30px;bottom:-30px;width:200px;height:200px;border-radius:50%;background:rgba(93,196,104,.08);pointer-events:none}
-.dark-card .card-hd{color:rgba(255,255,255,.5)}
-.dark-card .card-pip{background:rgba(255,255,255,.25)}
+.dark-card .card-hd{color:rgba(255,255,255,.5)}.dark-card .card-pip{background:rgba(255,255,255,.25)}
 .ans-row{display:flex;align-items:center;gap:14px;background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.11);border-radius:12px;padding:14px 16px;margin-bottom:10px}
 .ans-ico{width:40px;height:40px;border-radius:10px;background:rgba(255,255,255,.14);display:flex;align-items:center;justify-content:center;flex-shrink:0}
 .ans-ico svg{width:18px;height:18px;color:rgba(255,255,255,.75)}
@@ -135,8 +119,6 @@ body{font-family:'Sora',sans-serif;background:var(--g50);color:var(--ink)}
 .ans-stat{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.09);border-radius:10px;padding:12px 10px;text-align:center}
 .as-v{font-family:'Playfair Display',serif;font-size:24px;color:#fff;line-height:1;transition:all .3s}
 .as-l{font-size:9.5px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:rgba(255,255,255,.4);margin-top:3px}
-
-/* ── Progress, Regional Bars, Legend ──── */
 .prog{margin-bottom:12px}.prog:last-child{margin-bottom:0}
 .prog-hd{display:flex;justify-content:space-between;margin-bottom:5px}
 .prog-hd span:first-child{font-size:12px;font-weight:600;color:var(--ink2)}
@@ -152,19 +134,9 @@ body{font-family:'Sora',sans-serif;background:var(--g50);color:var(--ink)}
 .reg-np{height:100%;background:linear-gradient(90deg,#dc2626,#f87171);transition:width .6s ease}
 .dleg{list-style:none;margin-top:14px;display:flex;flex-direction:column;gap:9px}
 .dleg li{display:flex;align-items:center;gap:9px;font-size:12px;font-weight:500;color:var(--ink2)}
-.dl-sq{width:10px;height:10px;border-radius:3px;flex-shrink:0}
-.dl-n{margin-left:auto;font-weight:700;font-size:13px;color:var(--ink)}
-.dl-p{font-size:10px;color:var(--ink4);margin-left:3px}
-
-/* ── Chips ────────────────────────────── */
+.dl-sq{width:10px;height:10px;border-radius:3px;flex-shrink:0}.dl-n{margin-left:auto;font-weight:700;font-size:13px;color:var(--ink)}.dl-p{font-size:10px;color:var(--ink4);margin-left:3px}
 .chip{display:inline-flex;align-items:center;padding:3px 9px;border-radius:20px;font-size:10px;font-weight:700;letter-spacing:.4px;white-space:nowrap}
-.chip-g{background:var(--g100);color:var(--g700)}
-.chip-r{background:#fef2f2;color:#991b1b}
-.chip-a{background:#fffbeb;color:#92400e}
-.chip-s{background:#f3f4f6;color:#374151}
-.chip-t{background:#f0fdfa;color:#0f766e}
-
-/* ── Filter ───────────────────────────── */
+.chip-g{background:var(--g100);color:var(--g700)}.chip-r{background:#fef2f2;color:#991b1b}.chip-a{background:#fffbeb;color:#92400e}.chip-s{background:#f3f4f6;color:#374151}.chip-t{background:#f0fdfa;color:#0f766e}
 .filter-bar{background:#fff;border:1px solid var(--g200);border-radius:var(--r);box-shadow:var(--sh2);padding:16px 20px;margin-bottom:24px;display:flex;flex-wrap:wrap;gap:12px;align-items:center}
 .filter-group{display:flex;flex-direction:column;gap:4px;min-width:140px}
 .filter-label{font-size:9.5px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--ink4)}
@@ -173,13 +145,9 @@ body{font-family:'Sora',sans-serif;background:var(--g50);color:var(--ink)}
 .filter-reset{margin-left:auto;align-self:flex-end;font-family:'Sora',sans-serif;font-size:11px;font-weight:600;letter-spacing:.4px;padding:8px 16px;border-radius:8px;cursor:pointer;border:1px solid var(--g200);background:#fff;color:var(--ink3);transition:background .15s,color .15s}
 .filter-reset:hover{background:var(--g100);color:var(--g700)}
 .filter-count{font-size:10px;font-weight:700;color:var(--g600);background:var(--g100);padding:4px 10px;border-radius:20px;align-self:flex-end;white-space:nowrap}
-
-/* ── Tabs ─────────────────────────────── */
 .tab-bar{display:flex;gap:6px;margin-bottom:16px;flex-wrap:wrap}
 .tab-btn{font-family:'Sora',sans-serif;font-size:11px;font-weight:600;letter-spacing:.5px;padding:7px 16px;border-radius:8px;cursor:pointer;border:1px solid var(--g200);background:#fff;color:var(--ink3);transition:all .15s}
 .tab-btn.active{background:var(--g700);color:#fff;border-color:var(--g700)}
-
-/* ── Tables ───────────────────────────── */
 .tbl-wrap{overflow-x:auto}
 table{width:100%;border-collapse:collapse;font-size:12.5px}
 thead th{background:var(--g50);padding:11px 13px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--ink3);text-align:left;border-bottom:2px solid var(--g200);white-space:nowrap}
@@ -187,74 +155,60 @@ tbody td{padding:10px 13px;border-bottom:1px solid var(--g100);color:var(--ink2)
 tbody tr:last-child td{border-bottom:none}
 tbody tr:hover td{background:var(--g50)}
 tbody tr.tr-total td{background:var(--g100);font-weight:700;color:var(--ink);border-top:2px solid var(--g200)}
-tbody td[title]{cursor:help;border-bottom:1px dotted var(--g300)}
+tbody td[title]{cursor:help}
 .no-data{text-align:center;color:var(--ink4);font-style:italic;padding:32px!important}
-
-/* ── Animations ───────────────────────── */
 @keyframes up{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
-.kpi{animation:up .4s ease both}
-.kpi:nth-child(1){animation-delay:.04s}.kpi:nth-child(2){animation-delay:.08s}
-.kpi:nth-child(3){animation-delay:.12s}.kpi:nth-child(4){animation-delay:.16s}
-.kpi:nth-child(5){animation-delay:.20s}.kpi:nth-child(6){animation-delay:.24s}
+.kpi{animation:up .4s ease both}.kpi:nth-child(1){animation-delay:.04s}.kpi:nth-child(2){animation-delay:.08s}.kpi:nth-child(3){animation-delay:.12s}.kpi:nth-child(4){animation-delay:.16s}.kpi:nth-child(5){animation-delay:.20s}.kpi:nth-child(6){animation-delay:.24s}
 .card,.dark-card{animation:up .45s ease both;animation-delay:.08s}
-
-/* ── Responsive ───────────────────────── */
 @media(max-width:1240px){.g6{grid-template-columns:repeat(3,1fr)}}
-@media(max-width:1140px){.hero-inner{grid-template-columns:1fr;padding:32px 28px 24px}.hero-badge{display:none}.hero-bar{padding:0 28px}.g3,.g3b,.g3c{grid-template-columns:1fr 1fr}.wrap{padding:22px 20px 48px}.filter-bar{padding:14px 16px}}
+@media(max-width:1140px){.hero-inner{grid-template-columns:1fr;padding:32px 28px 24px}.hero-badge{display:none}.hero-bar{padding:0 28px}.g3,.g3b,.g3c{grid-template-columns:1fr 1fr}.wrap{padding:22px 20px 48px}}
 @media(max-width:700px){.hero-inner{padding:24px 18px 18px}.hero-bar{padding:0 18px}.hbi{min-width:50%;border-right:none;border-bottom:1px solid rgba(255,255,255,.07)}.g6{grid-template-columns:1fr 1fr}.g3,.g3b,.g3c{grid-template-columns:1fr}.wrap{padding:14px 12px 36px}.filter-bar{flex-direction:column;align-items:stretch}.filter-group{min-width:0}.filter-reset{margin-left:0}}
 </style>
 </head>
 <body>
 
-<!-- ═══ LOADING ══════════════════════════════════════════ -->
 <div id="loadingOverlay">
-  <div class="ld-logo">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/><path d="M8 12l3 3 5-5"/></svg>
-  </div>
+  <div class="ld-logo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/><path d="M8 12l3 3 5-5"/></svg></div>
   <div class="ld-title">Rotacion de Personal</div>
   <div class="ld-sub">Cargando datos desde Google Sheets...</div>
   <div class="ld-bar"><div class="ld-prog"></div></div>
 </div>
 
-<!-- ═══ ERROR ═══════════════════════════════════════════ -->
 <div id="errorBanner">
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-  <div>
-    <strong>Error al cargar los datos.</strong> Verifica que el Apps Script este desplegado y la URL sea correcta.
-    <span id="errorMsg" style="display:block;margin-top:4px;font-size:11px;opacity:.7"></span>
-  </div>
+  <div><strong>Error al cargar los datos.</strong><span id="errorMsg" style="display:block;margin-top:4px;font-size:11px;opacity:.7"></span></div>
 </div>
 
-<!-- ═══ HERO ════════════════════════════════════════════ -->
 <header class="hero">
   <div class="hero-orb hero-orb-1"></div>
   <div class="hero-orb hero-orb-2"></div>
   <div class="hero-inner">
-    <!-- Logos -->
     <div>
+      <!-- LOGOS con fallback SVG -->
       <div class="logo-pill">
-        <div class="logo-cell">
-          <img id="logoEficacia" alt="Eficacia S.A.S" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-          <div class="logo-fallback">EFICACIA</div>
+        <div class="logo-cell" id="cellEficacia">
+          <img id="logoEficacia" alt="Eficacia S.A.S">
+          <div class="logo-fb">
+            <span class="logo-fb-name" style="color:#1e5826">EFICACIA</span>
+            <span class="logo-fb-sub" style="color:#2d7a38">S.A.S</span>
+          </div>
         </div>
-        <div class="logo-cell">
-          <img id="logoNutrimenti" alt="Nutrimenti" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-          <div class="logo-fallback">NUTRIMENTI</div>
+        <div class="logo-cell" id="cellNutrimenti">
+          <img id="logoNutrimenti" alt="Nutrimenti">
+          <div class="logo-fb">
+            <span class="logo-fb-name" style="color:#c41e3a">NUTRIMENTI</span>
+            <span class="logo-fb-sub" style="color:#666">de Colombia</span>
+          </div>
         </div>
       </div>
       <p class="logo-tagline">Operador de talento &middot; Cliente estrategico</p>
-      <div id="syncStatus" class="sync-info">
-        <span class="sync-dot" id="syncDot"></span>
-        <span id="syncText">Conectando...</span>
-      </div>
+      <div class="sync-info"><span class="sync-dot" id="syncDot"></span><span id="syncText">Conectando...</span></div>
     </div>
-    <!-- Title -->
     <div class="hero-text">
       <div class="hero-eyebrow">Informe de Gestion Humana</div>
       <h1 class="hero-title">Rotacion de <em>Personal</em></h1>
       <p class="hero-sub" id="heroSub">Autoservicios (AU) &middot; Grandes Cuentas (GC) &middot; Cargando...</p>
     </div>
-    <!-- Badge -->
     <div class="hero-badge">
       <div class="badge-period">Periodo</div>
       <div class="badge-date" id="badgeMonth">&mdash;</div>
@@ -263,50 +217,21 @@ tbody td[title]{cursor:help;border-bottom:1px dotted var(--g300)}
       <div class="badge-client">NUTRIMENTI<br>DE COLOMBIA</div>
     </div>
   </div>
-
-  <!-- Hero Bar -->
   <div class="hero-bar">
-    <div class="hbi hbi-cupos">
-      <div class="hbi-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
-      <div><div class="hbi-v" id="barCupos">&mdash;</div><div class="hbi-l">N Cupos</div></div>
-    </div>
-    <div class="hbi">
-      <div class="hbi-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M16 17l5-5-5-5M21 12H9M12 19a7 7 0 1 1 0-14"/></svg></div>
-      <div><div class="hbi-v" id="barTotal">&mdash;</div><div class="hbi-l">Total Retiros</div></div>
-    </div>
-    <div class="hbi">
-      <div class="hbi-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div>
-      <div><div class="hbi-v" id="barPlaneados">&mdash;</div><div class="hbi-l">Planeados</div></div>
-    </div>
-    <div class="hbi">
-      <div class="hbi-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
-      <div><div class="hbi-v" id="barNoPlaneados">&mdash;</div><div class="hbi-l">No Planeados</div></div>
-    </div>
-    <div class="hbi">
-      <div class="hbi-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg></div>
-      <div><div class="hbi-v" id="barAusencias">&mdash;</div><div class="hbi-l">Ausentismos</div></div>
-    </div>
-    <div class="hbi">
-      <div class="hbi-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
-      <div><div class="hbi-v" id="barVacantes">&mdash;</div><div class="hbi-l">Vacantes</div></div>
-    </div>
-    <div class="hbi">
-      <div class="hbi-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
-      <div><div class="hbi-v" id="barPctRot">&mdash;%</div><div class="hbi-l">% Rotacion Real</div></div>
-    </div>
+    <div class="hbi hbi-cupos"><div class="hbi-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div><div><div class="hbi-v" id="barCupos">&mdash;</div><div class="hbi-l">Cupos (Headcount)</div></div></div>
+    <div class="hbi"><div class="hbi-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M16 17l5-5-5-5M21 12H9M12 19a7 7 0 1 1 0-14"/></svg></div><div><div class="hbi-v" id="barTotal">&mdash;</div><div class="hbi-l">Total Retiros</div></div></div>
+    <div class="hbi"><div class="hbi-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div><div><div class="hbi-v" id="barPlaneados">&mdash;</div><div class="hbi-l">Planeados</div></div></div>
+    <div class="hbi"><div class="hbi-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div><div><div class="hbi-v" id="barNoPlaneados">&mdash;</div><div class="hbi-l">No Planeados</div></div></div>
+    <div class="hbi"><div class="hbi-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg></div><div><div class="hbi-v" id="barAusencias">&mdash;</div><div class="hbi-l">Ausentismos</div></div></div>
+    <div class="hbi"><div class="hbi-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div><div><div class="hbi-v" id="barVacantes">&mdash;</div><div class="hbi-l">Vacantes</div></div></div>
+    <div class="hbi"><div class="hbi-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><div><div class="hbi-v" id="barPctRot">&mdash;%</div><div class="hbi-l">% Rotacion</div></div></div>
     <div class="hbi" style="margin-left:auto;padding-left:20px;border-left:1px solid rgba(255,255,255,.07);flex:0 0 auto">
-      <button class="sync-btn" id="syncBtn" onclick="loadData()">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-3"/></svg>
-        Actualizar
-      </button>
+      <button class="sync-btn" id="syncBtn" onclick="loadData()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-3"/></svg>Actualizar</button>
     </div>
   </div>
 </header>
 
-<!-- ═══ MAIN ═══════════════════════════════════════════ -->
 <main class="wrap">
-
-<!-- KPIs -->
 <div class="sec">Indicadores Clave &middot; Periodo Actual</div>
 <div class="tab-bar">
   <button class="tab-btn active" onclick="setLinea('ALL',this)">Todas las lineas</button>
@@ -315,698 +240,385 @@ tbody td[title]{cursor:help;border-bottom:1px dotted var(--g300)}
   <button class="tab-btn" onclick="setLinea('SN',this)">Supernumerarios (SN)</button>
 </div>
 <div class="g6" id="kpiGrid">
-  <div class="kpi t-indigo">
-    <div class="kpi-top"></div>
-    <div class="kpi-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
-    <div class="kpi-n" id="k0">&mdash;</div>
-    <div class="kpi-lbl">N de Cupos</div>
-    <div class="kpi-foot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg><span id="k0foot">&mdash; % rotacion</span></div>
-  </div>
-  <div class="kpi t-green">
-    <div class="kpi-top"></div>
-    <div class="kpi-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M16 17l5-5-5-5M21 12H9"/></svg></div>
-    <div class="kpi-n" id="k1">&mdash;</div>
-    <div class="kpi-lbl">Total Retiros</div>
-    <div class="kpi-foot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/></svg><span id="k1foot">Periodo actual</span></div>
-  </div>
-  <div class="kpi t-green">
-    <div class="kpi-top"></div>
-    <div class="kpi-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div>
-    <div class="kpi-n" id="k2">&mdash;</div>
-    <div class="kpi-lbl">Retiros Planeados</div>
-    <div class="kpi-foot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span id="k2foot">&mdash;% del total</span></div>
-  </div>
-  <div class="kpi t-red">
-    <div class="kpi-top"></div>
-    <div class="kpi-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
-    <div class="kpi-n" id="k3">&mdash;</div>
-    <div class="kpi-lbl">No Planeados</div>
-    <div class="kpi-foot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/></svg><span id="k3foot">&mdash;% del total</span></div>
-  </div>
-  <div class="kpi t-teal">
-    <div class="kpi-top"></div>
-    <div class="kpi-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg></div>
-    <div class="kpi-n" id="k4">&mdash;</div>
-    <div class="kpi-lbl">Ausentismos</div>
-    <div class="kpi-foot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/></svg><span id="k4foot">&mdash; dias afectados</span></div>
-  </div>
-  <div class="kpi t-amber">
-    <div class="kpi-top"></div>
-    <div class="kpi-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
-    <div class="kpi-n" id="k5">&mdash;</div>
-    <div class="kpi-lbl">Vacantes Gestionadas</div>
-    <div class="kpi-foot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg><span id="k5foot">&mdash; contratados</span></div>
-  </div>
+  <div class="kpi t-indigo"><div class="kpi-top"></div><div class="kpi-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div><div class="kpi-n" id="k0">&mdash;</div><div class="kpi-lbl">Cupos (Headcount)</div><div class="kpi-foot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg><span id="k0foot">&mdash;</span></div></div>
+  <div class="kpi t-green"><div class="kpi-top"></div><div class="kpi-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M16 17l5-5-5-5M21 12H9"/></svg></div><div class="kpi-n" id="k1">&mdash;</div><div class="kpi-lbl">Total Retiros</div><div class="kpi-foot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/></svg><span id="k1foot">Periodo actual</span></div></div>
+  <div class="kpi t-green"><div class="kpi-top"></div><div class="kpi-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div><div class="kpi-n" id="k2">&mdash;</div><div class="kpi-lbl">Retiros Planeados</div><div class="kpi-foot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span id="k2foot">&mdash;</span></div></div>
+  <div class="kpi t-red"><div class="kpi-top"></div><div class="kpi-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div><div class="kpi-n" id="k3">&mdash;</div><div class="kpi-lbl">No Planeados</div><div class="kpi-foot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/></svg><span id="k3foot">&mdash;</span></div></div>
+  <div class="kpi t-teal"><div class="kpi-top"></div><div class="kpi-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg></div><div class="kpi-n" id="k4">&mdash;</div><div class="kpi-lbl">Ausentismos</div><div class="kpi-foot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/></svg><span id="k4foot">&mdash;</span></div></div>
+  <div class="kpi t-amber"><div class="kpi-top"></div><div class="kpi-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div><div class="kpi-n" id="k5">&mdash;</div><div class="kpi-lbl">Vacantes</div><div class="kpi-foot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg><span id="k5foot">&mdash;</span></div></div>
 </div>
 
-<!-- Filters -->
 <div class="sec">Filtros Interactivos</div>
-<div class="filter-bar" id="filterBar">
-  <div class="filter-group">
-    <label class="filter-label">Regional</label>
-    <select class="filter-select" id="fRegional" onchange="applyFilters()"><option value="">Todas</option></select>
-  </div>
-  <div class="filter-group">
-    <label class="filter-label">Causal</label>
-    <select class="filter-select" id="fCausal" onchange="applyFilters()"><option value="">Todas</option></select>
-  </div>
-  <div class="filter-group">
-    <label class="filter-label">Tipo Rotacion</label>
-    <select class="filter-select" id="fTipo" onchange="applyFilters()">
-      <option value="">Todos</option><option value="PLANEADA">Planeada</option><option value="NO PLANEADA">No Planeada</option>
-    </select>
-  </div>
-  <div class="filter-group">
-    <label class="filter-label">Estatus Vacante</label>
-    <select class="filter-select" id="fEstatus" onchange="applyFilters()">
-      <option value="">Todos</option><option value="CONTRATADO">Contratado</option><option value="CIERRE DE CUPO">Cierre de Cupo</option><option value="NO SE CUBRE">No se Cubre</option>
-    </select>
-  </div>
-  <div class="filter-group">
-    <label class="filter-label">Busqueda</label>
-    <input class="filter-input" id="fSearch" placeholder="Nombre, cargo, CEDIS..." oninput="applyFilters()" style="width:200px">
-  </div>
+<div class="filter-bar">
+  <div class="filter-group"><label class="filter-label">Regional</label><select class="filter-select" id="fRegional" onchange="applyFilters()"><option value="">Todas</option></select></div>
+  <div class="filter-group"><label class="filter-label">Causal</label><select class="filter-select" id="fCausal" onchange="applyFilters()"><option value="">Todas</option></select></div>
+  <div class="filter-group"><label class="filter-label">Tipo Rotacion</label><select class="filter-select" id="fTipo" onchange="applyFilters()"><option value="">Todos</option><option value="PLANEADA">Planeada</option><option value="NO PLANEADA">No Planeada</option></select></div>
+  <div class="filter-group"><label class="filter-label">Estatus Vacante</label><select class="filter-select" id="fEstatus" onchange="applyFilters()"><option value="">Todos</option><option value="CONTRATADO">Contratado</option><option value="CIERRE DE CUPO">Cierre de Cupo</option><option value="NO SE CUBRE">No se Cubre</option></select></div>
+  <div class="filter-group"><label class="filter-label">Busqueda</label><input class="filter-input" id="fSearch" placeholder="Nombre, cargo, CEDIS..." oninput="applyFilters()" style="width:200px"></div>
   <button class="filter-reset" onclick="resetFilters()">&#10005; Limpiar</button>
-  <div class="filter-count" id="filterCount">&mdash; registros</div>
+  <div class="filter-count" id="filterCount">&mdash;</div>
 </div>
 
-<!-- Charts Row 1 -->
 <div class="sec">Tendencia y Composicion</div>
 <div class="g3">
-  <div class="card">
-    <div class="card-hd"><div class="card-pip"></div>Causales de Retiro &middot; Distribucion</div>
-    <div class="chart-h" style="height:250px"><canvas id="causalBarChart"></canvas></div>
-  </div>
-  <div class="card">
-    <div class="card-hd"><div class="card-pip"></div>Tipo de Rotacion</div>
-    <div class="chart-h" style="height:158px"><canvas id="tipoChart"></canvas></div>
-    <ul class="dleg" id="tipoLeg"></ul>
-  </div>
-  <div class="card">
-    <div class="card-hd"><div class="card-pip"></div>Tipo de Ausentismo</div>
-    <div class="chart-h" style="height:158px"><canvas id="ausentChart"></canvas></div>
-    <ul class="dleg" id="ausentLeg"></ul>
-  </div>
+  <div class="card"><div class="card-hd"><div class="card-pip"></div>Causales de Retiro</div><div class="chart-h" style="height:250px"><canvas id="causalBarChart"></canvas></div></div>
+  <div class="card"><div class="card-hd"><div class="card-pip"></div>Tipo de Rotacion</div><div class="chart-h" style="height:158px"><canvas id="tipoChart"></canvas></div><ul class="dleg" id="tipoLeg"></ul></div>
+  <div class="card"><div class="card-hd"><div class="card-pip"></div>Tipo de Ausentismo</div><div class="chart-h" style="height:158px"><canvas id="ausentChart"></canvas></div><ul class="dleg" id="ausentLeg"></ul></div>
 </div>
-
-<!-- Charts Row 2 -->
 <div class="sec">Por Regional &middot; Cobertura de Ausentismos</div>
 <div class="g3b">
-  <div class="card">
-    <div class="card-hd"><div class="card-pip"></div>Retiros por Regional</div>
-    <div id="regBars" style="padding-top:6px"></div>
-  </div>
-  <div class="card">
-    <div class="card-hd"><div class="card-pip"></div>Distribucion por Linea</div>
-    <div class="chart-h" style="height:180px"><canvas id="lineaChart"></canvas></div>
-    <ul class="dleg" id="lineaLeg"></ul>
-  </div>
-  <div class="card">
-    <div class="card-hd"><div class="card-pip"></div>Cobertura de Ausentismos</div>
-    <div class="chart-h" style="height:140px"><canvas id="cobChart"></canvas></div>
-    <div id="cobProgs" style="margin-top:16px"></div>
-  </div>
+  <div class="card"><div class="card-hd"><div class="card-pip"></div>Retiros por Regional</div><div id="regBars" style="padding-top:6px"></div></div>
+  <div class="card"><div class="card-hd"><div class="card-pip"></div>Distribucion por Linea</div><div class="chart-h" style="height:180px"><canvas id="lineaChart"></canvas></div><ul class="dleg" id="lineaLeg"></ul></div>
+  <div class="card"><div class="card-hd"><div class="card-pip"></div>Cobertura de Ausentismos</div><div class="chart-h" style="height:140px"><canvas id="cobChart"></canvas></div><div id="cobProgs" style="margin-top:16px"></div></div>
 </div>
-
-<!-- ANS & Vacantes -->
 <div class="sec">ANS &amp; Gestion de Vacantes</div>
 <div class="g3c">
   <div class="dark-card">
-    <div class="card-hd"><div class="card-pip"></div>ANS de Cubrimiento de Vacantes</div>
-    <div class="ans-row">
-      <div class="ans-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
-      <div>
-        <div class="ans-lbl">Cargo Principal</div>
-        <div class="ans-val">3 <span style="font-size:14px;font-family:'Sora';color:rgba(255,255,255,.45)">dias</span></div>
-        <div class="ans-sub">Tiempo objetivo de respuesta</div>
-      </div>
-    </div>
-    <div class="ans-row">
-      <div class="ans-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
-      <div>
-        <div class="ans-lbl">Cargo Poblacion</div>
-        <div class="ans-val">5 <span style="font-size:14px;font-family:'Sora';color:rgba(255,255,255,.45)">dias</span></div>
-        <div class="ans-sub">Tiempo objetivo de respuesta</div>
-      </div>
-    </div>
+    <div class="card-hd"><div class="card-pip"></div>ANS de Cubrimiento</div>
+    <div class="ans-row"><div class="ans-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div><div><div class="ans-lbl">Cargo Principal</div><div class="ans-val">3 <span style="font-size:14px;font-family:'Sora';color:rgba(255,255,255,.45)">dias</span></div><div class="ans-sub">Tiempo objetivo</div></div></div>
+    <div class="ans-row"><div class="ans-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div><div><div class="ans-lbl">Cargo Poblacion</div><div class="ans-val">5 <span style="font-size:14px;font-family:'Sora';color:rgba(255,255,255,.45)">dias</span></div><div class="ans-sub">Tiempo objetivo</div></div></div>
     <div class="ans-stats">
-      <div class="ans-stat"><div class="as-v" id="ansMaxDias">&mdash;</div><div class="as-l">Max dias vacante</div></div>
+      <div class="ans-stat"><div class="as-v" id="ansMaxDias">&mdash;</div><div class="as-l">Max dias vac.</div></div>
       <div class="ans-stat"><div class="as-v" style="color:#f87171" id="ansMaxSinCob">&mdash;</div><div class="as-l">Dias sin cob.</div></div>
-      <div class="ans-stat"><div class="as-v" style="color:#86efac" id="ansDentro">&mdash;</div><div class="as-l">Dentro de ANS</div></div>
+      <div class="ans-stat"><div class="as-v" style="color:#86efac" id="ansDentro">&mdash;</div><div class="as-l">Dentro ANS</div></div>
     </div>
   </div>
-  <div class="card">
-    <div class="card-hd"><div class="card-pip"></div>Estado de Vacantes</div>
-    <div class="chart-h" style="height:170px"><canvas id="vacChart"></canvas></div>
-    <ul class="dleg" id="vacLeg"></ul>
-  </div>
-  <div class="card">
-    <div class="card-hd"><div class="card-pip"></div>Dias Vacante por Persona</div>
-    <div class="chart-h" style="height:220px"><canvas id="diasChart"></canvas></div>
-  </div>
+  <div class="card"><div class="card-hd"><div class="card-pip"></div>Estado de Vacantes</div><div class="chart-h" style="height:170px"><canvas id="vacChart"></canvas></div><ul class="dleg" id="vacLeg"></ul></div>
+  <div class="card"><div class="card-hd"><div class="card-pip"></div>Dias Vacante por Persona</div><div class="chart-h" style="height:220px"><canvas id="diasChart"></canvas></div></div>
 </div>
 
-<!-- ═══ TABLE: RETIROS (ALL EXCEL VARIABLES) ═══════════ -->
 <div class="sec">Tabla de Retiros &middot; Detalle Completo</div>
-<div class="gfull">
-  <div class="card" style="padding:0">
-    <div class="tbl-wrap">
-      <table id="tblRetiros">
-        <thead><tr>
-          <th>Empresa</th><th>Cliente</th><th>N Doc.</th><th>Colaborador</th>
-          <th>Cargo</th><th>Linea</th><th>Regional</th><th>CEDIS</th>
-          <th>Ciudad</th><th>Causal</th><th>Motivo</th><th>Tipo</th><th>Fecha Retiro</th>
-        </tr></thead>
-        <tbody id="tbodyRetiros"><tr><td colspan="13" class="no-data">Cargando...</td></tr></tbody>
-      </table>
-    </div>
-  </div>
-</div>
+<div class="gfull"><div class="card" style="padding:0"><div class="tbl-wrap"><table><thead><tr><th>Empresa</th><th>Cliente</th><th>N Doc.</th><th>Colaborador</th><th>Cargo</th><th>Linea</th><th>Regional</th><th>CEDIS</th><th>Ciudad</th><th>Causal</th><th>Motivo</th><th>Tipo</th><th>Fecha</th></tr></thead><tbody id="tbodyRetiros"><tr><td colspan="13" class="no-data">Cargando...</td></tr></tbody></table></div></div></div>
 
-<!-- ═══ TABLE: AUSENTISMOS (ALL EXCEL VARIABLES) ═══════ -->
 <div class="sec">Tabla de Ausentismos</div>
-<div class="gfull">
-  <div class="card" style="padding:0">
-    <div class="tbl-wrap">
-      <table id="tblAusencias">
-        <thead><tr>
-          <th>Empresa</th><th>Cliente</th><th>Contrato</th><th>N Doc.</th>
-          <th>Colaborador</th><th>Cargo</th><th>Linea</th><th>Regional</th>
-          <th>CEDI</th><th>Ciudad</th><th>Tipo Ausentismo</th><th>Dias</th>
-          <th>Inicio</th><th>Fin</th><th>Cubierto</th><th>Como se cubrio</th><th>Lider</th>
-        </tr></thead>
-        <tbody id="tbodyAusencias"><tr><td colspan="17" class="no-data">Cargando...</td></tr></tbody>
-      </table>
-    </div>
-  </div>
-</div>
+<div class="gfull"><div class="card" style="padding:0"><div class="tbl-wrap"><table><thead><tr><th>Empresa</th><th>Cliente</th><th>Contrato</th><th>N Doc.</th><th>Colaborador</th><th>Cargo</th><th>Linea</th><th>Regional</th><th>CEDI</th><th>Ciudad</th><th>Tipo</th><th>Dias</th><th>Inicio</th><th>Fin</th><th>Cubierto</th><th>Como se cubrio</th><th>Lider</th></tr></thead><tbody id="tbodyAusencias"><tr><td colspan="17" class="no-data">Cargando...</td></tr></tbody></table></div></div></div>
 
-<!-- ═══ TABLE: VACANTES (ALL EXCEL VARIABLES) ══════════ -->
-<div class="sec">Tabla de Vacantes &middot; Estatus de Cobertura</div>
-<div class="gfull">
-  <div class="card" style="padding:0">
-    <div class="tbl-wrap">
-      <table>
-        <thead><tr>
-          <th>OT</th><th>RQ</th><th>Causal</th><th>Estatus</th>
-          <th>F. Retiro</th><th>Quien se fue</th><th>Doc.</th><th>Cargo</th>
-          <th>Linea</th><th>LR</th><th>Regional</th><th>Ciudad</th><th>CEDI</th>
-          <th>Dias Vac.</th><th>ANS</th><th>Dias Sin Cob.</th>
-          <th>F. Contratacion</th><th>Reemplazante</th><th>Cedula Rep.</th>
-          <th>Lider</th><th>Estado del Dia</th>
-        </tr></thead>
-        <tbody id="tbodyVacantes"><tr><td colspan="21" class="no-data">Cargando...</td></tr></tbody>
-      </table>
-    </div>
-  </div>
-</div>
+<div class="sec">Tabla de Vacantes &middot; Estatus</div>
+<div class="gfull"><div class="card" style="padding:0"><div class="tbl-wrap"><table><thead><tr><th>OT</th><th>RQ</th><th>Causal</th><th>Estatus</th><th>F. Retiro</th><th>Quien se fue</th><th>Doc.</th><th>Cargo</th><th>Linea</th><th>LR</th><th>Regional</th><th>Ciudad</th><th>CEDI</th><th>Dias Vac.</th><th>ANS</th><th>Dias Sin Cob.</th><th>F. Contrat.</th><th>Reemplazante</th><th>Cedula</th><th>Lider</th><th>Estado del Dia</th></tr></thead><tbody id="tbodyVacantes"><tr><td colspan="21" class="no-data">Cargando...</td></tr></tbody></table></div></div></div>
 
 </main>
-
-<!-- ═══ FOOTER ═════════════════════════════════════════ -->
 <footer style="background:var(--g800);color:rgba(255,255,255,.3);text-align:center;padding:20px 24px;font-size:11px;letter-spacing:.5px">
-  EFICACIA S.A.S &nbsp;&middot;&nbsp; Cliente: Nutrimenti de Colombia S.A.S &nbsp;&middot;&nbsp;
-  Dashboard de Rotacion de Personal &nbsp;&middot;&nbsp;
-  Datos en tiempo real desde Google Sheets
+  EFICACIA S.A.S &middot; Cliente: Nutrimenti de Colombia S.A.S &middot; Dashboard de Rotacion de Personal &middot; Datos en tiempo real desde Google Sheets
 </footer>
 
-<!-- ═══════════════════════════════════════════════════════
-     JAVASCRIPT — Toda la logica del dashboard
-     ═══════════════════════════════════════════════════════ -->
 <script>
-// ══ LOGOS ═══════════════════════════════════════════════
+// ══════════════════════════════════════════════════════════════
+// CONFIGURACION
+// ══════════════════════════════════════════════════════════════
+const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwFaBqUOwtrxpCV4No4DjcJjnIBGILcb3B-U_GBXtLAXo6a3_6DpK_osuL1g4S1PVfAgA/exec';
+
+// Logos: URLs principales + fallback automatico a texto estilizado
 const LOGO_EFICACIA   = 'https://eficacia.com.co/wp-content/uploads/2023/06/logo-eficacia.png';
-const LOGO_NUTRIMENTI = 'https://yt3.googleusercontent.com/ytc/AIdro_nlHVTWRB8BCs4Ls9w6DTbrKYhkmcOd7nkLfI6qzCzzeBs=s900-c-k-c0x00ffffff-no-rj';
+const LOGO_NUTRIMENTI = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRkWyOKR2Pd6WIL2JjVJBziUDJHvnSvDaGiSg&s';
 
-// ══ URL DEL WEB APP DE APPS SCRIPT ═════════════════════
-const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzBduP_1tO4LooH0gIqsoprWeobekoDbFNcFhxnE0jdPS_C-HxDFFDmkEK0FisUI0uJTQ/exec';
-
-// ══ STATE ══════════════════════════════════════════════
 let DATA = null;
 let currentLinea = 'ALL';
 Chart.defaults.font.family = "'Sora',sans-serif";
 Chart.defaults.color = '#8aaa8e';
 const CHARTS = {};
 
-// ══ CARGA DE DATOS ════════════════════════════════════
+// ══ NORMALIZACIÓN: toda comparacion pasa por aqui ═══════════
+function N(s) { return String(s||'').trim().toUpperCase(); }
+
+// ══ CARGA ════════════════════════════════════════════════════
 async function loadData() {
-  showLoading(true);
-  setError(null);
-  const btn = document.getElementById('syncBtn');
-  btn.classList.add('syncing');
+  showLoading(true); setError(null);
+  document.getElementById('syncBtn').classList.add('syncing');
   try {
-    const data = await fetchWithJSONP(APPS_SCRIPT_URL);
+    const data = await fetchData(APPS_SCRIPT_URL);
     if (data.error) throw new Error(data.error);
     DATA = data;
     renderAll(data);
     setSync(true, data.timestamp);
   } catch (err) {
-    console.error('Error cargando datos:', err);
-    setError('No se pudo conectar con Apps Script. ' + err.message);
-    setSync(false);
+    console.error(err); setError(err.message); setSync(false);
   } finally {
     showLoading(false);
-    btn.classList.remove('syncing');
+    document.getElementById('syncBtn').classList.remove('syncing');
   }
 }
 
-async function fetchWithJSONP(url) {
-  if (!url || url.includes('PEGA_AQUI')) throw new Error('Configura la URL del Web App en APPS_SCRIPT_URL.');
-  try {
-    const res = await fetch(url, { redirect: 'follow' });
-    if (!res.ok) throw new Error('HTTP ' + res.status);
-    return await res.json();
-  } catch { return await jsonp(url); }
+async function fetchData(url) {
+  if (!url || url.includes('PEGA_AQUI')) throw new Error('Configura APPS_SCRIPT_URL');
+  try { const r = await fetch(url,{redirect:'follow'}); if(!r.ok) throw 0; return await r.json(); }
+  catch { return jsonp(url); }
 }
-
 function jsonp(url) {
-  return new Promise((resolve, reject) => {
-    const cbName = '__gs_cb_' + Date.now();
-    const timeout = setTimeout(() => { delete window[cbName]; s.remove(); reject(new Error('Timeout JSONP')); }, 15000);
-    window[cbName] = (data) => { clearTimeout(timeout); delete window[cbName]; s.remove(); resolve(data); };
-    const sep = url.includes('?') ? '&' : '?';
-    const s = document.createElement('script');
-    s.src = url + sep + 'callback=' + cbName;
-    s.onerror = () => { clearTimeout(timeout); reject(new Error('Error JSONP')); };
+  return new Promise((res,rej) => {
+    const cb='__cb_'+Date.now(), to=setTimeout(()=>{delete window[cb];s.remove();rej(new Error('Timeout'));},15000);
+    window[cb]=d=>{clearTimeout(to);delete window[cb];s.remove();res(d);};
+    const s=document.createElement('script');
+    s.src=url+(url.includes('?')?'&':'?')+'callback='+cb;
+    s.onerror=()=>{clearTimeout(to);rej(new Error('JSONP error'));};
     document.head.appendChild(s);
   });
 }
 
-// ══ CUPOS (excluye CIERRE DE CUPO) ════════════════════
-function getCuposBase(d, linea, regionalFiltro) {
-  if (!d || !d.vacantes) return 0;
-  let v = d.vacantes.filter(x => String(x.estatus || '').toUpperCase() !== 'CIERRE DE CUPO');
-  if (linea !== 'ALL') v = v.filter(x => x.linea === linea);
-  if (regionalFiltro) v = v.filter(x => (x.regional || '').toUpperCase() === regionalFiltro);
-  return v.length;
+// ══ CUPOS DESDE cuposConfig (headcount real del backend) ═════
+function getCuposLinea(d, linea) {
+  if (!d || !d.cuposConfig) return 0;
+  const c = d.cuposConfig;
+  if (linea === 'ALL') return c.total || (c.AU + c.GC + c.SN);
+  if (linea === 'AU')  return c.AU  || 0;
+  if (linea === 'GC')  return c.GC  || 0;
+  if (linea === 'SN')  return c.SN  || 0;
+  return 0;
 }
 
-// ══ RENDER PRINCIPAL ══════════════════════════════════
+// ══ RENDER ════════════════════════════════════════════════════
 function renderAll(d) {
-  renderHero(d);
-  renderKPIs(d, currentLinea);
-  renderCharts(d);
-  renderTables(d, currentLinea);
-  populateFilters(d);
-  updateFilterCount();
+  renderHero(d); renderKPIs(d, currentLinea); renderCharts(d);
+  renderTables(d, currentLinea); populateFilters(d); updateCount();
 }
 
-function updateFilterCount() {
+function updateCount() {
   if (!DATA) return;
-  const r = filterByLinea(DATA.retiros, currentLinea);
-  const a = filterByLinea(DATA.ausencias, currentLinea);
-  const v = filterByLinea(DATA.vacantes, currentLinea);
-  document.getElementById('filterCount').textContent = r.length + ' retiros - ' + a.length + ' ausentismos - ' + v.length + ' vacantes';
+  const r=fLinea(DATA.retiros,currentLinea), a=fLinea(DATA.ausencias,currentLinea), v=fLinea(DATA.vacantes,currentLinea);
+  setText('filterCount', r.length+' retiros - '+a.length+' ausentismos - '+v.length+' vacantes');
 }
 
 function renderHero(d) {
-  const k = d.kpis;
-  setText('barCupos', k.totalCupos || 0);
-  setText('barTotal', k.totalRetiros);
-  setText('barPlaneados', k.planeados);
-  setText('barNoPlaneados', k.noPlaneados);
-  setText('barAusencias', k.totalAusencias);
-  setText('barVacantes', k.totalVacantes);
-  setText('barPctRot', k.pctRotacion != null ? k.pctRotacion + '%' : '—%');
-  const mes = parseInt(d.periodoMes) || (new Date().getMonth()+1);
-  const anio = parseInt(d.periodoAnio) || new Date().getFullYear();
-  const mFull = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
-  const mShort = ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'];
-  setText('badgeMonth', mShort[mes-1] + ' ' + String(mes).padStart(2,'0'));
-  setText('badgeYear', anio);
-  document.getElementById('heroSub').textContent = 'Autoservicios (AU) - Grandes Cuentas (GC) - ' + mFull[mes-1] + ' ' + anio;
+  const k=d.kpis, cc=d.cuposConfig;
+  setText('barCupos', cc.total); setText('barTotal', k.totalRetiros);
+  setText('barPlaneados', k.planeados); setText('barNoPlaneados', k.noPlaneados);
+  setText('barAusencias', k.totalAusencias); setText('barVacantes', k.totalVacantes);
+  setText('barPctRot', k.pctRotacion!=null ? k.pctRotacion+'%' : '—%');
+  const mes=parseInt(d.periodoMes)||(new Date().getMonth()+1), anio=parseInt(d.periodoAnio)||new Date().getFullYear();
+  const mF=['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+  const mS=['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'];
+  setText('badgeMonth',mS[mes-1]+' '+String(mes).padStart(2,'0'));
+  setText('badgeYear',anio);
+  document.getElementById('heroSub').textContent='Autoservicios (AU) - Grandes Cuentas (GC) - '+mF[mes-1]+' '+anio;
 }
 
-// ══ KPIs ═══════════════════════════════════════════════
+// ══ KPIs con % rotacion CORREGIDO ════════════════════════════
 function renderKPIs(d, linea) {
-  const ret = filterByLinea(d.retiros, linea);
-  const aus = filterByLinea(d.ausencias, linea);
-  const vac = filterByLinea(d.vacantes, linea);
-  const total = ret.length;
-  const plan = ret.filter(r => r.tipo === 'PLANEADA').length;
-  const noPlan = ret.filter(r => r.tipo === 'NO PLANEADA').length;
-  const diasAus = aus.reduce((s, a) => s + (a.dias||0), 0);
-  const contrat = vac.filter(v => v.estatus && v.estatus.toUpperCase() === 'CONTRATADO').length;
-  const cuposLinea = getCuposBase(d, linea, null);
-  const pctRot = cuposLinea > 0 ? (total / cuposLinea * 100).toFixed(2) : null;
+  const ret=fLinea(d.retiros,linea), aus=fLinea(d.ausencias,linea), vac=fLinea(d.vacantes,linea);
+  const total=ret.length, plan=ret.filter(r=>N(r.tipo)==='PLANEADA').length, noPlan=ret.filter(r=>N(r.tipo)==='NO PLANEADA').length;
+  const diasAus=aus.reduce((s,a)=>s+(a.dias||0),0);
+  const contrat=vac.filter(v=>N(v.estatus)==='CONTRATADO').length;
 
-  animNum('k0', cuposLinea); animNum('k1', total); animNum('k2', plan);
-  animNum('k3', noPlan); animNum('k4', aus.length); animNum('k5', vac.length);
-  setText('k0foot', pctRot != null ? pctRot + '% rotacion' : 'Sin cupos activos');
-  setText('k1foot', 'Periodo actual');
-  setText('k2foot', total ? pct(plan,total) + '% del total' : '—');
-  setText('k3foot', total ? pct(noPlan,total) + '% del total' : '—');
-  setText('k4foot', diasAus + ' dias afectados');
-  setText('k5foot', contrat + ' contratados');
+  // CUPOS = headcount total de la linea (desde CONFIGURACION/constantes)
+  const cupos = getCuposLinea(d, linea);
+  const pctRot = cupos > 0 ? (total / cupos * 100).toFixed(2) : null;
 
-  setText('barCupos', cuposLinea); setText('barTotal', total);
-  setText('barPlaneados', plan); setText('barNoPlaneados', noPlan);
-  setText('barAusencias', aus.length); setText('barVacantes', vac.length);
-  setText('barPctRot', pctRot != null ? pctRot + '%' : '—%');
+  animNum('k0',cupos); animNum('k1',total); animNum('k2',plan);
+  animNum('k3',noPlan); animNum('k4',aus.length); animNum('k5',vac.length);
+  setText('k0foot', pctRot!=null ? pctRot+'% rotacion' : 'Sin cupos configurados');
+  setText('k1foot','Periodo actual');
+  setText('k2foot', total ? pct(plan,total)+'% del total' : '—');
+  setText('k3foot', total ? pct(noPlan,total)+'% del total' : '—');
+  setText('k4foot', diasAus+' dias afectados');
+  setText('k5foot', contrat+' contratados');
 
-  const maxDias = Math.max(...vac.map(v => v.diasVacante||0), 0);
-  const maxSinCob = Math.max(...vac.map(v => v.diasSinCob||0), 0);
-  const dentro = vac.filter(v => (v.diasVacante||0) <= (v.ans||5) && v.estatus && v.estatus.toUpperCase() === 'CONTRATADO').length;
-  setText('ansMaxDias', maxDias||'0'); setText('ansMaxSinCob', maxSinCob||'0'); setText('ansDentro', dentro||'0');
+  setText('barCupos',cupos); setText('barTotal',total);
+  setText('barPlaneados',plan); setText('barNoPlaneados',noPlan);
+  setText('barAusencias',aus.length); setText('barVacantes',vac.length);
+  setText('barPctRot', pctRot!=null ? pctRot+'%' : '—%');
+
+  const mx=Math.max(...vac.map(v=>v.diasVacante||0),0), msc=Math.max(...vac.map(v=>v.diasSinCob||0),0);
+  const dentro=vac.filter(v=>(v.diasVacante||0)<=(v.ans||5)&&N(v.estatus)==='CONTRATADO').length;
+  setText('ansMaxDias',mx||'0'); setText('ansMaxSinCob',msc||'0'); setText('ansDentro',dentro||'0');
 }
 
-// ══ CHARTS ════════════════════════════════════════════
-function renderCharts(d, retA, ausA, vacA) {
-  const retiros = retA || filterByLinea(d.retiros, currentLinea);
-  const ausencias = ausA || filterByLinea(d.ausencias, currentLinea);
-  const vacantes = vacA || filterByLinea(d.vacantes, currentLinea);
-  const colors = ['#1e5826','#3d9e4a','#5cb868','#96d49e','#c8eacc','#0d9488','#34d399','#d97706','#dc2626'];
+// ══ CHARTS ════════════════════════════════════════════════════
+function renderCharts(d, rA, aA, vA) {
+  const ret=rA||fLinea(d.retiros,currentLinea), aus=aA||fLinea(d.ausencias,currentLinea), vac=vA||fLinea(d.vacantes,currentLinea);
+  const clrs=['#1e5826','#3d9e4a','#5cb868','#96d49e','#c8eacc','#0d9488','#34d399','#d97706','#dc2626'];
 
   // Causales bar
-  const causalMap = {}; retiros.forEach(r => { const c = r.causal||'Otro'; causalMap[c]=(causalMap[c]||0)+1; });
-  const causales = Object.entries(causalMap).map(([l,v])=>({label:l,value:v})).sort((a,b)=>b.value-a.value);
-  destroyChart('causalBarChart');
-  CHARTS.causalBarChart = new Chart(document.getElementById('causalBarChart'), {
-    type:'bar', data:{ labels:causales.map(c=>c.label), datasets:[{data:causales.map(c=>c.value),backgroundColor:colors,borderRadius:6,borderSkipped:false}] },
-    options:{ responsive:true,maintainAspectRatio:false,indexAxis:'y',plugins:{legend:{display:false}},scales:{x:{beginAtZero:true,ticks:{font:{size:11}},grid:{color:'rgba(0,0,0,.05)'}},y:{ticks:{font:{size:11}},grid:{display:false}}} }
-  });
+  const cm={}; ret.forEach(r=>{const c=r.causal||'Otro';cm[c]=(cm[c]||0)+1;});
+  const ca=Object.entries(cm).map(([l,v])=>({label:l,value:v})).sort((a,b)=>b.value-a.value);
+  dC('causalBarChart'); CHARTS.causalBarChart=new Chart(document.getElementById('causalBarChart'),{type:'bar',data:{labels:ca.map(c=>c.label),datasets:[{data:ca.map(c=>c.value),backgroundColor:clrs,borderRadius:6,borderSkipped:false}]},options:{responsive:true,maintainAspectRatio:false,indexAxis:'y',plugins:{legend:{display:false}},scales:{x:{beginAtZero:true,ticks:{font:{size:11}},grid:{color:'rgba(0,0,0,.05)'}},y:{ticks:{font:{size:11}},grid:{display:false}}}}});
 
-  // Tipo rotacion doughnut
-  const plan = retiros.filter(r => r.tipo === 'PLANEADA').length;
-  const noPlan = retiros.filter(r => r.tipo === 'NO PLANEADA').length;
-  destroyChart('tipoChart');
-  CHARTS.tipoChart = new Chart(document.getElementById('tipoChart'), {
-    type:'doughnut', data:{ labels:['Planeada','No Planeada'], datasets:[{data:[plan,noPlan],backgroundColor:['#2d7a38','#dc2626'],borderWidth:2,borderColor:'#fff'}] },
-    options:{ cutout:'70%',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}} }
-  });
-  const tT = plan+noPlan;
-  document.getElementById('tipoLeg').innerHTML =
-    '<li><span class="dl-sq" style="background:#2d7a38"></span>Planeada<span class="dl-n">'+plan+'</span><span class="dl-p">'+pct(plan,tT)+'%</span></li>'+
-    '<li><span class="dl-sq" style="background:#dc2626"></span>No Planeada<span class="dl-n">'+noPlan+'</span><span class="dl-p">'+pct(noPlan,tT)+'%</span></li>';
+  // Tipo rotacion
+  const pl=ret.filter(r=>N(r.tipo)==='PLANEADA').length, np=ret.filter(r=>N(r.tipo)==='NO PLANEADA').length;
+  dC('tipoChart'); CHARTS.tipoChart=new Chart(document.getElementById('tipoChart'),{type:'doughnut',data:{labels:['Planeada','No Planeada'],datasets:[{data:[pl,np],backgroundColor:['#2d7a38','#dc2626'],borderWidth:2,borderColor:'#fff'}]},options:{cutout:'70%',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}}}});
+  const tt=pl+np; document.getElementById('tipoLeg').innerHTML='<li><span class="dl-sq" style="background:#2d7a38"></span>Planeada<span class="dl-n">'+pl+'</span><span class="dl-p">'+pct(pl,tt)+'%</span></li><li><span class="dl-sq" style="background:#dc2626"></span>No Planeada<span class="dl-n">'+np+'</span><span class="dl-p">'+pct(np,tt)+'%</span></li>';
 
-  // Tipo ausentismo doughnut
-  const tipoAusMap = {}; ausencias.forEach(a => { const t = a.tipo||'Otro'; tipoAusMap[t]=(tipoAusMap[t]||0)+1; });
-  const tiposAus = Object.entries(tipoAusMap).map(([l,v])=>({label:l,value:v})).sort((a,b)=>b.value-a.value);
-  const ausColors = ['#0d9488','#34d399','#a7f3d0','#d97706','#6366f1'];
-  destroyChart('ausentChart');
-  CHARTS.ausentChart = new Chart(document.getElementById('ausentChart'), {
-    type:'doughnut', data:{ labels:tiposAus.map(t=>t.label), datasets:[{data:tiposAus.map(t=>t.value),backgroundColor:ausColors,borderWidth:2,borderColor:'#fff'}] },
-    options:{ cutout:'70%',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}} }
-  });
-  const ausTotal = tiposAus.reduce((s,t)=>s+t.value,0);
-  document.getElementById('ausentLeg').innerHTML = tiposAus.map((t,i)=>
-    '<li><span class="dl-sq" style="background:'+ausColors[i%ausColors.length]+'"></span>'+t.label+'<span class="dl-n">'+t.value+'</span><span class="dl-p">'+pct(t.value,ausTotal)+'%</span></li>'
-  ).join('');
+  // Ausentismo
+  const tam={}; aus.forEach(a=>{const t=a.tipo||'Otro';tam[t]=(tam[t]||0)+1;});
+  const ta=Object.entries(tam).map(([l,v])=>({label:l,value:v})).sort((a,b)=>b.value-a.value);
+  const ac=['#0d9488','#34d399','#a7f3d0','#d97706','#6366f1'];
+  dC('ausentChart'); CHARTS.ausentChart=new Chart(document.getElementById('ausentChart'),{type:'doughnut',data:{labels:ta.map(t=>t.label),datasets:[{data:ta.map(t=>t.value),backgroundColor:ac,borderWidth:2,borderColor:'#fff'}]},options:{cutout:'70%',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}}}});
+  const at=ta.reduce((s,t)=>s+t.value,0); document.getElementById('ausentLeg').innerHTML=ta.map((t,i)=>'<li><span class="dl-sq" style="background:'+ac[i%ac.length]+'"></span>'+t.label+'<span class="dl-n">'+t.value+'</span><span class="dl-p">'+pct(t.value,at)+'%</span></li>').join('');
 
   // Regional bars
-  const regMap = {}; retiros.forEach(r => { const rg=r.regional||'N/A'; if(!regMap[rg]) regMap[rg]={planeada:0,noPlaneada:0,total:0}; regMap[rg].total++; if(r.tipo==='PLANEADA')regMap[rg].planeada++; else regMap[rg].noPlaneada++; });
-  const regs = Object.entries(regMap).map(([name,v])=>({name,...v})).sort((a,b)=>b.total-a.total);
-  const mx = Math.max(...regs.map(r=>r.total), 1);
-  document.getElementById('regBars').innerHTML = regs.length ? regs.map(r=>
-    '<div class="reg-item"><div class="reg-top"><span class="reg-name">'+r.name+'</span><span class="reg-nums">'+r.planeada+' plan - '+r.noPlaneada+' no plan - '+r.total+' total</span></div><div class="reg-track"><div class="reg-p" style="width:'+r.planeada/mx*100+'%"></div><div class="reg-np" style="width:'+r.noPlaneada/mx*100+'%"></div></div></div>'
-  ).join('') : '<p style="color:var(--ink4);font-size:12px;text-align:center;padding:20px">Sin datos</p>';
+  const rm={}; ret.forEach(r=>{const rg=r.regional||'N/A';if(!rm[rg])rm[rg]={p:0,n:0,t:0};rm[rg].t++;N(r.tipo)==='PLANEADA'?rm[rg].p++:rm[rg].n++;});
+  const regs=Object.entries(rm).map(([name,v])=>({name,p:v.p,n:v.n,t:v.t})).sort((a,b)=>b.t-a.t);
+  const mx=Math.max(...regs.map(r=>r.t),1);
+  document.getElementById('regBars').innerHTML=regs.length?regs.map(r=>'<div class="reg-item"><div class="reg-top"><span class="reg-name">'+r.name+'</span><span class="reg-nums">'+r.p+' plan - '+r.n+' no plan - '+r.t+' total</span></div><div class="reg-track"><div class="reg-p" style="width:'+r.p/mx*100+'%"></div><div class="reg-np" style="width:'+r.n/mx*100+'%"></div></div></div>').join(''):'<p style="color:var(--ink4);font-size:12px;text-align:center;padding:20px">Sin datos</p>';
 
-  // Linea doughnut
-  const lineaData = [
-    {label:'Autoservicios AU', val:retiros.filter(r=>r.linea==='AU').length, color:'#2d7a38'},
-    {label:'Grandes Cuentas GC', val:retiros.filter(r=>r.linea==='GC').length, color:'#3d9e4a'},
-    {label:'Supernumerario SN', val:retiros.filter(r=>r.linea==='SN').length, color:'#96d49e'},
-    {label:'Otro', val:retiros.filter(r=>r.linea==='OTRO').length, color:'#8aaa8e'}
-  ].filter(x=>x.val>0);
-  destroyChart('lineaChart');
-  CHARTS.lineaChart = new Chart(document.getElementById('lineaChart'), {
-    type:'doughnut', data:{ labels:lineaData.map(l=>l.label), datasets:[{data:lineaData.map(l=>l.val),backgroundColor:lineaData.map(l=>l.color),borderWidth:2,borderColor:'#fff'}] },
-    options:{ cutout:'65%',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}} }
-  });
-  const lt = lineaData.reduce((s,l)=>s+l.val,0);
-  document.getElementById('lineaLeg').innerHTML = lineaData.map(l=>
-    '<li><span class="dl-sq" style="background:'+l.color+'"></span>'+l.label+'<span class="dl-n">'+l.val+'</span><span class="dl-p">'+pct(l.val,lt)+'%</span></li>'
-  ).join('');
+  // Linea
+  const ld=[{l:'AU',c:'#2d7a38'},{l:'GC',c:'#3d9e4a'},{l:'SN',c:'#96d49e'},{l:'OTRO',c:'#8aaa8e'}].map(x=>({label:x.l,val:ret.filter(r=>r.linea===x.l).length,color:x.c})).filter(x=>x.val>0);
+  dC('lineaChart'); CHARTS.lineaChart=new Chart(document.getElementById('lineaChart'),{type:'doughnut',data:{labels:ld.map(l=>l.label),datasets:[{data:ld.map(l=>l.val),backgroundColor:ld.map(l=>l.color),borderWidth:2,borderColor:'#fff'}]},options:{cutout:'65%',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}}}});
+  const lt=ld.reduce((s,l)=>s+l.val,0); document.getElementById('lineaLeg').innerHTML=ld.map(l=>'<li><span class="dl-sq" style="background:'+l.color+'"></span>'+l.label+'<span class="dl-n">'+l.val+'</span><span class="dl-p">'+pct(l.val,lt)+'%</span></li>').join('');
 
-  // Cobertura ausentismo pie
-  const cobMap = {}; ausencias.forEach(a => { const k=(a.comoSeCubrio&&a.comoSeCubrio!=='')?a.comoSeCubrio:'Sin cobertura'; cobMap[k]=(cobMap[k]||0)+1; });
-  const cob = Object.entries(cobMap).map(([label,value])=>({label,value}));
-  destroyChart('cobChart');
-  CHARTS.cobChart = new Chart(document.getElementById('cobChart'), {
-    type:'pie', data:{ labels:cob.map(c=>c.label), datasets:[{data:cob.map(c=>c.value),backgroundColor:['#dc2626','#3d9e4a','#0d9488','#d97706'],borderWidth:2,borderColor:'#fff'}] },
-    options:{ responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{boxWidth:9,padding:10,font:{size:10}}}} }
-  });
-  const cobTotal = cob.reduce((s,c)=>s+c.value, 0);
-  const bgs = ['linear-gradient(90deg,#dc2626,#f87171)','linear-gradient(90deg,var(--g500),var(--g300))','linear-gradient(90deg,#0d9488,#34d399)','linear-gradient(90deg,#d97706,#fcd34d)'];
-  document.getElementById('cobProgs').innerHTML = cob.map((c,i)=>
-    '<div class="prog"><div class="prog-hd"><span>'+c.label+'</span><span>'+c.value+' / '+cobTotal+'</span></div><div class="prog-track"><div class="prog-fill" style="width:'+pct(c.value,cobTotal)+'%;background:'+bgs[i%bgs.length]+'"></div></div></div>'
-  ).join('');
+  // Cobertura
+  const cbm={}; aus.forEach(a=>{const k=(a.comoSeCubrio&&a.comoSeCubrio!=='')?a.comoSeCubrio:'Sin cobertura';cbm[k]=(cbm[k]||0)+1;});
+  const cb=Object.entries(cbm).map(([l,v])=>({label:l,value:v}));
+  dC('cobChart'); CHARTS.cobChart=new Chart(document.getElementById('cobChart'),{type:'pie',data:{labels:cb.map(c=>c.label),datasets:[{data:cb.map(c=>c.value),backgroundColor:['#dc2626','#3d9e4a','#0d9488','#d97706'],borderWidth:2,borderColor:'#fff'}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{boxWidth:9,padding:10,font:{size:10}}}}}});
+  const ct=cb.reduce((s,c)=>s+c.value,0); const bgs=['linear-gradient(90deg,#dc2626,#f87171)','linear-gradient(90deg,var(--g500),var(--g300))','linear-gradient(90deg,#0d9488,#34d399)','linear-gradient(90deg,#d97706,#fcd34d)'];
+  document.getElementById('cobProgs').innerHTML=cb.map((c,i)=>'<div class="prog"><div class="prog-hd"><span>'+c.label+'</span><span>'+c.value+'/'+ct+'</span></div><div class="prog-track"><div class="prog-fill" style="width:'+pct(c.value,ct)+'%;background:'+bgs[i%bgs.length]+'"></div></div></div>').join('');
 
-  // Estado vacantes doughnut
-  const evMap = {}; vacantes.forEach(v => { const e=v.estatus||'N/A'; evMap[e]=(evMap[e]||0)+1; });
-  const ev = Object.entries(evMap).map(([label,value])=>({label,value}));
-  destroyChart('vacChart');
-  CHARTS.vacChart = new Chart(document.getElementById('vacChart'), {
-    type:'doughnut', data:{ labels:ev.map(e=>e.label), datasets:[{data:ev.map(e=>e.value),backgroundColor:['#3d9e4a','#96d49e','#d97706','#dc2626'],borderWidth:2,borderColor:'#fff'}] },
-    options:{ cutout:'65%',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}} }
-  });
-  const evTotal = ev.reduce((s,e)=>s+e.value, 0);
-  const evColors = ['#3d9e4a','#96d49e','#d97706','#dc2626'];
-  document.getElementById('vacLeg').innerHTML = ev.map((e,i)=>
-    '<li><span class="dl-sq" style="background:'+evColors[i%evColors.length]+'"></span>'+e.label+'<span class="dl-n">'+e.value+'</span><span class="dl-p">'+pct(e.value,evTotal)+'%</span></li>'
-  ).join('');
+  // Estado vacantes
+  const evm={}; vac.forEach(v=>{const e=v.estatus||'N/A';evm[e]=(evm[e]||0)+1;});
+  const ev=Object.entries(evm).map(([l,v])=>({label:l,value:v}));
+  dC('vacChart'); const evc=['#3d9e4a','#96d49e','#d97706','#dc2626']; CHARTS.vacChart=new Chart(document.getElementById('vacChart'),{type:'doughnut',data:{labels:ev.map(e=>e.label),datasets:[{data:ev.map(e=>e.value),backgroundColor:evc,borderWidth:2,borderColor:'#fff'}]},options:{cutout:'65%',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}}}});
+  const evt=ev.reduce((s,e)=>s+e.value,0); document.getElementById('vacLeg').innerHTML=ev.map((e,i)=>'<li><span class="dl-sq" style="background:'+evc[i%evc.length]+'"></span>'+e.label+'<span class="dl-n">'+e.value+'</span><span class="dl-p">'+pct(e.value,evt)+'%</span></li>').join('');
 
-  // Dias vacante bar
-  const dv = vacantes.filter(v => v.diasVacante > 0 || v.diasSinCob > 0).slice(0,8);
-  destroyChart('diasChart');
-  CHARTS.diasChart = new Chart(document.getElementById('diasChart'), {
-    type:'bar', data:{
-      labels: dv.length ? dv.map(v => shortName(v.quienSeFue || v.nombre || '')) : ['Sin datos'],
-      datasets:[
-        { label:'Dias Vacante', data:dv.map(v=>v.diasVacante), backgroundColor:'rgba(220,38,38,.85)', borderRadius:6, borderSkipped:false },
-        { label:'Dias Sin Cob.', data:dv.map(v=>v.diasSinCob), backgroundColor:'rgba(220,38,38,.3)', borderRadius:6, borderSkipped:false }
-      ]
-    },
-    options:{ responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{boxWidth:9,padding:12,font:{size:11}}}},scales:{y:{beginAtZero:true,ticks:{callback:v=>v+' d',font:{size:11}},grid:{color:'rgba(0,0,0,.05)'}},x:{ticks:{font:{size:11}},grid:{display:false}}} }
-  });
+  // Dias vacante
+  const dv=vac.filter(v=>v.diasVacante>0||v.diasSinCob>0).slice(0,8);
+  dC('diasChart'); CHARTS.diasChart=new Chart(document.getElementById('diasChart'),{type:'bar',data:{labels:dv.length?dv.map(v=>shortN(v.quienSeFue)):['Sin datos'],datasets:[{label:'Dias Vacante',data:dv.map(v=>v.diasVacante),backgroundColor:'rgba(220,38,38,.85)',borderRadius:6,borderSkipped:false},{label:'Dias Sin Cob.',data:dv.map(v=>v.diasSinCob),backgroundColor:'rgba(220,38,38,.3)',borderRadius:6,borderSkipped:false}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{boxWidth:9,padding:12,font:{size:11}}}},scales:{y:{beginAtZero:true,ticks:{callback:v=>v+'d',font:{size:11}},grid:{color:'rgba(0,0,0,.05)'}},x:{ticks:{font:{size:11}},grid:{display:false}}}}});
 }
 
-// ══ TABLAS CON TODAS LAS VARIABLES DEL EXCEL ═══════════
-function escapeAttr(s) { return String(s||'').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+// ══ TABLAS ════════════════════════════════════════════════════
+function esc(s){return String(s||'').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
 
-function renderTables(d, linea, retA, ausA, vacA) {
-  const retFilt = retA || filterByLinea(d.retiros, linea);
-  const ausFilt = ausA || filterByLinea(d.ausencias, linea);
-  const vacFilt = vacA || filterByLinea(d.vacantes, linea);
+function renderTables(d, linea, rA, aA, vA) {
+  const ret=rA||fLinea(d.retiros,linea), aus=aA||fLinea(d.ausencias,linea), vac=vA||fLinea(d.vacantes,linea);
 
-  // ── RETIROS: Empresa, Cliente, N Doc, Nombre, Cargo, Linea, Regional, CEDIS, Ciudad, Causal, Motivo, Tipo, Fecha
-  if (retFilt.length) {
-    let html = retFilt.map(r => {
-      const tip = 'Doc: '+(r.documento||'—')+' | Motivo: '+(r.motivo||'—');
-      return '<tr title="'+escapeAttr(tip)+'">'+
-        '<td>'+escapeAttr(r.empresa)+'</td>'+
-        '<td>'+escapeAttr(r.cliente)+'</td>'+
-        '<td title="'+escapeAttr(r.documento)+'">'+escapeAttr(r.documento)+'</td>'+
-        '<td>'+titleCase(r.nombre)+'</td>'+
-        '<td title="'+escapeAttr(r.cargo)+'">'+titleCase(r.cargo)+'</td>'+
-        '<td>'+lineaBadge(r.linea)+'</td>'+
-        '<td>'+escapeAttr(r.regional||'—')+'</td>'+
-        '<td>'+escapeAttr(r.cedis||'—')+'</td>'+
-        '<td>'+escapeAttr(r.ciudad||'—')+'</td>'+
-        '<td>'+escapeAttr(r.causal||'—')+'</td>'+
-        '<td title="'+escapeAttr(r.motivo)+'">'+escapeAttr(r.motivo||'—')+'</td>'+
-        '<td>'+tipoBadge(r.tipo)+'</td>'+
-        '<td>'+escapeAttr(r.fecha||'—')+'</td></tr>';
-    }).join('');
-    const planR = retFilt.filter(r=>r.tipo==='PLANEADA').length;
-    const noPlanR = retFilt.filter(r=>r.tipo==='NO PLANEADA').length;
-    html += '<tr class="tr-total"><td colspan="11"><strong>TOTAL</strong></td><td><span class="chip chip-g">'+planR+' Plan.</span> <span class="chip chip-r">'+noPlanR+' No Plan.</span></td><td><strong>'+retFilt.length+' retiros</strong></td></tr>';
-    document.getElementById('tbodyRetiros').innerHTML = html;
-  } else {
-    document.getElementById('tbodyRetiros').innerHTML = '<tr><td colspan="13" class="no-data">Sin registros para esta seleccion</td></tr>';
-  }
+  // Retiros
+  if(ret.length){
+    let h=ret.map(r=>'<tr><td>'+esc(r.empresa)+'</td><td>'+esc(r.cliente)+'</td><td>'+esc(r.documento)+'</td><td>'+tc(r.nombre)+'</td><td>'+tc(r.cargo)+'</td><td>'+lBadge(r.linea)+'</td><td>'+esc(r.regional||'—')+'</td><td>'+esc(r.cedis||'—')+'</td><td>'+esc(r.ciudad||'—')+'</td><td>'+esc(r.causal||'—')+'</td><td title="'+esc(r.motivo)+'">'+esc(r.motivo||'—')+'</td><td>'+tBadge(r.tipo)+'</td><td>'+esc(r.fecha||'—')+'</td></tr>').join('');
+    const pl=ret.filter(r=>N(r.tipo)==='PLANEADA').length, np=ret.filter(r=>N(r.tipo)==='NO PLANEADA').length;
+    h+='<tr class="tr-total"><td colspan="11"><strong>TOTAL</strong></td><td><span class="chip chip-g">'+pl+' Plan.</span> <span class="chip chip-r">'+np+' No Plan.</span></td><td><strong>'+ret.length+'</strong></td></tr>';
+    document.getElementById('tbodyRetiros').innerHTML=h;
+  } else document.getElementById('tbodyRetiros').innerHTML='<tr><td colspan="13" class="no-data">Sin registros</td></tr>';
 
-  // ── AUSENTISMOS: Empresa, Cliente, Contrato, N Doc, Nombre, Cargo, Linea, Regional, CEDI, Ciudad, Tipo, Dias, Inicio, Fin, Cubierto, Como, Lider
-  document.getElementById('tbodyAusencias').innerHTML = ausFilt.length
-    ? ausFilt.map(a => {
-      const tip = 'Contrato: '+(a.contrato||'—')+' | Lider: '+(a.lider||'—');
-      return '<tr title="'+escapeAttr(tip)+'">'+
-        '<td>'+escapeAttr(a.empresa)+'</td>'+
-        '<td>'+escapeAttr(a.cliente)+'</td>'+
-        '<td>'+escapeAttr(a.contrato)+'</td>'+
-        '<td>'+escapeAttr(a.documento)+'</td>'+
-        '<td>'+titleCase(a.nombre)+'</td>'+
-        '<td title="'+escapeAttr(a.cargo)+'">'+titleCase(a.cargo)+'</td>'+
-        '<td>'+lineaBadge(a.linea)+'</td>'+
-        '<td>'+escapeAttr(a.regional||'—')+'</td>'+
-        '<td>'+escapeAttr(a.cedi||'—')+'</td>'+
-        '<td>'+escapeAttr(a.ciudad||'—')+'</td>'+
-        '<td>'+escapeAttr(a.tipo||'—')+'</td>'+
-        '<td><strong>'+a.dias+'</strong></td>'+
-        '<td>'+escapeAttr(a.inicio||'—')+'</td>'+
-        '<td>'+escapeAttr(a.fin||'—')+'</td>'+
-        '<td>'+cubiertoBadge(a.cubierto)+'</td>'+
-        '<td>'+escapeAttr(a.comoSeCubrio||'—')+'</td>'+
-        '<td>'+escapeAttr(a.lider||'—')+'</td></tr>';
-    }).join('')
-    : '<tr><td colspan="17" class="no-data">Sin registros</td></tr>';
+  // Ausencias
+  document.getElementById('tbodyAusencias').innerHTML=aus.length?aus.map(a=>'<tr><td>'+esc(a.empresa)+'</td><td>'+esc(a.cliente)+'</td><td>'+esc(a.contrato)+'</td><td>'+esc(a.documento)+'</td><td>'+tc(a.nombre)+'</td><td>'+tc(a.cargo)+'</td><td>'+lBadge(a.linea)+'</td><td>'+esc(a.regional||'—')+'</td><td>'+esc(a.cedi||'—')+'</td><td>'+esc(a.ciudad||'—')+'</td><td>'+esc(a.tipo||'—')+'</td><td><strong>'+a.dias+'</strong></td><td>'+esc(a.inicio||'—')+'</td><td>'+esc(a.fin||'—')+'</td><td>'+cBadge(a.cubierto)+'</td><td>'+esc(a.comoSeCubrio||'—')+'</td><td>'+esc(a.lider||'—')+'</td></tr>').join(''):'<tr><td colspan="17" class="no-data">Sin registros</td></tr>';
 
-  // ── VACANTES: OT, RQ, Causal, Estatus, F. Retiro, Quien se fue, Doc, Cargo, Linea, LR, Regional, Ciudad, CEDI, Dias Vac, ANS, Dias Sin Cob, F. Contrat, Reemplazante, Cedula, Lider, Estado Dia
-  document.getElementById('tbodyVacantes').innerHTML = vacFilt.length
-    ? vacFilt.map(v => {
-      const dc = v.diasVacante > (v.ans||5) ? '<strong style="color:#dc2626">'+v.diasVacante+'</strong>' : v.diasVacante;
-      const sc = v.diasSinCob > 0 ? '<strong style="color:'+(v.diasSinCob>5?'#dc2626':'#d97706')+'">'+v.diasSinCob+'</strong>' : v.diasSinCob;
-      const tip = 'Estado: '+(v.estadoDia||'—');
-      return '<tr title="'+escapeAttr(tip)+'">'+
-        '<td>'+escapeAttr(v.ot)+'</td>'+
-        '<td>'+escapeAttr(v.rq)+'</td>'+
-        '<td>'+escapeAttr(v.causal||'—')+'</td>'+
-        '<td>'+estatusBadge(v.estatus)+'</td>'+
-        '<td>'+escapeAttr(v.fechaRetiro||'—')+'</td>'+
-        '<td title="'+escapeAttr('Doc: '+(v.documento||'—'))+'">'+titleCase(v.quienSeFue)+'</td>'+
-        '<td>'+escapeAttr(v.documento)+'</td>'+
-        '<td title="'+escapeAttr(v.cargo)+'">'+titleCase(v.cargo)+'</td>'+
-        '<td>'+lineaBadge(v.linea)+'</td>'+
-        '<td>'+escapeAttr(v.lr)+'</td>'+
-        '<td>'+escapeAttr(v.regional||'—')+'</td>'+
-        '<td>'+escapeAttr(v.ciudad||'—')+'</td>'+
-        '<td>'+escapeAttr(v.cedis||'—')+'</td>'+
-        '<td>'+dc+'</td>'+
-        '<td>'+v.ans+'</td>'+
-        '<td>'+sc+'</td>'+
-        '<td>'+escapeAttr(v.fechaContrat||'—')+'</td>'+
-        '<td title="'+escapeAttr('Ced: '+(v.cedulaRep||'—'))+'">'+titleCase(v.reemplazante||'—')+'</td>'+
-        '<td>'+escapeAttr(v.cedulaRep||'—')+'</td>'+
-        '<td>'+escapeAttr(v.lider||'—')+'</td>'+
-        '<td title="'+escapeAttr(v.estadoDia)+'">'+truncate(v.estadoDia, 40)+'</td></tr>';
-    }).join('')
-    : '<tr><td colspan="21" class="no-data">Sin registros</td></tr>';
+  // Vacantes
+  document.getElementById('tbodyVacantes').innerHTML=vac.length?vac.map(v=>{
+    const dc=v.diasVacante>(v.ans||5)?'<strong style="color:#dc2626">'+v.diasVacante+'</strong>':v.diasVacante;
+    const sc=v.diasSinCob>0?'<strong style="color:'+(v.diasSinCob>5?'#dc2626':'#d97706')+'">'+v.diasSinCob+'</strong>':v.diasSinCob;
+    return '<tr><td>'+esc(v.ot)+'</td><td>'+esc(v.rq)+'</td><td>'+esc(v.causal||'—')+'</td><td>'+eBadge(v.estatus)+'</td><td>'+esc(v.fechaRetiro||'—')+'</td><td>'+tc(v.quienSeFue)+'</td><td>'+esc(v.documento)+'</td><td>'+tc(v.cargo)+'</td><td>'+lBadge(v.linea)+'</td><td>'+esc(v.lr)+'</td><td>'+esc(v.regional||'—')+'</td><td>'+esc(v.ciudad||'—')+'</td><td>'+esc(v.cedis||'—')+'</td><td>'+dc+'</td><td>'+v.ans+'</td><td>'+sc+'</td><td>'+esc(v.fechaContrat||'—')+'</td><td>'+tc(v.reemplazante||'—')+'</td><td>'+esc(v.cedulaRep||'—')+'</td><td>'+esc(v.lider||'—')+'</td><td title="'+esc(v.estadoDia)+'">'+trunc(v.estadoDia,35)+'</td></tr>';
+  }).join(''):'<tr><td colspan="21" class="no-data">Sin registros</td></tr>';
 }
 
-// ══ FILTROS ═══════════════════════════════════════════
+// ══ FILTROS (CORREGIDOS: N() normaliza todo) ═════════════════
 function populateFilters(d) {
-  const allRetiros = d.retiros || [];
-  const allAusencias = d.ausencias || [];
-  const regionals = [...new Set([
-    ...allRetiros.map(r => r.regional),
-    ...allAusencias.map(a => a.regional)
-  ].filter(Boolean).map(r => r.trim()))].sort();
-  const causales = [...new Set(allRetiros.map(r => r.causal).filter(Boolean))].sort();
+  // Unificar regionales de TODAS las hojas, normalizando
+  const regSet = new Set();
+  (d.retiros||[]).forEach(r => { if(r.regional) regSet.add(r.regional.trim()); });
+  (d.ausencias||[]).forEach(a => { if(a.regional) regSet.add(a.regional.trim()); });
+  (d.vacantes||[]).forEach(v => { if(v.regional) regSet.add(v.regional.trim()); });
+  const regionals = [...regSet].sort();
 
-  const fReg = document.getElementById('fRegional');
-  const fCau = document.getElementById('fCausal');
-  const curReg = fReg.value, curCau = fCau.value;
-  fReg.innerHTML = '<option value="">Todas</option>' + regionals.map(r=>'<option value="'+r+'">'+r+'</option>').join('');
-  fCau.innerHTML = '<option value="">Todas</option>' + causales.map(c=>'<option value="'+c+'">'+c+'</option>').join('');
-  fReg.value = curReg; fCau.value = curCau;
+  const causales = [...new Set((d.retiros||[]).map(r=>r.causal).filter(Boolean))].sort();
+
+  const fR=document.getElementById('fRegional'), fC=document.getElementById('fCausal');
+  const cR=fR.value, cC=fC.value;
+  fR.innerHTML='<option value="">Todas</option>'+regionals.map(r=>'<option value="'+r+'">'+r+'</option>').join('');
+  fC.innerHTML='<option value="">Todas</option>'+causales.map(c=>'<option value="'+c+'">'+c+'</option>').join('');
+  fR.value=cR; fC.value=cC;
 }
 
 function applyFilters() {
-  if (!DATA) return;
-  const reg = document.getElementById('fRegional').value.toUpperCase();
-  const causal = document.getElementById('fCausal').value.toUpperCase();
-  const tipo = document.getElementById('fTipo').value.toUpperCase();
-  const estatus = document.getElementById('fEstatus').value.toUpperCase();
-  const search = document.getElementById('fSearch').value.toUpperCase();
+  if(!DATA) return;
+  const regV  = N(document.getElementById('fRegional').value);
+  const cauV  = N(document.getElementById('fCausal').value);
+  const tipV  = N(document.getElementById('fTipo').value);
+  const estV  = N(document.getElementById('fEstatus').value);
+  const srcV  = N(document.getElementById('fSearch').value);
 
-  let retFilt = filterByLinea(DATA.retiros, currentLinea);
-  let ausFilt = filterByLinea(DATA.ausencias, currentLinea);
-  let vacFilt = filterByLinea(DATA.vacantes, currentLinea);
+  let ret=fLinea(DATA.retiros,currentLinea), aus=fLinea(DATA.ausencias,currentLinea), vac=fLinea(DATA.vacantes,currentLinea);
 
-  if (reg) {
-    retFilt = retFilt.filter(r => (r.regional||'').toUpperCase().trim() === reg);
-    ausFilt = ausFilt.filter(a => (a.regional||'').toUpperCase().trim() === reg);
-    vacFilt = vacFilt.filter(v => (v.regional||'').toUpperCase().trim() === reg);
+  // Regional: aplica a TODO (KPIs + tablas + charts)
+  if(regV){
+    ret=ret.filter(r=>N(r.regional)===regV);
+    aus=aus.filter(a=>N(a.regional)===regV);
+    vac=vac.filter(v=>N(v.regional)===regV);
   }
-  const hasDetail = causal || tipo || estatus || search;
-  if (causal) retFilt = retFilt.filter(r => (r.causal||'').toUpperCase() === causal);
-  if (tipo)   retFilt = retFilt.filter(r => (r.tipo||'').toUpperCase() === tipo);
-  if (estatus) vacFilt = vacFilt.filter(v => (v.estatus||'').toUpperCase() === estatus);
-  if (search) {
-    retFilt = retFilt.filter(r => [r.nombre,r.cargo,r.cedis,r.ciudad,r.causal,r.documento,r.motivo].some(f => f && String(f).toUpperCase().includes(search)));
-    ausFilt = ausFilt.filter(a => [a.nombre,a.cargo,a.cedi,a.ciudad,a.documento,a.contrato].some(f => f && String(f).toUpperCase().includes(search)));
-    vacFilt = vacFilt.filter(v => [v.quienSeFue,v.cargo,v.cedis,v.documento,v.reemplazante,v.lider,v.estadoDia].some(f => f && String(f).toUpperCase().includes(search)));
+  // Filtros de detalle
+  if(cauV) ret=ret.filter(r=>N(r.causal)===cauV);
+  if(tipV) ret=ret.filter(r=>N(r.tipo)===tipV);
+  if(estV) vac=vac.filter(v=>N(v.estatus)===estV);
+  if(srcV){
+    ret=ret.filter(r=>[r.nombre,r.cargo,r.cedis,r.ciudad,r.causal,r.documento,r.motivo].some(f=>N(f).includes(srcV)));
+    aus=aus.filter(a=>[a.nombre,a.cargo,a.cedi,a.ciudad,a.documento,a.contrato,a.lider].some(f=>N(f).includes(srcV)));
+    vac=vac.filter(v=>[v.quienSeFue,v.cargo,v.cedis,v.documento,v.reemplazante,v.lider,v.estadoDia].some(f=>N(f).includes(srcV)));
   }
 
-  const cuposFilt = getCuposBase(DATA, currentLinea, reg);
-  const totalRet = retFilt.length;
-  const pctRotF = (cuposFilt > 0 && !hasDetail) ? (totalRet / cuposFilt * 100).toFixed(2) : null;
+  const total=ret.length, plan=ret.filter(r=>N(r.tipo)==='PLANEADA').length, noPlan=ret.filter(r=>N(r.tipo)==='NO PLANEADA').length;
+  const cupos=getCuposLinea(DATA,currentLinea);
+  const pctR=cupos>0?(total/cupos*100).toFixed(2):null;
 
-  animNum('k0', cuposFilt); animNum('k1', totalRet);
-  animNum('k2', retFilt.filter(r => r.tipo === 'PLANEADA').length);
-  animNum('k3', retFilt.filter(r => r.tipo === 'NO PLANEADA').length);
-  animNum('k4', ausFilt.length); animNum('k5', vacFilt.length);
+  animNum('k0',cupos); animNum('k1',total); animNum('k2',plan); animNum('k3',noPlan); animNum('k4',aus.length); animNum('k5',vac.length);
+  setText('k0foot',pctR!=null?pctR+'% rotacion':'Sin cupos');
+  setText('k1foot',(cauV||tipV||estV||srcV)?'Filtrado':'Periodo actual');
+  setText('k2foot',total?pct(plan,total)+'% del total':'—');
+  setText('k3foot',total?pct(noPlan,total)+'% del total':'—');
+  setText('k4foot',aus.reduce((s,a)=>s+(a.dias||0),0)+' dias afectados');
+  setText('k5foot',vac.filter(v=>N(v.estatus)==='CONTRATADO').length+' contratados');
+  setText('barCupos',cupos); setText('barTotal',total); setText('barPlaneados',plan); setText('barNoPlaneados',noPlan);
+  setText('barAusencias',aus.length); setText('barVacantes',vac.length);
+  setText('barPctRot',pctR!=null?pctR+'%':'—%');
 
-  setText('k0foot', pctRotF != null ? pctRotF + '% rotacion' : (hasDetail ? 'Filtros activos' : 'Sin cupos activos'));
-  setText('k1foot', hasDetail ? 'Filtrado' : 'Periodo actual');
-  setText('k2foot', totalRet ? pct(retFilt.filter(r=>r.tipo==='PLANEADA').length, totalRet) + '% del total' : '—');
-  setText('k3foot', totalRet ? pct(retFilt.filter(r=>r.tipo==='NO PLANEADA').length, totalRet) + '% del total' : '—');
-  setText('k4foot', ausFilt.reduce((s,a)=>s+(a.dias||0),0) + ' dias afectados');
-  setText('k5foot', vacFilt.filter(v=>(v.estatus||'').toUpperCase()==='CONTRATADO').length + ' contratados');
+  const mxd=Math.max(...vac.map(v=>v.diasVacante||0),0), msc=Math.max(...vac.map(v=>v.diasSinCob||0),0);
+  const dentro=vac.filter(v=>(v.diasVacante||0)<=(v.ans||5)&&N(v.estatus)==='CONTRATADO').length;
+  setText('ansMaxDias',mxd||'0'); setText('ansMaxSinCob',msc||'0'); setText('ansDentro',dentro||'0');
 
-  setText('barCupos', cuposFilt); setText('barTotal', totalRet);
-  setText('barPlaneados', retFilt.filter(r=>r.tipo==='PLANEADA').length);
-  setText('barNoPlaneados', retFilt.filter(r=>r.tipo==='NO PLANEADA').length);
-  setText('barAusencias', ausFilt.length); setText('barVacantes', vacFilt.length);
-  setText('barPctRot', pctRotF != null ? pctRotF + '%' : '—%');
-
-  const maxDias = Math.max(...vacFilt.map(v=>v.diasVacante||0), 0);
-  const maxSinCob = Math.max(...vacFilt.map(v=>v.diasSinCob||0), 0);
-  const dentro = vacFilt.filter(v=>(v.diasVacante||0)<=(v.ans||5)&&(v.estatus||'').toUpperCase()==='CONTRATADO').length;
-  setText('ansMaxDias', maxDias||'0'); setText('ansMaxSinCob', maxSinCob||'0'); setText('ansDentro', dentro||'0');
-
-  renderTables(DATA, currentLinea, retFilt, ausFilt, vacFilt);
-  renderCharts(DATA, retFilt, ausFilt, vacFilt);
-  document.getElementById('filterCount').textContent = retFilt.length + ' retiros - ' + ausFilt.length + ' ausentismos - ' + vacFilt.length + ' vacantes';
+  renderTables(DATA,currentLinea,ret,aus,vac);
+  renderCharts(DATA,ret,aus,vac);
+  setText('filterCount',ret.length+' retiros - '+aus.length+' ausentismos - '+vac.length+' vacantes');
 }
 
 function resetFilters() {
-  document.getElementById('fRegional').value = '';
-  document.getElementById('fCausal').value = '';
-  document.getElementById('fTipo').value = '';
-  document.getElementById('fEstatus').value = '';
-  document.getElementById('fSearch').value = '';
-  if (DATA) { renderKPIs(DATA, currentLinea); renderCharts(DATA); renderTables(DATA, currentLinea); updateFilterCount(); }
+  ['fRegional','fCausal','fTipo','fEstatus'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('fSearch').value='';
+  if(DATA){renderKPIs(DATA,currentLinea);renderCharts(DATA);renderTables(DATA,currentLinea);updateCount();}
 }
 
-function setLinea(linea, btn) {
-  currentLinea = linea;
-  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+function setLinea(linea,btn) {
+  currentLinea=linea;
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
   btn.classList.add('active');
-  if (DATA) applyFilters();
+  if(DATA) applyFilters();
 }
 
-function filterByLinea(arr, linea) {
-  if (!arr) return [];
-  return linea === 'ALL' ? arr : arr.filter(r => r.linea === linea);
-}
+function fLinea(arr,linea){return !arr?[]:linea==='ALL'?arr:arr.filter(r=>r.linea===linea);}
 
-// ══ HELPERS UI ════════════════════════════════════════
-function showLoading(v) { const el = document.getElementById('loadingOverlay'); v ? el.classList.remove('hidden') : el.classList.add('hidden'); }
-function setError(msg) { const el = document.getElementById('errorBanner'); const m2 = document.getElementById('errorMsg'); if(msg){el.classList.add('show');m2.textContent=msg;}else{el.classList.remove('show');} }
-function setSync(ok, ts) {
-  const dot = document.getElementById('syncDot'), text = document.getElementById('syncText');
-  if(ok){dot.className='sync-dot';text.textContent='Actualizado '+(ts?new Date(ts).toLocaleTimeString('es-CO',{hour:'2-digit',minute:'2-digit'}):'');}
-  else{dot.className='sync-dot err';text.textContent='Error de conexion';}
-}
-function setText(id, val) { const el = document.getElementById(id); if(el) el.textContent = (val==null||val===undefined) ? '—' : val; }
-function animNum(id, target) {
-  const el = document.getElementById(id); if(!el) return;
-  const start = parseInt(el.textContent)||0; if(start===target)return;
-  const dur=600, t0=performance.now();
-  function step(now){ const p=Math.min((now-t0)/dur,1); el.textContent=Math.round(start+(target-start)*p); if(p<1)requestAnimationFrame(step); }
-  requestAnimationFrame(step);
-}
-function pct(n, total) { return total ? Math.round(n/total*100) : 0; }
-function titleCase(str) { return str ? String(str).toLowerCase().replace(/\b\w/g, c=>c.toUpperCase()) : ''; }
-function shortName(n) { if(!n) return '—'; const p=n.trim().split(/\s+/); return p.length>=2?p[0]+' '+p[1].charAt(0)+'.':p[0]; }
-function truncate(s, max) { if(!s) return '—'; return s.length > max ? s.substring(0,max)+'...' : s; }
-function destroyChart(id) { if(CHARTS[id]){CHARTS[id].destroy();delete CHARTS[id];} }
-function tipoBadge(t) { if(!t) return '—'; const u=t.toUpperCase(); if(u==='PLANEADA') return '<span class="chip chip-g">Planeada</span>'; if(u==='NO PLANEADA') return '<span class="chip chip-r">No Planeada</span>'; return '<span class="chip chip-s">'+t+'</span>'; }
-function lineaBadge(l) { if(l==='AU') return '<span class="chip chip-g">AU</span>'; if(l==='GC') return '<span class="chip chip-t">GC</span>'; if(l==='SN') return '<span class="chip chip-a">SN</span>'; return '<span class="chip chip-s">—</span>'; }
-function cubiertoBadge(v) { const u=(v||'').toUpperCase(); if(u==='SI') return '<span class="chip chip-g">Si</span>'; if(u==='NO') return '<span class="chip chip-r">No</span>'; return '—'; }
-function estatusBadge(e) { const u=(e||'').toUpperCase(); if(u==='CONTRATADO') return '<span class="chip chip-g">Contratado</span>'; if(u==='CIERRE DE CUPO') return '<span class="chip chip-s">Cierre Cupo</span>'; if(u==='NO SE CUBRE') return '<span class="chip chip-a">No se Cubre</span>'; return '<span class="chip chip-s">'+(e||'—')+'</span>'; }
+// ══ HELPERS ══════════════════════════════════════════════════
+function showLoading(v){const e=document.getElementById('loadingOverlay');v?e.classList.remove('hidden'):e.classList.add('hidden');}
+function setError(m){const e=document.getElementById('errorBanner'),m2=document.getElementById('errorMsg');if(m){e.classList.add('show');m2.textContent=m;}else e.classList.remove('show');}
+function setSync(ok,ts){const d=document.getElementById('syncDot'),t=document.getElementById('syncText');if(ok){d.className='sync-dot';t.textContent='Actualizado '+(ts?new Date(ts).toLocaleTimeString('es-CO',{hour:'2-digit',minute:'2-digit'}):'');}else{d.className='sync-dot err';t.textContent='Error de conexion';}}
+function setText(id,v){const e=document.getElementById(id);if(e)e.textContent=(v==null||v===undefined)?'—':v;}
+function animNum(id,tgt){const e=document.getElementById(id);if(!e)return;const s=parseInt(e.textContent)||0;if(s===tgt)return;const d=600,t0=performance.now();function step(n){const p=Math.min((n-t0)/d,1);e.textContent=Math.round(s+(tgt-s)*p);if(p<1)requestAnimationFrame(step);}requestAnimationFrame(step);}
+function pct(n,t){return t?Math.round(n/t*100):0;}
+function tc(s){return s?String(s).toLowerCase().replace(/\b\w/g,c=>c.toUpperCase()):'';}
+function shortN(n){if(!n)return'—';const p=n.trim().split(/\s+/);return p.length>=2?p[0]+' '+p[1].charAt(0)+'.':p[0];}
+function trunc(s,m){if(!s)return'—';return s.length>m?s.substring(0,m)+'...':s;}
+function dC(id){if(CHARTS[id]){CHARTS[id].destroy();delete CHARTS[id];}}
+function tBadge(t){if(!t)return'—';const u=N(t);return u==='PLANEADA'?'<span class="chip chip-g">Planeada</span>':u==='NO PLANEADA'?'<span class="chip chip-r">No Planeada</span>':'<span class="chip chip-s">'+t+'</span>';}
+function lBadge(l){return l==='AU'?'<span class="chip chip-g">AU</span>':l==='GC'?'<span class="chip chip-t">GC</span>':l==='SN'?'<span class="chip chip-a">SN</span>':'<span class="chip chip-s">—</span>';}
+function cBadge(v){const u=N(v);return u==='SI'?'<span class="chip chip-g">Si</span>':u==='NO'?'<span class="chip chip-r">No</span>':'—';}
+function eBadge(e){const u=N(e);return u==='CONTRATADO'?'<span class="chip chip-g">Contratado</span>':u==='CIERRE DE CUPO'?'<span class="chip chip-s">Cierre Cupo</span>':u==='NO SE CUBRE'?'<span class="chip chip-a">No se Cubre</span>':'<span class="chip chip-s">'+(e||'—')+'</span>';}
 
-// ══ INICIO ════════════════════════════════════════════
+// ══ INICIO ═══════════════════════════════════════════════════
 window.addEventListener('DOMContentLoaded', () => {
-  const imgE = document.getElementById('logoEficacia');
-  const imgN = document.getElementById('logoNutrimenti');
+  // Logos con fallback elegante
+  const imgE=document.getElementById('logoEficacia'), imgN=document.getElementById('logoNutrimenti');
+  const cellE=document.getElementById('cellEficacia'), cellN=document.getElementById('cellNutrimenti');
+
+  imgE.onload = function(){ cellE.classList.remove('fb-active'); };
+  imgE.onerror = function(){ cellE.classList.add('fb-active'); };
+  imgN.onload = function(){ cellN.classList.remove('fb-active'); };
+  imgN.onerror = function(){ cellN.classList.add('fb-active'); };
+
+  // Cargar con cache-bust para evitar CORS cacheados
+  imgE.crossOrigin = 'anonymous';
+  imgN.crossOrigin = 'anonymous';
   imgE.src = LOGO_EFICACIA;
   imgN.src = LOGO_NUTRIMENTI;
-  imgE.onerror = function(){ this.style.display='none'; this.nextElementSibling.style.display='flex'; };
-  imgN.onerror = function(){ this.style.display='none'; this.nextElementSibling.style.display='flex'; };
+
+  // Si no cargan en 3s, activar fallback
+  setTimeout(()=>{ if(!imgE.complete||!imgE.naturalHeight) cellE.classList.add('fb-active'); }, 3000);
+  setTimeout(()=>{ if(!imgN.complete||!imgN.naturalHeight) cellN.classList.add('fb-active'); }, 3000);
+
   loadData();
-  setInterval(loadData, 5 * 60 * 1000);
+  setInterval(loadData, 5*60*1000);
 });
 </script>
 </body>
