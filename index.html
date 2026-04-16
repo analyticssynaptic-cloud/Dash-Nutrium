@@ -9,7 +9,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{--g50:#f6fdf6;--g100:#e8f7ea;--g200:#c8eacc;--g300:#96d49e;--g400:#5cb868;--g500:#3d9e4a;--g600:#2d7a38;--g700:#1e5826;--g800:#144019;--g900:#0b2a10;--ink:#0f2312;--ink2:#2d4a30;--ink3:#5a7a5e;--ink4:#8aaa8e;--red:#dc2626;--amber:#d97706;--teal:#0d9488;--indigo:#4f46e5;--r:16px;--sh2:0 4px 16px rgba(14,42,18,.09),0 2px 6px rgba(14,42,18,.06);--sh3:0 10px 40px rgba(14,42,18,.12),0 4px 12px rgba(14,42,18,.08);--sh4:0 24px 64px rgba(14,42,18,.16),0 8px 20px rgba(14,42,18,.10)}
+:root{--g50:#f6fdf6;--g100:#e8f7ea;--g200:#c8eacc;--g300:#96d49e;--g400:#5cb868;--g500:#3d9e4a;--g600:#2d7a38;--g700:#1e5826;--g800:#144019;--g900:#0b2a10;--ink:#0f2312;--ink2:#2d4a30;--ink3:#5a7a5e;--ink4:#8aaa8e;--red:#dc2626;--amber:#d97706;--teal:#0d9488;--indigo:#4f46e5;--xls:#0f9d58;--xls-d:#0b8043;--r:16px;--sh2:0 4px 16px rgba(14,42,18,.09),0 2px 6px rgba(14,42,18,.06);--sh3:0 10px 40px rgba(14,42,18,.12),0 4px 12px rgba(14,42,18,.08);--sh4:0 24px 64px rgba(14,42,18,.16),0 8px 20px rgba(14,42,18,.10)}
 html{-webkit-font-smoothing:antialiased;scroll-behavior:smooth}
 body{font-family:'Sora',sans-serif;background:var(--g50);color:var(--ink)}
 #loadingOverlay{position:fixed;inset:0;z-index:9999;background:linear-gradient(145deg,#0b2a10,#1e5826,#2d7a38);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:24px;transition:opacity .6s,visibility .6s}
@@ -27,15 +27,23 @@ body{font-family:'Sora',sans-serif;background:var(--g50);color:var(--ink)}
 .hero-orb{position:absolute;border-radius:50%;pointer-events:none}
 .hero-orb-1{width:320px;height:320px;top:-120px;right:200px;background:radial-gradient(circle,rgba(93,196,104,.15) 0%,transparent 70%)}
 .hero-inner{position:relative;z-index:5;display:flex;align-items:center;gap:32px;padding:36px 48px 30px;flex-wrap:wrap}
-.logo-area{display:flex;flex-direction:column;gap:8px;flex-shrink:0}
+.logo-area{display:flex;flex-direction:column;gap:10px;flex-shrink:0}
 .logo-pill{display:flex;align-items:center;background:#fff;border-radius:12px;box-shadow:0 6px 30px rgba(0,0,0,.22),0 2px 6px rgba(0,0,0,.12);overflow:hidden;border:1px solid rgba(255,255,255,.4)}
 .logo-cell{padding:12px 20px;display:flex;align-items:center;justify-content:center;height:60px}
 .logo-cell+.logo-cell{border-left:1px solid #e8f0e9}
 .logo-cell img{display:block;height:32px;width:auto;object-fit:contain}
 .logo-tagline{font-size:9.5px;font-weight:500;color:rgba(255,255,255,.32);letter-spacing:1.5px;text-transform:uppercase}
-.sheets-btn{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);color:rgba(255,255,255,.75);font-size:9.5px;font-weight:600;letter-spacing:.5px;padding:6px 14px;border-radius:8px;cursor:pointer;transition:background .2s,transform .15s;font-family:'Sora',sans-serif;text-decoration:none;width:fit-content}
-.sheets-btn:hover{background:rgba(255,255,255,.18);transform:translateY(-1px)}
-.sheets-btn svg{width:14px;height:14px;flex-shrink:0}
+
+/* ── BOTON SHEETS MEJORADO: más notorio, color verde Google Sheets ── */
+.sheets-btn{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,var(--xls) 0%,var(--xls-d) 100%);border:1px solid rgba(255,255,255,.3);color:#fff;font-size:11px;font-weight:700;letter-spacing:.4px;padding:9px 16px;border-radius:10px;cursor:pointer;transition:all .2s cubic-bezier(.4,0,.2,1);font-family:'Sora',sans-serif;text-decoration:none;width:fit-content;box-shadow:0 4px 14px rgba(15,157,88,.45),0 2px 4px rgba(0,0,0,.2);text-transform:uppercase;position:relative;overflow:hidden}
+.sheets-btn::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.2),transparent);transition:left .5s}
+.sheets-btn:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(15,157,88,.6),0 3px 8px rgba(0,0,0,.25);background:linear-gradient(135deg,#13b368 0%,var(--xls) 100%)}
+.sheets-btn:hover::before{left:100%}
+.sheets-btn:active{transform:translateY(0)}
+.sheets-btn svg{width:18px;height:18px;flex-shrink:0}
+.sheets-btn .sh-txt{display:flex;flex-direction:column;line-height:1;gap:2px;align-items:flex-start}
+.sheets-btn .sh-txt small{font-size:8px;opacity:.85;font-weight:500;letter-spacing:.8px}
+
 .sync-info{font-size:10px;color:rgba(255,255,255,.3);display:flex;align-items:center;gap:6px}
 .sync-dot{width:6px;height:6px;border-radius:50%;background:#5cb868;flex-shrink:0}.sync-dot.err{background:#dc2626}
 .hero-center{flex:1;text-align:center;min-width:250px}
@@ -126,8 +134,38 @@ body{font-family:'Sora',sans-serif;background:var(--g50);color:var(--ink)}
 .tab-bar{display:flex;gap:5px;margin-bottom:14px;flex-wrap:wrap}
 .tab-btn{font-family:'Sora',sans-serif;font-size:10px;font-weight:600;letter-spacing:.4px;padding:6px 14px;border-radius:7px;cursor:pointer;border:1px solid var(--g200);background:#fff;color:var(--ink3);transition:all .15s}
 .tab-btn.active{background:var(--g700);color:#fff;border-color:var(--g700)}
+
+/* ═════════════════════════════════════════════════════════ */
+/* ── ACCORDION PARA TABLAS INFERIORES ── */
+/* ═════════════════════════════════════════════════════════ */
+.sec-tables-header{display:flex;align-items:center;gap:12px;margin:0 0 16px;flex-wrap:wrap}
+.sec-tables-header .sec{flex:1;min-width:200px;margin:0}
+.sec-tables-header .sec::after{content:none}
+.accordion-ctrl{display:flex;gap:6px;align-items:center}
+.acc-btn-global{display:inline-flex;align-items:center;gap:6px;font-family:'Sora',sans-serif;font-size:10px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;padding:7px 12px;border-radius:8px;cursor:pointer;border:1px solid var(--g300);background:#fff;color:var(--g700);transition:all .15s;white-space:nowrap}
+.acc-btn-global:hover{background:var(--g100);border-color:var(--g500);transform:translateY(-1px)}
+.acc-btn-global svg{width:12px;height:12px;transition:transform .2s}
+.acc-btn-global.expanded svg{transform:rotate(180deg)}
+
+.accordion{background:#fff;border-radius:var(--r);border:1px solid var(--g200);box-shadow:var(--sh2);margin-bottom:14px;overflow:hidden;transition:box-shadow .2s}
+.accordion:hover{box-shadow:var(--sh3)}
+.accordion-head{display:flex;align-items:center;gap:12px;padding:14px 18px;cursor:pointer;background:#fff;border-bottom:1px solid transparent;transition:background .15s,border-color .2s;user-select:none}
+.accordion.open .accordion-head{background:linear-gradient(90deg,var(--g50),#fff);border-bottom-color:var(--g200)}
+.accordion-head:hover{background:var(--g50)}
+.acc-pip{width:4px;height:22px;border-radius:2px;background:linear-gradient(180deg,var(--g400),var(--g300));flex-shrink:0}
+.acc-title{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.2px;color:var(--ink2);flex:1;display:flex;align-items:center;gap:10px}
+.acc-title-txt{color:var(--ink)}
+.acc-sub{font-size:9px;font-weight:500;color:var(--ink4);text-transform:none;letter-spacing:.3px;margin-left:4px}
+.acc-badge{background:var(--g100);color:var(--g700);font-size:10px;font-weight:700;padding:3px 10px;border-radius:20px;min-width:32px;text-align:center}
+.accordion.open .acc-badge{background:var(--g600);color:#fff}
+.acc-chevron{width:28px;height:28px;border-radius:8px;background:var(--g50);display:flex;align-items:center;justify-content:center;color:var(--g600);transition:all .25s cubic-bezier(.4,0,.2,1);flex-shrink:0;border:1px solid var(--g200)}
+.accordion.open .acc-chevron{background:var(--g600);color:#fff;border-color:var(--g600);transform:rotate(180deg)}
+.acc-chevron svg{width:14px;height:14px}
+.accordion-body{max-height:0;overflow:hidden;transition:max-height .35s cubic-bezier(.4,0,.2,1);opacity:0}
+.accordion.open .accordion-body{max-height:520px;opacity:1}
+
 /* ── TABLAS COMPACTAS CON SCROLL ── */
-.tbl-wrap{overflow-x:auto;max-height:420px;overflow-y:auto;border-radius:var(--r)}
+.tbl-wrap{overflow-x:auto;max-height:420px;overflow-y:auto}
 .tbl-wrap::-webkit-scrollbar{height:6px;width:6px}
 .tbl-wrap::-webkit-scrollbar-track{background:var(--g100);border-radius:3px}
 .tbl-wrap::-webkit-scrollbar-thumb{background:var(--g300);border-radius:3px}
@@ -147,7 +185,7 @@ tbody tr.tr-total td{background:var(--g100);font-weight:700;color:var(--ink);bor
 .card,.dark-card{animation:up .45s ease both;animation-delay:.08s}
 @media(max-width:1240px){.g6{grid-template-columns:repeat(3,1fr)}}
 @media(max-width:1140px){.hero-inner{padding:24px 24px 18px}.hero-badge{display:none}.hero-bar{padding:0 24px}.g3,.g3b,.g3c{grid-template-columns:1fr 1fr}.wrap{padding:20px 18px 40px}}
-@media(max-width:700px){.hero-inner{flex-direction:column;align-items:flex-start}.hbi{min-width:50%;border-right:none;border-bottom:1px solid rgba(255,255,255,.07)}.g6{grid-template-columns:1fr 1fr}.g3,.g3b,.g3c{grid-template-columns:1fr}.wrap{padding:12px 10px 32px}.filter-bar{flex-direction:column;align-items:stretch}}
+@media(max-width:700px){.hero-inner{flex-direction:column;align-items:flex-start}.hbi{min-width:50%;border-right:none;border-bottom:1px solid rgba(255,255,255,.07)}.g6{grid-template-columns:1fr 1fr}.g3,.g3b,.g3c{grid-template-columns:1fr}.wrap{padding:12px 10px 32px}.filter-bar{flex-direction:column;align-items:stretch}.accordion-head{padding:12px 14px;gap:8px}.acc-title{font-size:10px}.sheets-btn{padding:8px 12px;font-size:10px}.sheets-btn svg{width:16px;height:16px}}
 </style>
 </head>
 <body>
@@ -165,15 +203,20 @@ tbody tr.tr-total td{background:var(--g100);font-weight:700;color:var(--ink);bor
   <div class="logo-area">
     <div class="logo-pill">
       <div class="logo-cell"><img src="data:image/png;base64,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" alt="Nutrium"></div>
-      <div class="logo-cell"><img src="data:image/png;base64,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" alt="Eficacia"></div>
+      <div class="logo-cell"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAZAAAACQCAMAAAARFs1KAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAEIUExURf///////+7//93u/8zu/7vd7qrd7pnd7pnM7qrd/7vu/93//3e77ma73USq3TOq3TOZ3SKZ3SKq3US77lW77mbM7ojM7ne73TOZzCKZzBGZzDOq7jO77nfM7qrM7kSZzCKIzBGIzJnM3VWqzJnd/1WZzCKIuxGIu2aqzBF3u1XM7qru/4i73QB3u1Wq3Wa77lW73Xfd/8zd7neq3bvd/wB3qszu7kS73UTM7gBmqkSqzN3u7u7u/yJ3uzOIuzOIzGaq3WbM/0SZuxF3qojd/xFmqkSIuwBVqnfM/wBVmVWZuyJ3qqrM3XeqzJm73REREWaZzLvM7jN3u4i7zIjd7lXM/0TM/4iqzL3IHsgAAAABdFJOUwBA5thmAAAAAWJLR0QAiAUdSAAAAAlwSFlzAAAuIwAALiMBeKU/dgAAAAd0SU1FB+oEDxcNAHov72oAAA7XSURBVHja7Z17X9pKGsedmQQQCrRVuVQEpIJQo61p9ZjlslpKLHKz3e057/+d7EwukwRymQDqZ9vn98c5FsKEzDfPPJeZDDs7IBAIBAKBQCAQCAQCgUAgEAgEAoFAIBAIBAKBQCAQCAQCgUAgEAgEAoFAIBDo/0ZoSS/9ff5gse7HmEhyIplMUSUTu2kpg4HKC4h1OpFTr7K5/Os3pt4y5fN7+weFXQkDlOcTswspVcyVyuV3ZSaHBwXCdFjZP9olwOQ5xCyjmq3Vj6nq5bIDxE3k8PCwUtk72MWA5GlFaUiN9wYMN5CyLxCq/ZMMIHk6UdtoNFunVL5A/IhU9iiSl/7ev6eo30i0W51O59RFhOrdshvxAqlUPpyBkWxf1DiUUue84wFSL5dyF9mjAot4U4Wjj59yeT8ilUofChInBwumLflWE/4Q0VAfMBRSJ2YefD5XdQ3cUPv7/S5G5qk7ua+eM65iFjVm/0PccQriHpwS5eI8wZEVD8BqVjsAxquYjbJRuSqPDa3yeZ86ooeGgkHjZP+TPLuEKtflfiU7oOrWctiLaNR5FS8WGOmUMbD61xY8f8FKhn2jsur7zv+JfdnlZRt/tw/VPoRqcFztZ/geZM3gpUOCRtAAAAABJRU5ErkJggg==" alt="Eficacia"></div>
     </div>
-    <div style="display:flex;align-items:center;gap:12px;margin-top:2px;flex-wrap:wrap">
-      <p class="logo-tagline" style="margin:0">Operador de talento &middot; Cliente estrategico</p>
-      <a href="https://docs.google.com/spreadsheets/d/1EQ0xlFUHKj5-ROX30cYGLesDlsC4S2_sin_BB-ad8wA/edit?usp=sharing" target="_blank" class="sheets-btn">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="16" y2="17"/><line x1="10" y1="9" x2="8" y2="9"/></svg>
-        Abrir Sheets
-      </a>
-    </div>
+
+    <!-- ── BOTON SHEETS MEJORADO: icono Google Sheets oficial, fondo verde, texto claro ── -->
+    <a href="https://docs.google.com/spreadsheets/d/1EQ0xlFUHKj5-ROX30cYGLesDlsC4S2_sin_BB-ad8wA/edit?usp=sharing" target="_blank" class="sheets-btn" title="Abrir base de datos en Google Sheets">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z" fill="#ffffff" opacity=".15"/>
+        <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14z" fill="#ffffff"/>
+        <path d="M7 10h4v2H7zm0 3h4v2H7zm0 3h4v2H7zm6-6h4v2h-4zm0 3h4v2h-4zm0 3h4v2h-4z" fill="#ffffff"/>
+      </svg>
+      <span class="sh-txt"><small>Base de datos</small>Abrir en Sheets</span>
+    </a>
+
+    <p class="logo-tagline" style="margin:0">Operador de talento &middot; Cliente estrategico</p>
     <div class="sync-info"><span class="sync-dot" id="syncDot"></span><span id="syncText">Conectando...</span></div>
   </div>
   <div class="hero-center">
@@ -248,12 +291,83 @@ tbody tr.tr-total td{background:var(--g100);font-weight:700;color:var(--ink);bor
   <div class="card"><div class="card-hd"><div class="card-pip"></div>Estado Vacantes</div><div class="chart-h" style="height:160px"><canvas id="chVac"></canvas></div><ul class="dleg" id="lgVac"></ul></div>
   <div class="card"><div class="card-hd"><div class="card-pip"></div>Dias Vacante</div><div class="chart-h" style="height:200px"><canvas id="chDias"></canvas></div></div>
 </div>
-<div class="sec">Retiros &middot; Detalle</div>
-<div class="gfull"><div class="card" style="padding:0"><div class="tbl-wrap"><table><thead><tr><th>Colaborador</th><th>Cargo</th><th>Linea</th><th>Regional</th><th>CEDIS</th><th>Ciudad</th><th>Causal</th><th>Motivo</th><th>Tipo</th><th>Fecha</th></tr></thead><tbody id="tbR"><tr><td colspan="10" class="no-data">Cargando...</td></tr></tbody></table></div></div></div>
-<div class="sec">Ausentismos</div>
-<div class="gfull"><div class="card" style="padding:0"><div class="tbl-wrap"><table><thead><tr><th>Colaborador</th><th>Cargo</th><th>Linea</th><th>Regional</th><th>CEDI</th><th>Tipo</th><th>Dias</th><th>Inicio</th><th>Fin</th><th>Cubierto</th><th>Como</th><th>Lider</th></tr></thead><tbody id="tbA"><tr><td colspan="12" class="no-data">Cargando...</td></tr></tbody></table></div></div></div>
-<div class="sec">Vacantes &middot; Estatus</div>
-<div class="gfull"><div class="card" style="padding:0"><div class="tbl-wrap"><table><thead><tr><th>Quien se fue</th><th>Cargo</th><th>Linea</th><th>Regional</th><th>CEDI</th><th>Causal</th><th>Estatus</th><th>Dias Vac</th><th>ANS</th><th>Sin Cob</th><th>F.Contrat</th><th>Reemplazo</th><th>Lider</th><th>Estado</th></tr></thead><tbody id="tbV"><tr><td colspan="14" class="no-data">Cargando...</td></tr></tbody></table></div></div></div>
+
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<!-- ── SECCION DE TABLAS INFERIORES CON ACCORDION (EXPANDIR/CONTRAER) ── -->
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<div class="sec-tables-header">
+  <div class="sec">Detalle de Registros</div>
+  <div class="accordion-ctrl">
+    <button class="acc-btn-global" id="accGlobalBtn" onclick="toggleAllAcc()">
+      <svg id="accGlobalIco" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+      <span id="accGlobalTxt">Expandir todo</span>
+    </button>
+  </div>
+</div>
+
+<!-- Accordion: Retiros -->
+<div class="accordion" id="accRet">
+  <div class="accordion-head" onclick="toggleAcc('accRet')">
+    <div class="acc-pip"></div>
+    <div class="acc-title">
+      <span class="acc-title-txt">Retiros</span>
+      <span class="acc-sub">Detalle individual</span>
+    </div>
+    <div class="acc-badge" id="accRetBadge">0</div>
+    <div class="acc-chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></div>
+  </div>
+  <div class="accordion-body">
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Colaborador</th><th>Cargo</th><th>Linea</th><th>Regional</th><th>CEDIS</th><th>Ciudad</th><th>Causal</th><th>Motivo</th><th>Tipo</th><th>Fecha</th></tr></thead>
+        <tbody id="tbR"><tr><td colspan="10" class="no-data">Cargando...</td></tr></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- Accordion: Ausentismos -->
+<div class="accordion" id="accAus">
+  <div class="accordion-head" onclick="toggleAcc('accAus')">
+    <div class="acc-pip"></div>
+    <div class="acc-title">
+      <span class="acc-title-txt">Ausentismos</span>
+      <span class="acc-sub">Cobertura y dias afectados</span>
+    </div>
+    <div class="acc-badge" id="accAusBadge">0</div>
+    <div class="acc-chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></div>
+  </div>
+  <div class="accordion-body">
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Colaborador</th><th>Cargo</th><th>Linea</th><th>Regional</th><th>CEDI</th><th>Tipo</th><th>Dias</th><th>Inicio</th><th>Fin</th><th>Cubierto</th><th>Como</th><th>Lider</th></tr></thead>
+        <tbody id="tbA"><tr><td colspan="12" class="no-data">Cargando...</td></tr></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- Accordion: Vacantes -->
+<div class="accordion" id="accVac">
+  <div class="accordion-head" onclick="toggleAcc('accVac')">
+    <div class="acc-pip"></div>
+    <div class="acc-title">
+      <span class="acc-title-txt">Vacantes</span>
+      <span class="acc-sub">Estatus, ANS y reemplazos</span>
+    </div>
+    <div class="acc-badge" id="accVacBadge">0</div>
+    <div class="acc-chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></div>
+  </div>
+  <div class="accordion-body">
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Quien se fue</th><th>Cargo</th><th>Linea</th><th>Regional</th><th>CEDI</th><th>Causal</th><th>Estatus</th><th>Dias Vac</th><th>ANS</th><th>Sin Cob</th><th>F.Contrat</th><th>Reemplazo</th><th>Lider</th><th>Estado</th></tr></thead>
+        <tbody id="tbV"><tr><td colspan="14" class="no-data">Cargando...</td></tr></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
 </main>
 <footer style="background:var(--g800);color:rgba(255,255,255,.25);text-align:center;padding:16px 20px;font-size:10px;letter-spacing:.5px">EFICACIA S.A.S &middot; Nutrium de Colombia &middot; Dashboard Rotacion de Personal &middot; Datos en tiempo real</footer>
 
@@ -264,6 +378,44 @@ Chart.defaults.font.family="'Sora',sans-serif";Chart.defaults.color='#8aaa8e';
 const CH={};
 function N(s){return String(s||'').trim().toUpperCase();}
 function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+
+/* ═════════════════════════════════════════════════════════════ */
+/* ── LOGICA DEL ACCORDION ── */
+/* ═════════════════════════════════════════════════════════════ */
+const ACC_IDS=['accRet','accAus','accVac'];
+
+function toggleAcc(id){
+  const el=document.getElementById(id);
+  if(!el)return;
+  el.classList.toggle('open');
+  updGlobalBtn();
+}
+
+function toggleAllAcc(){
+  const allOpen=ACC_IDS.every(id=>document.getElementById(id).classList.contains('open'));
+  ACC_IDS.forEach(id=>{
+    const el=document.getElementById(id);
+    if(!el)return;
+    if(allOpen)el.classList.remove('open');
+    else el.classList.add('open');
+  });
+  updGlobalBtn();
+}
+
+function updGlobalBtn(){
+  const btn=document.getElementById('accGlobalBtn');
+  const txt=document.getElementById('accGlobalTxt');
+  if(!btn||!txt)return;
+  const allOpen=ACC_IDS.every(id=>document.getElementById(id).classList.contains('open'));
+  if(allOpen){btn.classList.add('expanded');txt.textContent='Contraer todo';}
+  else{btn.classList.remove('expanded');txt.textContent='Expandir todo';}
+}
+
+function updAccBadges(rLen,aLen,vLen){
+  const r=document.getElementById('accRetBadge');if(r)r.textContent=rLen;
+  const a=document.getElementById('accAusBadge');if(a)a.textContent=aLen;
+  const v=document.getElementById('accVacBadge');if(v)v.textContent=vLen;
+}
 
 async function loadData(){
   showL(true);setErr(null);document.getElementById('syncBtn').classList.add('syncing');
@@ -288,7 +440,7 @@ function getContrat(d,l){
 }
 
 function renderAll(d){renderH(d);renderK(d,cL);renderC(d);renderT(d,cL);popF(d);updC();}
-function updC(){if(!D)return;const r=fL(D.retiros,cL),a=fL(D.ausencias,cL),v=fL(D.vacantes,cL);sT('fc',r.length+' ret - '+a.length+' aus - '+v.length+' vac');}
+function updC(){if(!D)return;const r=fL(D.retiros,cL),a=fL(D.ausencias,cL),v=fL(D.vacantes,cL);sT('fc',r.length+' ret - '+a.length+' aus - '+v.length+' vac');updAccBadges(r.length,a.length,v.length);}
 function renderH(d){
   const k=d.kpis;
   sT('barCupos',k.cuposActivos);sT('barTotal',k.totalRetiros);sT('barPlan',k.planeados);
@@ -379,6 +531,9 @@ function renderT(d,l,rA,aA,vA){
     const dc=v.diasVacante>(v.ans||5)?'<strong style="color:#dc2626">'+v.diasVacante+'</strong>':v.diasVacante;
     const sc=v.diasSinCob>0?'<strong style="color:'+(v.diasSinCob>5?'#dc2626':'#d97706')+'">'+v.diasSinCob+'</strong>':v.diasSinCob;
     return '<tr><td data-tip="Doc: '+esc(v.documento)+' | OT: '+esc(v.ot)+' | RQ: '+esc(v.rq)+'">'+tc(v.quienSeFue)+'</td><td>'+tc(v.cargo)+'</td><td>'+lB(v.linea)+'</td><td>'+esc(v.regional||'—')+'</td><td>'+esc(v.cedis||'—')+'</td><td>'+esc(v.causal||'—')+'</td><td>'+eB(v.estatus)+'</td><td>'+dc+'</td><td>'+v.ans+'</td><td>'+sc+'</td><td>'+esc(v.fechaContrat||'—')+'</td><td data-tip="Ced: '+esc(v.cedulaRep||'—')+'">'+tc(v.reemplazante||'—')+'</td><td>'+esc(v.lider||'—')+'</td><td data-tip="'+esc(v.estadoDia)+'">'+trn(v.estadoDia,30)+'</td></tr>';}).join(''):'<tr><td colspan="14" class="no-data">Sin registros</td></tr>';
+
+  // Actualizar badges del accordion
+  updAccBadges(ret.length,aus.length,vac.length);
 }
 
 function popF(d){
