@@ -27,22 +27,22 @@ body{font-family:'Sora',sans-serif;background:var(--g50);color:var(--ink)}
 .hero-orb{position:absolute;border-radius:50%;pointer-events:none}
 .hero-orb-1{width:320px;height:320px;top:-120px;right:200px;background:radial-gradient(circle,rgba(93,196,104,.15) 0%,transparent 70%)}
 .hero-inner{position:relative;z-index:5;display:flex;align-items:center;gap:32px;padding:36px 48px 30px;flex-wrap:wrap}
-.logo-area{display:flex;flex-direction:column;gap:10px;flex-shrink:0}
+.logo-area{display:flex;flex-direction:column;gap:8px;flex-shrink:0}
 .logo-pill{display:flex;align-items:center;background:#fff;border-radius:12px;box-shadow:0 6px 30px rgba(0,0,0,.22),0 2px 6px rgba(0,0,0,.12);overflow:hidden;border:1px solid rgba(255,255,255,.4)}
 .logo-cell{padding:12px 20px;display:flex;align-items:center;justify-content:center;height:60px}
 .logo-cell+.logo-cell{border-left:1px solid #e8f0e9}
 .logo-cell img{display:block;height:32px;width:auto;object-fit:contain}
 .logo-tagline{font-size:9.5px;font-weight:500;color:rgba(255,255,255,.32);letter-spacing:1.5px;text-transform:uppercase}
 
-/* ── BOTON SHEETS: verde Google Sheets, icono hoja de calculo ── */
-.sheets-btn{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,var(--xls) 0%,var(--xls-d) 100%);border:1px solid rgba(255,255,255,.3);color:#fff;font-size:11px;font-weight:700;letter-spacing:.4px;padding:9px 16px;border-radius:10px;cursor:pointer;transition:all .2s cubic-bezier(.4,0,.2,1);font-family:'Sora',sans-serif;text-decoration:none;width:fit-content;box-shadow:0 4px 14px rgba(15,157,88,.45),0 2px 4px rgba(0,0,0,.2);text-transform:uppercase;position:relative;overflow:hidden}
+/* ── BOTON SHEETS: verde Google Sheets, compacto, inline con tagline ── */
+.sheets-btn{display:inline-flex;align-items:center;gap:6px;background:linear-gradient(135deg,var(--xls) 0%,var(--xls-d) 100%);border:1px solid rgba(255,255,255,.3);color:#fff;font-size:9.5px;font-weight:700;letter-spacing:.5px;padding:6px 12px;border-radius:8px;cursor:pointer;transition:all .2s cubic-bezier(.4,0,.2,1);font-family:'Sora',sans-serif;text-decoration:none;width:fit-content;box-shadow:0 3px 10px rgba(15,157,88,.4),0 1px 3px rgba(0,0,0,.15);text-transform:uppercase;position:relative;overflow:hidden}
 .sheets-btn::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.2),transparent);transition:left .5s}
-.sheets-btn:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(15,157,88,.6),0 3px 8px rgba(0,0,0,.25);background:linear-gradient(135deg,#13b368 0%,var(--xls) 100%)}
+.sheets-btn:hover{transform:translateY(-1px);box-shadow:0 5px 16px rgba(15,157,88,.55),0 2px 5px rgba(0,0,0,.2);background:linear-gradient(135deg,#13b368 0%,var(--xls) 100%)}
 .sheets-btn:hover::before{left:100%}
 .sheets-btn:active{transform:translateY(0)}
-.sheets-btn svg{width:18px;height:18px;flex-shrink:0}
-.sheets-btn .sh-txt{display:flex;flex-direction:column;line-height:1;gap:2px;align-items:flex-start}
-.sheets-btn .sh-txt small{font-size:8px;opacity:.85;font-weight:500;letter-spacing:.8px}
+.sheets-btn svg{width:14px;height:14px;flex-shrink:0}
+.sheets-btn .sh-txt{display:flex;flex-direction:column;line-height:1;gap:1px;align-items:flex-start}
+.sheets-btn .sh-txt small{font-size:7.5px;opacity:.85;font-weight:500;letter-spacing:.6px}
 
 .sync-info{font-size:10px;color:rgba(255,255,255,.3);display:flex;align-items:center;gap:6px}
 .sync-dot{width:6px;height:6px;border-radius:50%;background:#5cb868;flex-shrink:0}.sync-dot.err{background:#dc2626}
@@ -193,17 +193,16 @@ tbody tr.tr-total td{background:var(--g100);font-weight:700;color:var(--ink);bor
       <div class="logo-cell"><img src="data:image/png;base64,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" alt="Nutrium"></div>
       <div class="logo-cell"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAZAAAACQCAMAAAARFs1KAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAEIUExURf///////+7//93u/8zu/7vd7qrd7pnd7pnM7qrd/7vu/93//3e77ma73USq3TOq3TOZ3SKZ3SKq3US77lW77mbM7ojM7ne73TOZzCKZzBGZzDOq7jO77nfM7qrM7kSZzCKIzBGIzJnM3VWqzJnd/1WZzCKIuxGIu2aqzBF3u1XM7qru/4i73QB3u1Wq3Wa77lW73Xfd/8zd7neq3bvd/wB3qszu7kS73UTM7gBmqkSqzN3u7u7u/yJ3uzOIuzOIzGaq3WbM/0SZuxF3qojd/xFmqkSIuwBVqnfM/wBVmVWZuyJ3qqrM3XeqzJm73REREWaZzLvM7jN3u4i7zIjd7lXM/0TM/4iqzL3IHsgAAAABdFJOUwBA5thmAAAAAWJLR0QAiAUdSAAAAAlwSFlzAAAuIwAALiMBeKU/dgAAAAd0SU1FB+oEDxcNAHov72oAAA7XSURBVHja7Z17X9pKGsedmQQQCrRVuVQEpIJQo61p9ZjlslpKLHKz3e057/+d7EwukwRymQDqZ9vn98c5FsKEzDfPPJeZDDs7IBAIBAKBQCAQCAQCgUAgEAgEAoFAIBAIBAKBQCAQCAQCgUAgEAgEAoFAIBDo/0ZoSS/9ff5gse7HmEhyIplMUSUTu2kpg4HKC4h1OpFTr7K5/Os3pt4y5fN7+weFXQkDlOcTswspVcyVyuV3ZSaHBwXCdFjZP9olwOQ5xCyjmq3Vj6nq5bIDxE3k8PCwUtk72MWA5GlFaUiN9wYMN5CyLxCq/ZMMIHk6UdtoNFunVL5A/IhU9iiSl/7ev6eo30i0W51O59RFhOrdshvxAqlUPpyBkWxf1DiUUue84wFSL5dyF9mjAot4U4Wjj59yeT8ilUofChInBwumLflWE/4Q0VAfMBRSJ2YefD5XdQ3cUPv7/S5G5qk7ua+eM65iFjVm/0PccQriHpwS5eI8wZEVD8BqVjsAxquYjbJRuSqPDa3yeZ86ooeGgkHjZP+TPLuEKtflfiU7oOrWctiLaNR5FS8WGOmUMbD61xY8f8FKhn2jsur7zv+JfdnlZRt/tw/VPoRqcFztZ/geZM3gpUOCRtAAAAABJRU5ErkJggg==" alt="Eficacia"></div>
     </div>
-
-    <!-- BOTON SHEETS MEJORADO -->
-    <a href="https://docs.google.com/spreadsheets/d/1EQ0xlFUHKj5-ROX30cYGLesDlsC4S2_sin_BB-ad8wA/edit?usp=sharing" target="_blank" class="sheets-btn" title="Abrir base de datos en Google Sheets">
-      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-        <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14z" fill="#ffffff"/>
-        <path d="M7 10h4v2H7zm0 3h4v2H7zm0 3h4v2H7zm6-6h4v2h-4zm0 3h4v2h-4zm0 3h4v2h-4z" fill="#ffffff"/>
-      </svg>
-      <span class="sh-txt"><small>Base de datos</small>Abrir en Sheets</span>
-    </a>
-
-    <p class="logo-tagline" style="margin:0">Operador de talento &middot; Cliente estrategico</p>
+    <div style="display:flex;align-items:center;gap:12px;margin-top:2px;flex-wrap:wrap">
+      <p class="logo-tagline" style="margin:0">Operador de talento &middot; Cliente estrategico</p>
+      <a href="https://docs.google.com/spreadsheets/d/1EQ0xlFUHKj5-ROX30cYGLesDlsC4S2_sin_BB-ad8wA/edit?usp=sharing" target="_blank" class="sheets-btn" title="Abrir base de datos en Google Sheets">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14z" fill="#ffffff"/>
+          <path d="M7 10h4v2H7zm0 3h4v2H7zm0 3h4v2H7zm6-6h4v2h-4zm0 3h4v2h-4zm0 3h4v2h-4z" fill="#ffffff"/>
+        </svg>
+        <span class="sh-txt"><small>Base de datos</small>Abrir en Sheets</span>
+      </a>
+    </div>
     <div class="sync-info"><span class="sync-dot" id="syncDot"></span><span id="syncText">Conectando...</span></div>
   </div>
   <div class="hero-center">
