@@ -34,7 +34,7 @@ body{font-family:'Sora',sans-serif;background:var(--g50);color:var(--ink)}
 .logo-cell img{display:block;height:32px;width:auto;object-fit:contain}
 .logo-tagline{font-size:9.5px;font-weight:500;color:rgba(255,255,255,.32);letter-spacing:1.5px;text-transform:uppercase}
 
-/* ── BOTON SHEETS MEJORADO: más notorio, color verde Google Sheets ── */
+/* ── BOTON SHEETS: verde Google Sheets, icono hoja de calculo ── */
 .sheets-btn{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,var(--xls) 0%,var(--xls-d) 100%);border:1px solid rgba(255,255,255,.3);color:#fff;font-size:11px;font-weight:700;letter-spacing:.4px;padding:9px 16px;border-radius:10px;cursor:pointer;transition:all .2s cubic-bezier(.4,0,.2,1);font-family:'Sora',sans-serif;text-decoration:none;width:fit-content;box-shadow:0 4px 14px rgba(15,157,88,.45),0 2px 4px rgba(0,0,0,.2);text-transform:uppercase;position:relative;overflow:hidden}
 .sheets-btn::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.2),transparent);transition:left .5s}
 .sheets-btn:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(15,157,88,.6),0 3px 8px rgba(0,0,0,.25);background:linear-gradient(135deg,#13b368 0%,var(--xls) 100%)}
@@ -135,37 +135,25 @@ body{font-family:'Sora',sans-serif;background:var(--g50);color:var(--ink)}
 .tab-btn{font-family:'Sora',sans-serif;font-size:10px;font-weight:600;letter-spacing:.4px;padding:6px 14px;border-radius:7px;cursor:pointer;border:1px solid var(--g200);background:#fff;color:var(--ink3);transition:all .15s}
 .tab-btn.active{background:var(--g700);color:#fff;border-color:var(--g700)}
 
-/* ═════════════════════════════════════════════════════════ */
-/* ── ACCORDION PARA TABLAS INFERIORES ── */
-/* ═════════════════════════════════════════════════════════ */
-.sec-tables-header{display:flex;align-items:center;gap:12px;margin:0 0 16px;flex-wrap:wrap}
-.sec-tables-header .sec{flex:1;min-width:200px;margin:0}
-.sec-tables-header .sec::after{content:none}
-.accordion-ctrl{display:flex;gap:6px;align-items:center}
-.acc-btn-global{display:inline-flex;align-items:center;gap:6px;font-family:'Sora',sans-serif;font-size:10px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;padding:7px 12px;border-radius:8px;cursor:pointer;border:1px solid var(--g300);background:#fff;color:var(--g700);transition:all .15s;white-space:nowrap}
-.acc-btn-global:hover{background:var(--g100);border-color:var(--g500);transform:translateY(-1px)}
-.acc-btn-global svg{width:12px;height:12px;transition:transform .2s}
-.acc-btn-global.expanded svg{transform:rotate(180deg)}
+/* ═════════════════════════════════════════════════════════════ */
+/* ── BOTON TOGGLE GLOBAL PARA TABLAS INFERIORES ── */
+/* ═════════════════════════════════════════════════════════════ */
+.tbl-toggle-wrap{display:flex;justify-content:center;margin:10px 0 22px}
+.tbl-toggle-btn{display:inline-flex;align-items:center;gap:10px;font-family:'Sora',sans-serif;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:12px 22px;border-radius:12px;cursor:pointer;border:1.5px solid var(--g400);background:#fff;color:var(--g700);transition:all .25s cubic-bezier(.4,0,.2,1);box-shadow:0 2px 8px rgba(30,88,38,.08)}
+.tbl-toggle-btn:hover{background:var(--g50);border-color:var(--g500);transform:translateY(-2px);box-shadow:0 6px 20px rgba(30,88,38,.18)}
+.tbl-toggle-btn:active{transform:translateY(0)}
+.tbl-toggle-btn.active{background:linear-gradient(135deg,var(--g600),var(--g500));color:#fff;border-color:var(--g600);box-shadow:0 6px 20px rgba(45,122,56,.35)}
+.tbl-toggle-btn svg{width:16px;height:16px;transition:transform .3s}
+.tbl-toggle-btn.active svg{transform:rotate(180deg)}
+.tbl-toggle-btn .tbl-count{background:var(--g100);color:var(--g700);font-size:10px;font-weight:700;padding:3px 9px;border-radius:20px;letter-spacing:.3px}
+.tbl-toggle-btn.active .tbl-count{background:rgba(255,255,255,.25);color:#fff}
 
-.accordion{background:#fff;border-radius:var(--r);border:1px solid var(--g200);box-shadow:var(--sh2);margin-bottom:14px;overflow:hidden;transition:box-shadow .2s}
-.accordion:hover{box-shadow:var(--sh3)}
-.accordion-head{display:flex;align-items:center;gap:12px;padding:14px 18px;cursor:pointer;background:#fff;border-bottom:1px solid transparent;transition:background .15s,border-color .2s;user-select:none}
-.accordion.open .accordion-head{background:linear-gradient(90deg,var(--g50),#fff);border-bottom-color:var(--g200)}
-.accordion-head:hover{background:var(--g50)}
-.acc-pip{width:4px;height:22px;border-radius:2px;background:linear-gradient(180deg,var(--g400),var(--g300));flex-shrink:0}
-.acc-title{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.2px;color:var(--ink2);flex:1;display:flex;align-items:center;gap:10px}
-.acc-title-txt{color:var(--ink)}
-.acc-sub{font-size:9px;font-weight:500;color:var(--ink4);text-transform:none;letter-spacing:.3px;margin-left:4px}
-.acc-badge{background:var(--g100);color:var(--g700);font-size:10px;font-weight:700;padding:3px 10px;border-radius:20px;min-width:32px;text-align:center}
-.accordion.open .acc-badge{background:var(--g600);color:#fff}
-.acc-chevron{width:28px;height:28px;border-radius:8px;background:var(--g50);display:flex;align-items:center;justify-content:center;color:var(--g600);transition:all .25s cubic-bezier(.4,0,.2,1);flex-shrink:0;border:1px solid var(--g200)}
-.accordion.open .acc-chevron{background:var(--g600);color:#fff;border-color:var(--g600);transform:rotate(180deg)}
-.acc-chevron svg{width:14px;height:14px}
-.accordion-body{max-height:0;overflow:hidden;transition:max-height .35s cubic-bezier(.4,0,.2,1);opacity:0}
-.accordion.open .accordion-body{max-height:520px;opacity:1}
+/* Contenedor de las tablas - animacion show/hide */
+.tbl-section{max-height:0;overflow:hidden;opacity:0;transition:max-height .5s cubic-bezier(.4,0,.2,1),opacity .35s ease;margin-bottom:0}
+.tbl-section.visible{max-height:3000px;opacity:1;margin-bottom:20px;overflow:visible}
 
 /* ── TABLAS COMPACTAS CON SCROLL ── */
-.tbl-wrap{overflow-x:auto;max-height:420px;overflow-y:auto}
+.tbl-wrap{overflow-x:auto;max-height:420px;overflow-y:auto;border-radius:var(--r)}
 .tbl-wrap::-webkit-scrollbar{height:6px;width:6px}
 .tbl-wrap::-webkit-scrollbar-track{background:var(--g100);border-radius:3px}
 .tbl-wrap::-webkit-scrollbar-thumb{background:var(--g300);border-radius:3px}
@@ -185,7 +173,7 @@ tbody tr.tr-total td{background:var(--g100);font-weight:700;color:var(--ink);bor
 .card,.dark-card{animation:up .45s ease both;animation-delay:.08s}
 @media(max-width:1240px){.g6{grid-template-columns:repeat(3,1fr)}}
 @media(max-width:1140px){.hero-inner{padding:24px 24px 18px}.hero-badge{display:none}.hero-bar{padding:0 24px}.g3,.g3b,.g3c{grid-template-columns:1fr 1fr}.wrap{padding:20px 18px 40px}}
-@media(max-width:700px){.hero-inner{flex-direction:column;align-items:flex-start}.hbi{min-width:50%;border-right:none;border-bottom:1px solid rgba(255,255,255,.07)}.g6{grid-template-columns:1fr 1fr}.g3,.g3b,.g3c{grid-template-columns:1fr}.wrap{padding:12px 10px 32px}.filter-bar{flex-direction:column;align-items:stretch}.accordion-head{padding:12px 14px;gap:8px}.acc-title{font-size:10px}.sheets-btn{padding:8px 12px;font-size:10px}.sheets-btn svg{width:16px;height:16px}}
+@media(max-width:700px){.hero-inner{flex-direction:column;align-items:flex-start}.hbi{min-width:50%;border-right:none;border-bottom:1px solid rgba(255,255,255,.07)}.g6{grid-template-columns:1fr 1fr}.g3,.g3b,.g3c{grid-template-columns:1fr}.wrap{padding:12px 10px 32px}.filter-bar{flex-direction:column;align-items:stretch}.sheets-btn{padding:8px 12px;font-size:10px}.sheets-btn svg{width:16px;height:16px}.tbl-toggle-btn{padding:10px 16px;font-size:10px}}
 </style>
 </head>
 <body>
@@ -206,10 +194,9 @@ tbody tr.tr-total td{background:var(--g100);font-weight:700;color:var(--ink);bor
       <div class="logo-cell"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAZAAAACQCAMAAAARFs1KAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAEIUExURf///////+7//93u/8zu/7vd7qrd7pnd7pnM7qrd/7vu/93//3e77ma73USq3TOq3TOZ3SKZ3SKq3US77lW77mbM7ojM7ne73TOZzCKZzBGZzDOq7jO77nfM7qrM7kSZzCKIzBGIzJnM3VWqzJnd/1WZzCKIuxGIu2aqzBF3u1XM7qru/4i73QB3u1Wq3Wa77lW73Xfd/8zd7neq3bvd/wB3qszu7kS73UTM7gBmqkSqzN3u7u7u/yJ3uzOIuzOIzGaq3WbM/0SZuxF3qojd/xFmqkSIuwBVqnfM/wBVmVWZuyJ3qqrM3XeqzJm73REREWaZzLvM7jN3u4i7zIjd7lXM/0TM/4iqzL3IHsgAAAABdFJOUwBA5thmAAAAAWJLR0QAiAUdSAAAAAlwSFlzAAAuIwAALiMBeKU/dgAAAAd0SU1FB+oEDxcNAHov72oAAA7XSURBVHja7Z17X9pKGsedmQQQCrRVuVQEpIJQo61p9ZjlslpKLHKz3e057/+d7EwukwRymQDqZ9vn98c5FsKEzDfPPJeZDDs7IBAIBAKBQCAQCAQCgUAgEAgEAoFAIBAIBAKBQCAQCAQCgUAgEAgEAoFAIBDo/0ZoSS/9ff5gse7HmEhyIplMUSUTu2kpg4HKC4h1OpFTr7K5/Os3pt4y5fN7+weFXQkDlOcTswspVcyVyuV3ZSaHBwXCdFjZP9olwOQ5xCyjmq3Vj6nq5bIDxE3k8PCwUtk72MWA5GlFaUiN9wYMN5CyLxCq/ZMMIHk6UdtoNFunVL5A/IhU9iiSl/7ev6eo30i0W51O59RFhOrdshvxAqlUPpyBkWxf1DiUUue84wFSL5dyF9mjAot4U4Wjj59yeT8ilUofChInBwumLflWE/4Q0VAfMBRSJ2YefD5XdQ3cUPv7/S5G5qk7ua+eM65iFjVm/0PccQriHpwS5eI8wZEVD8BqVjsAxquYjbJRuSqPDa3yeZ86ooeGgkHjZP+TPLuEKtflfiU7oOrWctiLaNR5FS8WGOmUMbD61xY8f8FKhn2jsur7zv+JfdnlZRt/tw/VPoRqcFztZ/geZM3gpUOCRtAAAAABJRU5ErkJggg==" alt="Eficacia"></div>
     </div>
 
-    <!-- ── BOTON SHEETS MEJORADO: icono Google Sheets oficial, fondo verde, texto claro ── -->
+    <!-- BOTON SHEETS MEJORADO -->
     <a href="https://docs.google.com/spreadsheets/d/1EQ0xlFUHKj5-ROX30cYGLesDlsC4S2_sin_BB-ad8wA/edit?usp=sharing" target="_blank" class="sheets-btn" title="Abrir base de datos en Google Sheets">
       <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-        <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z" fill="#ffffff" opacity=".15"/>
         <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14z" fill="#ffffff"/>
         <path d="M7 10h4v2H7zm0 3h4v2H7zm0 3h4v2H7zm6-6h4v2h-4zm0 3h4v2h-4zm0 3h4v2h-4z" fill="#ffffff"/>
       </svg>
@@ -292,82 +279,27 @@ tbody tr.tr-total td{background:var(--g100);font-weight:700;color:var(--ink);bor
   <div class="card"><div class="card-hd"><div class="card-pip"></div>Dias Vacante</div><div class="chart-h" style="height:200px"><canvas id="chDias"></canvas></div></div>
 </div>
 
-<!-- ═══════════════════════════════════════════════════════════════ -->
-<!-- ── SECCION DE TABLAS INFERIORES CON ACCORDION (EXPANDIR/CONTRAER) ── -->
-<!-- ═══════════════════════════════════════════════════════════════ -->
-<div class="sec-tables-header">
-  <div class="sec">Detalle de Registros</div>
-  <div class="accordion-ctrl">
-    <button class="acc-btn-global" id="accGlobalBtn" onclick="toggleAllAcc()">
-      <svg id="accGlobalIco" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
-      <span id="accGlobalTxt">Expandir todo</span>
-    </button>
-  </div>
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<!-- ── BOTON UNICO PARA MOSTRAR / OCULTAR TODAS LAS TABLAS INFERIORES ── -->
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<div class="tbl-toggle-wrap">
+  <button class="tbl-toggle-btn" id="tblToggleBtn" onclick="toggleTables()">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
+    <span id="tblToggleTxt">Ver tablas detalladas</span>
+    <span class="tbl-count" id="tblToggleCnt">&mdash;</span>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+  </button>
 </div>
 
-<!-- Accordion: Retiros -->
-<div class="accordion" id="accRet">
-  <div class="accordion-head" onclick="toggleAcc('accRet')">
-    <div class="acc-pip"></div>
-    <div class="acc-title">
-      <span class="acc-title-txt">Retiros</span>
-      <span class="acc-sub">Detalle individual</span>
-    </div>
-    <div class="acc-badge" id="accRetBadge">0</div>
-    <div class="acc-chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></div>
-  </div>
-  <div class="accordion-body">
-    <div class="tbl-wrap">
-      <table>
-        <thead><tr><th>Colaborador</th><th>Cargo</th><th>Linea</th><th>Regional</th><th>CEDIS</th><th>Ciudad</th><th>Causal</th><th>Motivo</th><th>Tipo</th><th>Fecha</th></tr></thead>
-        <tbody id="tbR"><tr><td colspan="10" class="no-data">Cargando...</td></tr></tbody>
-      </table>
-    </div>
-  </div>
+<!-- Contenedor que envuelve las 3 tablas - se muestra/oculta en conjunto -->
+<div class="tbl-section" id="tblSection">
+  <div class="sec">Retiros &middot; Detalle</div>
+  <div class="gfull"><div class="card" style="padding:0"><div class="tbl-wrap"><table><thead><tr><th>Colaborador</th><th>Cargo</th><th>Linea</th><th>Regional</th><th>CEDIS</th><th>Ciudad</th><th>Causal</th><th>Motivo</th><th>Tipo</th><th>Fecha</th></tr></thead><tbody id="tbR"><tr><td colspan="10" class="no-data">Cargando...</td></tr></tbody></table></div></div></div>
+  <div class="sec">Ausentismos</div>
+  <div class="gfull"><div class="card" style="padding:0"><div class="tbl-wrap"><table><thead><tr><th>Colaborador</th><th>Cargo</th><th>Linea</th><th>Regional</th><th>CEDI</th><th>Tipo</th><th>Dias</th><th>Inicio</th><th>Fin</th><th>Cubierto</th><th>Como</th><th>Lider</th></tr></thead><tbody id="tbA"><tr><td colspan="12" class="no-data">Cargando...</td></tr></tbody></table></div></div></div>
+  <div class="sec">Vacantes &middot; Estatus</div>
+  <div class="gfull"><div class="card" style="padding:0"><div class="tbl-wrap"><table><thead><tr><th>Quien se fue</th><th>Cargo</th><th>Linea</th><th>Regional</th><th>CEDI</th><th>Causal</th><th>Estatus</th><th>Dias Vac</th><th>ANS</th><th>Sin Cob</th><th>F.Contrat</th><th>Reemplazo</th><th>Lider</th><th>Estado</th></tr></thead><tbody id="tbV"><tr><td colspan="14" class="no-data">Cargando...</td></tr></tbody></table></div></div></div>
 </div>
-
-<!-- Accordion: Ausentismos -->
-<div class="accordion" id="accAus">
-  <div class="accordion-head" onclick="toggleAcc('accAus')">
-    <div class="acc-pip"></div>
-    <div class="acc-title">
-      <span class="acc-title-txt">Ausentismos</span>
-      <span class="acc-sub">Cobertura y dias afectados</span>
-    </div>
-    <div class="acc-badge" id="accAusBadge">0</div>
-    <div class="acc-chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></div>
-  </div>
-  <div class="accordion-body">
-    <div class="tbl-wrap">
-      <table>
-        <thead><tr><th>Colaborador</th><th>Cargo</th><th>Linea</th><th>Regional</th><th>CEDI</th><th>Tipo</th><th>Dias</th><th>Inicio</th><th>Fin</th><th>Cubierto</th><th>Como</th><th>Lider</th></tr></thead>
-        <tbody id="tbA"><tr><td colspan="12" class="no-data">Cargando...</td></tr></tbody>
-      </table>
-    </div>
-  </div>
-</div>
-
-<!-- Accordion: Vacantes -->
-<div class="accordion" id="accVac">
-  <div class="accordion-head" onclick="toggleAcc('accVac')">
-    <div class="acc-pip"></div>
-    <div class="acc-title">
-      <span class="acc-title-txt">Vacantes</span>
-      <span class="acc-sub">Estatus, ANS y reemplazos</span>
-    </div>
-    <div class="acc-badge" id="accVacBadge">0</div>
-    <div class="acc-chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></div>
-  </div>
-  <div class="accordion-body">
-    <div class="tbl-wrap">
-      <table>
-        <thead><tr><th>Quien se fue</th><th>Cargo</th><th>Linea</th><th>Regional</th><th>CEDI</th><th>Causal</th><th>Estatus</th><th>Dias Vac</th><th>ANS</th><th>Sin Cob</th><th>F.Contrat</th><th>Reemplazo</th><th>Lider</th><th>Estado</th></tr></thead>
-        <tbody id="tbV"><tr><td colspan="14" class="no-data">Cargando...</td></tr></tbody>
-      </table>
-    </div>
-  </div>
-</div>
-
 </main>
 <footer style="background:var(--g800);color:rgba(255,255,255,.25);text-align:center;padding:16px 20px;font-size:10px;letter-spacing:.5px">EFICACIA S.A.S &middot; Nutrium de Colombia &middot; Dashboard Rotacion de Personal &middot; Datos en tiempo real</footer>
 
@@ -380,41 +312,24 @@ function N(s){return String(s||'').trim().toUpperCase();}
 function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
 
 /* ═════════════════════════════════════════════════════════════ */
-/* ── LOGICA DEL ACCORDION ── */
+/* ── TOGGLE GLOBAL DE TABLAS ── */
 /* ═════════════════════════════════════════════════════════════ */
-const ACC_IDS=['accRet','accAus','accVac'];
-
-function toggleAcc(id){
-  const el=document.getElementById(id);
-  if(!el)return;
-  el.classList.toggle('open');
-  updGlobalBtn();
+function toggleTables(){
+  const sec=document.getElementById('tblSection');
+  const btn=document.getElementById('tblToggleBtn');
+  const txt=document.getElementById('tblToggleTxt');
+  if(!sec||!btn||!txt)return;
+  const isVisible=sec.classList.toggle('visible');
+  btn.classList.toggle('active',isVisible);
+  txt.textContent=isVisible?'Ocultar tablas detalladas':'Ver tablas detalladas';
+  if(isVisible){
+    setTimeout(()=>{sec.scrollIntoView({behavior:'smooth',block:'start'});},120);
+  }
 }
 
-function toggleAllAcc(){
-  const allOpen=ACC_IDS.every(id=>document.getElementById(id).classList.contains('open'));
-  ACC_IDS.forEach(id=>{
-    const el=document.getElementById(id);
-    if(!el)return;
-    if(allOpen)el.classList.remove('open');
-    else el.classList.add('open');
-  });
-  updGlobalBtn();
-}
-
-function updGlobalBtn(){
-  const btn=document.getElementById('accGlobalBtn');
-  const txt=document.getElementById('accGlobalTxt');
-  if(!btn||!txt)return;
-  const allOpen=ACC_IDS.every(id=>document.getElementById(id).classList.contains('open'));
-  if(allOpen){btn.classList.add('expanded');txt.textContent='Contraer todo';}
-  else{btn.classList.remove('expanded');txt.textContent='Expandir todo';}
-}
-
-function updAccBadges(rLen,aLen,vLen){
-  const r=document.getElementById('accRetBadge');if(r)r.textContent=rLen;
-  const a=document.getElementById('accAusBadge');if(a)a.textContent=aLen;
-  const v=document.getElementById('accVacBadge');if(v)v.textContent=vLen;
+function updTblToggleCount(rLen,aLen,vLen){
+  const c=document.getElementById('tblToggleCnt');
+  if(c)c.textContent=(rLen+aLen+vLen)+' registros';
 }
 
 async function loadData(){
@@ -440,7 +355,7 @@ function getContrat(d,l){
 }
 
 function renderAll(d){renderH(d);renderK(d,cL);renderC(d);renderT(d,cL);popF(d);updC();}
-function updC(){if(!D)return;const r=fL(D.retiros,cL),a=fL(D.ausencias,cL),v=fL(D.vacantes,cL);sT('fc',r.length+' ret - '+a.length+' aus - '+v.length+' vac');updAccBadges(r.length,a.length,v.length);}
+function updC(){if(!D)return;const r=fL(D.retiros,cL),a=fL(D.ausencias,cL),v=fL(D.vacantes,cL);sT('fc',r.length+' ret - '+a.length+' aus - '+v.length+' vac');updTblToggleCount(r.length,a.length,v.length);}
 function renderH(d){
   const k=d.kpis;
   sT('barCupos',k.cuposActivos);sT('barTotal',k.totalRetiros);sT('barPlan',k.planeados);
@@ -475,65 +390,53 @@ function renderK(d,l){
 function renderC(d,rA,aA,vA){
   const ret=rA||fL(d.retiros,cL),aus=aA||fL(d.ausencias,cL),vac=vA||fL(d.vacantes,cL);
   const cl=['#1e5826','#3d9e4a','#5cb868','#96d49e','#c8eacc','#0d9488','#34d399','#d97706','#dc2626'];
-  // Causales
   const cm={};ret.forEach(r=>{const c=r.causal||'Otro';cm[c]=(cm[c]||0)+1;});
   const ca=Object.entries(cm).map(([l,v])=>({l,v})).sort((a,b)=>b.v-a.v);
   dC('chCausal');CH.chCausal=new Chart(document.getElementById('chCausal'),{type:'bar',data:{labels:ca.map(c=>c.l),datasets:[{data:ca.map(c=>c.v),backgroundColor:cl,borderRadius:5,borderSkipped:false}]},options:{responsive:true,maintainAspectRatio:false,indexAxis:'y',plugins:{legend:{display:false}},scales:{x:{beginAtZero:true,ticks:{font:{size:10}},grid:{color:'rgba(0,0,0,.04)'}},y:{ticks:{font:{size:10}},grid:{display:false}}}}});
-  // Tipo
   const pl=ret.filter(r=>N(r.tipo)==='PLANEADA').length,np=ret.filter(r=>N(r.tipo)==='NO PLANEADA').length;
   dC('chTipo');CH.chTipo=new Chart(document.getElementById('chTipo'),{type:'doughnut',data:{labels:['Planeada','No Planeada'],datasets:[{data:[pl,np],backgroundColor:['#2d7a38','#dc2626'],borderWidth:2,borderColor:'#fff'}]},options:{cutout:'70%',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}}}});
   const tt=pl+np;document.getElementById('lgTipo').innerHTML='<li><span class="dl-sq" style="background:#2d7a38"></span>Planeada<span class="dl-n">'+pl+'</span><span class="dl-p">'+pct(pl,tt)+'%</span></li><li><span class="dl-sq" style="background:#dc2626"></span>No Planeada<span class="dl-n">'+np+'</span><span class="dl-p">'+pct(np,tt)+'%</span></li>';
-  // Ausentismo
   const tam={};aus.forEach(a=>{const t=a.tipo||'Otro';tam[t]=(tam[t]||0)+1;});
   const ta=Object.entries(tam).map(([l,v])=>({l,v})).sort((a,b)=>b.v-a.v);
   const ac=['#0d9488','#34d399','#a7f3d0','#d97706'];
   dC('chAus');CH.chAus=new Chart(document.getElementById('chAus'),{type:'doughnut',data:{labels:ta.map(t=>t.l),datasets:[{data:ta.map(t=>t.v),backgroundColor:ac,borderWidth:2,borderColor:'#fff'}]},options:{cutout:'70%',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}}}});
   const at=ta.reduce((s,t)=>s+t.v,0);document.getElementById('lgAus').innerHTML=ta.map((t,i)=>'<li><span class="dl-sq" style="background:'+ac[i%ac.length]+'"></span>'+t.l+'<span class="dl-n">'+t.v+'</span><span class="dl-p">'+pct(t.v,at)+'%</span></li>').join('');
-  // Regional
   const rm={};ret.forEach(r=>{const rg=r.regional||'N/A';if(!rm[rg])rm[rg]={p:0,n:0,t:0};rm[rg].t++;N(r.tipo)==='PLANEADA'?rm[rg].p++:rm[rg].n++;});
   const regs=Object.entries(rm).map(([name,v])=>({name,p:v.p,n:v.n,t:v.t})).sort((a,b)=>b.t-a.t);
   const mx=Math.max(...regs.map(r=>r.t),1);
   document.getElementById('regBars').innerHTML=regs.length?regs.map(r=>'<div class="reg-item"><div class="reg-top"><span class="reg-name">'+r.name+'</span><span class="reg-nums">'+r.p+'P '+r.n+'NP = '+r.t+'</span></div><div class="reg-track"><div class="reg-p" style="width:'+r.p/mx*100+'%"></div><div class="reg-np" style="width:'+r.n/mx*100+'%"></div></div></div>').join(''):'<p style="color:var(--ink4);font-size:11px;text-align:center;padding:16px">Sin datos</p>';
-  // Linea
   const ld=[{l:'AU',c:'#2d7a38'},{l:'GC',c:'#3d9e4a'},{l:'SN',c:'#96d49e'},{l:'OTRO',c:'#8aaa8e'}].map(x=>({label:x.l,val:ret.filter(r=>r.linea===x.l).length,color:x.c})).filter(x=>x.val>0);
   dC('chLinea');CH.chLinea=new Chart(document.getElementById('chLinea'),{type:'doughnut',data:{labels:ld.map(l=>l.label),datasets:[{data:ld.map(l=>l.val),backgroundColor:ld.map(l=>l.color),borderWidth:2,borderColor:'#fff'}]},options:{cutout:'65%',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}}}});
   const lt=ld.reduce((s,l)=>s+l.val,0);document.getElementById('lgLinea').innerHTML=ld.map(l=>'<li><span class="dl-sq" style="background:'+l.color+'"></span>'+l.label+'<span class="dl-n">'+l.val+'</span><span class="dl-p">'+pct(l.val,lt)+'%</span></li>').join('');
-  // Cobertura
   const cbm={};aus.forEach(a=>{const k=(a.comoSeCubrio&&a.comoSeCubrio!=='')?a.comoSeCubrio:'Sin cobertura';cbm[k]=(cbm[k]||0)+1;});
   const cb=Object.entries(cbm).map(([l,v])=>({l,v}));
   dC('chCob');CH.chCob=new Chart(document.getElementById('chCob'),{type:'pie',data:{labels:cb.map(c=>c.l),datasets:[{data:cb.map(c=>c.v),backgroundColor:['#dc2626','#3d9e4a','#0d9488','#d97706'],borderWidth:2,borderColor:'#fff'}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{boxWidth:8,padding:8,font:{size:9}}}}}});
   const ct=cb.reduce((s,c)=>s+c.v,0);const bgs=['linear-gradient(90deg,#dc2626,#f87171)','linear-gradient(90deg,var(--g500),var(--g300))','linear-gradient(90deg,#0d9488,#34d399)'];
   document.getElementById('cobProgs').innerHTML=cb.map((c,i)=>'<div class="prog"><div class="prog-hd"><span>'+c.l+'</span><span>'+c.v+'/'+ct+'</span></div><div class="prog-track"><div class="prog-fill" style="width:'+pct(c.v,ct)+'%;background:'+bgs[i%bgs.length]+'"></div></div></div>').join('');
-  // Estado vacantes
   const evm={};vac.forEach(v=>{const e=v.estatus||'N/A';evm[e]=(evm[e]||0)+1;});
   const ev=Object.entries(evm).map(([l,v])=>({l,v}));
   const evc=['#3d9e4a','#96d49e','#d97706','#dc2626'];
   dC('chVac');CH.chVac=new Chart(document.getElementById('chVac'),{type:'doughnut',data:{labels:ev.map(e=>e.l),datasets:[{data:ev.map(e=>e.v),backgroundColor:evc,borderWidth:2,borderColor:'#fff'}]},options:{cutout:'65%',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}}}});
   const evt=ev.reduce((s,e)=>s+e.v,0);document.getElementById('lgVac').innerHTML=ev.map((e,i)=>'<li><span class="dl-sq" style="background:'+evc[i%evc.length]+'"></span>'+e.l+'<span class="dl-n">'+e.v+'</span><span class="dl-p">'+pct(e.v,evt)+'%</span></li>').join('');
-  // Dias vacante
   const dv=vac.filter(v=>v.diasVacante>0||v.diasSinCob>0).slice(0,8);
   dC('chDias');CH.chDias=new Chart(document.getElementById('chDias'),{type:'bar',data:{labels:dv.length?dv.map(v=>sN(v.quienSeFue)):['—'],datasets:[{label:'Dias Vac',data:dv.map(v=>v.diasVacante),backgroundColor:'rgba(220,38,38,.85)',borderRadius:5,borderSkipped:false},{label:'Sin Cob',data:dv.map(v=>v.diasSinCob),backgroundColor:'rgba(220,38,38,.3)',borderRadius:5,borderSkipped:false}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{boxWidth:8,padding:10,font:{size:10}}}},scales:{y:{beginAtZero:true,ticks:{callback:v=>v+'d',font:{size:10}},grid:{color:'rgba(0,0,0,.04)'}},x:{ticks:{font:{size:10}},grid:{display:false}}}}});
 }
 
 function renderT(d,l,rA,aA,vA){
   const ret=rA||fL(d.retiros,l),aus=aA||fL(d.ausencias,l),vac=vA||fL(d.vacantes,l);
-  // Retiros
   if(ret.length){
     let h=ret.map(r=>'<tr><td data-tip="Doc: '+esc(r.documento)+' | '+esc(r.empresa)+'">'+tc(r.nombre)+'</td><td>'+tc(r.cargo)+'</td><td>'+lB(r.linea)+'</td><td>'+esc(r.regional||'—')+'</td><td>'+esc(r.cedis||'—')+'</td><td>'+esc(r.ciudad||'—')+'</td><td>'+esc(r.causal||'—')+'</td><td data-tip="'+esc(r.motivo)+'">'+esc(r.motivo||'—')+'</td><td>'+tB(r.tipo)+'</td><td>'+esc(r.fecha||'—')+'</td></tr>').join('');
     const pl=ret.filter(r=>N(r.tipo)==='PLANEADA').length,np=ret.filter(r=>N(r.tipo)==='NO PLANEADA').length;
     h+='<tr class="tr-total"><td colspan="8"><strong>TOTAL</strong></td><td><span class="chip chip-g">'+pl+'</span> <span class="chip chip-r">'+np+'</span></td><td><strong>'+ret.length+'</strong></td></tr>';
     document.getElementById('tbR').innerHTML=h;
   }else document.getElementById('tbR').innerHTML='<tr><td colspan="10" class="no-data">Sin registros</td></tr>';
-  // Ausencias
   document.getElementById('tbA').innerHTML=aus.length?aus.map(a=>'<tr><td data-tip="Doc: '+esc(a.documento)+' | Contrato: '+esc(a.contrato)+'">'+tc(a.nombre)+'</td><td>'+tc(a.cargo)+'</td><td>'+lB(a.linea)+'</td><td>'+esc(a.regional||'—')+'</td><td>'+esc(a.cedi||'—')+'</td><td>'+esc(a.tipo||'—')+'</td><td><strong>'+a.dias+'</strong></td><td>'+esc(a.inicio||'—')+'</td><td>'+esc(a.fin||'—')+'</td><td>'+cB(a.cubierto)+'</td><td>'+esc(a.comoSeCubrio||'—')+'</td><td>'+esc(a.lider||'—')+'</td></tr>').join(''):'<tr><td colspan="12" class="no-data">Sin registros</td></tr>';
-  // Vacantes
   document.getElementById('tbV').innerHTML=vac.length?vac.map(v=>{
     const dc=v.diasVacante>(v.ans||5)?'<strong style="color:#dc2626">'+v.diasVacante+'</strong>':v.diasVacante;
     const sc=v.diasSinCob>0?'<strong style="color:'+(v.diasSinCob>5?'#dc2626':'#d97706')+'">'+v.diasSinCob+'</strong>':v.diasSinCob;
     return '<tr><td data-tip="Doc: '+esc(v.documento)+' | OT: '+esc(v.ot)+' | RQ: '+esc(v.rq)+'">'+tc(v.quienSeFue)+'</td><td>'+tc(v.cargo)+'</td><td>'+lB(v.linea)+'</td><td>'+esc(v.regional||'—')+'</td><td>'+esc(v.cedis||'—')+'</td><td>'+esc(v.causal||'—')+'</td><td>'+eB(v.estatus)+'</td><td>'+dc+'</td><td>'+v.ans+'</td><td>'+sc+'</td><td>'+esc(v.fechaContrat||'—')+'</td><td data-tip="Ced: '+esc(v.cedulaRep||'—')+'">'+tc(v.reemplazante||'—')+'</td><td>'+esc(v.lider||'—')+'</td><td data-tip="'+esc(v.estadoDia)+'">'+trn(v.estadoDia,30)+'</td></tr>';}).join(''):'<tr><td colspan="14" class="no-data">Sin registros</td></tr>';
 
-  // Actualizar badges del accordion
-  updAccBadges(ret.length,aus.length,vac.length);
+  updTblToggleCount(ret.length,aus.length,vac.length);
 }
 
 function popF(d){
